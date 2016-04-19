@@ -21,7 +21,9 @@ $ drush en ctools -y
 $ drush dl views 
 $ drush en views views_ui -y
 ```
+
 <!-- more -->
+
 - `rules`执行设定任务
 ```console
 $ drush dl rules 

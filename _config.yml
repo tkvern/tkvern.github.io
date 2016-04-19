@@ -3,9 +3,9 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: tkvern
-subtitle:
-description: Full Stack, Front-end or Ruby on Rails and engineer. Using ES6, Bootstrap, Flexbox, NodeJS, MUI, Native, Gulp, Webpack, Jspm, React, Sass, PostgreSQL, MySQL, Nginx, Linux, Vagrant ...... As froala editor Gem Pack adds seven qiniu cloud storage support wysiwyg-rails-qiniu. Mobile terminal responsive component Autostrap author. oschina open source project author.
+title: tkvern & Blog
+subtitle: Web Development && Designer
+description: Full Stack & Front-end & Ruby on Rails and engineer. Believe what you believe, and stick to what you insist on.
 author: tkvern
 language: zh-Hans
 timezone: Asia/Shanghai
@@ -81,3 +81,9 @@ deploy:
   repo: git@github.com:tkvern/tkvern.github.io.git
   branch: master
   message:
+
+swiftype_key: owZE9q6-js34CkR18nAm
+
+google_site_verification: nITMHgGRG-3HZXe-SEJlmJxgA7J95q-z75xLLN4qNe4
+
+
