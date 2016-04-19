@@ -8,34 +8,34 @@ categories: Ruby on Rails
 
 ---
 
-## 1.吐槽
+## 吐槽
 写教程之前不得不吐槽一下[七牛](http://developer.qiniu.com/docs/v6/sdk/index.html)的官方文档，API的说明是很全面，但是读起来超蛋疼。为什么这么说呢，按照我以往的看API的文档都会有示例代码跑起来帮助理解，而七牛的API文档对于刚接触这种第三方服务商SDK的开发者来说不是太友好。建议七牛借鉴下[百度地图SDK](http://developer.baidu.com/map/index.php?title=jspopular)的文档写法。
 <!-- more -->
 
 ---
 
-## 2.初识
+## 初识
 七牛云存储是一家专注云存储领域的技术公司，提供云存储、云处理、云加速分发一站式服务，持续追求高可靠、高可用、高性能、高响应速度，推动客户健康稳定地快速发展。（前面是广告）
 
 以往开发项目时总会遇到上传文件的问题，譬如上传速度、断点续传、资源服务器部署等等。存在自己的服务器上面，维护成本高。那如何解决这些问题呢，有需求就有市场，云存储应运而生，把这些处理统统放到云存储上，只需要进行API调用即可，而这次我们选中了七牛云存储，便宜，好用，快速。（广告打了一大堆，进入正题吧）
 
 ---
 <!-- more -->
-##3.使用
+## 使用
 教程正式开始
 
-###3.1注册
+### 注册
 
 使用前得先注册一个七牛云存储的账号，[-->注册传送门<--](https://portal.qiniu.com/signup)
 
-###3.2登录认证
+### 登录认证
 
 登录之后查看你的账号身份认证，完成认证解锁更多功能
 
-###3.3获取AK, SK,空间域名
+### 获取AK, SK,空间域名
 这两个KEY值是用来生成上传凭证的
 
-###3.6配置服务器环境
+### 配置服务器环境
 在使用七牛云存储前我们先要配置好`上传凭证`的生成环境
 
 代码清单3.6.1: 导入七牛云存储的`gem`包
@@ -73,7 +73,7 @@ Use `bundle show [gemname]` to see where a bundled gem is installed.
 
 如果有提示安装失败或是无法安装一些国外的镜像可修改`Gemfile`的源到淘宝源或是自行翻墙，推荐一款翻墙工具[Shadowsocks](https://shadowsocks.com/)
 
-###3.7配置AccessKey/SecretKey
+### 配置AccessKey/SecretKey
 代码清单3.7.1: 新建`qiniu_sdk.rb`文件,将3.3节获取到的AK,SK,空间域名地址输入下面代码
 *`config/initializers/qiniu_sdk.rb`*
 ```ruby
@@ -87,7 +87,7 @@ Qiniu.establish_connection! :access_key => '<输入你的AK>',
 Rails.application.config.qiniu_domain = "<空间域名地址>"
 ```
 
-###3.8生成上传凭证
+### 生成上传凭证
 代码清单3.8.1: 这个方法我会包装到Helper里面
 *`app/helpers/application_helper.rb`*
 ```ruby
@@ -110,7 +110,7 @@ end
 ```
 到目前为止我们以及完成了服务端的所有配置,当我们的文件上传时,是不经过我们自己的服务器的,由客户端通过Ajax请求七牛的API再将返回的文件名存入我们的服务器。接下来就是客户端的配置
 
-###3.9导入七牛JavaScriptSDK
+### 导入七牛JavaScriptSDK
 [-->下载JavaScriptSDK传送门<--](http://developer.qiniu.com/docs/v6/sdk/javascript-sdk.html)
 
 代码清单3.9.1: 为了代码易于管理我们将七牛的JavaScriptSDK文件放到*`app/assets/javascripts/plugins`*目录
@@ -144,7 +144,7 @@ end
 //= require plugins/qiniu/qiniu
 ```
 
-###3.91初始化javascript
+### 初始化javascript
 在完成以上操作之后我们就可以正式使用七牛云存储了
 
 代码清单3.9.3: 在`controller`中引入`helper`方法，传入上传凭证
@@ -245,6 +245,6 @@ end
 $ rails server -b $IP -p $PORT
 ```
 
-##4.作者
+## 作者
 
 如果教程里面有什么纰漏的地方请给我留言

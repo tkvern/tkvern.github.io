@@ -37,7 +37,7 @@ php-fpm (pid  4054) is running...
 
 ```
 
-### 2. 安装常用扩展
+### 安装常用扩展
 
 - `php-gd` 图像处理
 
@@ -59,7 +59,7 @@ $ yum install php-gd php-mysqlnd php-pdo php-mcrypt php-mbstring php-xmlrpc php-
 
 ```
 
-### 3. 重启php-fpm服务
+### 重启php-fpm服务
 
 安装完扩展后需要重启服务生效
 

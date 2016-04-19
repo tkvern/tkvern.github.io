@@ -4,25 +4,25 @@ tags: Gulp
 categories: Front-end
 ---
 
-## 1.结构说明
+## 结构说明
 
 `assets`项目资源目录，`dev`开发目录，`dist`编译输出目录，`gulpfile.js`自动化工具API
 
-## 2. gulp的使用
+## gulp的使用
 
-1.安装node环境(自行goole即可)
+### 安装node环境(自行goole即可)
 
-2.全局安装gulp
+### 全局安装gulp
 ```console
 $ npm install gulp -g
 ```
 <!-- more -->
-3.进入到需要gulp管理的项目路径, 如 `/gulp` 再安装一遍
+### 进入到需要gulp管理的项目路径, 如 `/gulp` 再安装一遍
 ```console
 $ npm install gulp --save-dev
 ```
   
-4.安装gulp插件
+### 安装gulp插件
 
  
 ```console
@@ -56,17 +56,18 @@ $ gulp
 $ gulp watch
 ```
   
-6.gulp的API请查看gulpfile.js文件
+### gulp的API请查看gulpfile.js文件
 
 
-## 3. scss文件规范以及说明
-1.各个小模块以下划线开头全小写命名，多单词以 `-` 符号分隔，总模块正常，以该模块文件夹命名，在其中导入需要的小模块(详细规则请查看`font-awesome`的scss源码，更多内容google脑补)
+## scss文件规范以及说明
+### 各个小模块以下划线开头全小写命名
+多单词以 `-` 符号分隔，总模块正常，以该模块文件夹命名，在其中导入需要的小模块(详细规则请查看`font-awesome`的scss源码，更多内容google脑补)
 例：
 `_path.scss`路径配置文件，`_mixins.scss`预编译文件，`_variables.scss`变量定义文件，`font-awesome.scss`模块导入文件
 
-## 4. 脚本使用说明
+## 脚本使用说明
 ### 基本组件
-1.`error.js`
+#### `error.js`
 用途：低版本浏览器访问限制
 用法：在`head`标签中最先引入下列代码
 ```javascript
@@ -74,11 +75,11 @@ $ gulp watch
       <script src="dist/js/error.min.js"></script>
     <![endif]-->
 ```
-2.`mian.js`
+#### `mian.js`
 用途：javascript入口文件负责渲染数据处理交互
 用法：引入即可，涉及模块较多后续完善模块说明
 
-3.`date.js`
+#### `date.js`
 用途：解析处理日期数据，支持多种日期格式
 用法：调用`Date`方法
 ```javascript
@@ -97,18 +98,18 @@ Date.today().is().november()    // Month names.
 Date.today().is().nov()         // Abbreviated month names.
 ```
 
-4.`daterange-picker.js`
+#### `daterange-picker.js`
 用途：基于bootstrapt的日期范围选择器
 
-5.`modernizr.custom.js`
+#### `modernizr.custom.js`
 用途：提供过渡动画支持
 
 
 ### jQuery组件
-1.`jquery.bootstrap.wizard.js`
+#### `jquery.bootstrap.wizard.js`
 用途：基于jQuery的Bootstrap向导式插件
 
-2.`jquery.dataTables.js`
+#### `jquery.dataTables.js`
 用途：表格处理插件，包括排序分页，宽度自动处理
 用法：引入后，以下结构绘制表格
 例：
@@ -162,7 +163,7 @@ $('.table').each(function() {
 });
 ```
 
-3.`jquery.easy-pie-chart.js`
+#### `jquery.easy-pie-chart.js`
 用途：饼状图绘制工具
 用法：引入文件后，按ID初始化DOM元素
 传送门：[rendro.github.io](http://rendro.github.io/easy-pie-chart/?utm_source=jquer.in&utm_medium=website&utm_campaign=content-curation)
@@ -239,7 +240,7 @@ $(".pie-chart3").easyPieChart({
 });
 ```
 
-4.`jquery.sparkline.js`
+#### `jquery.sparkline.js`
 用途：canvas图表绘制工具
 用法：引入后按ID初始化，`ul`部分为横轴坐标，可在style.scss文件中配置宽度
 传送门：[omnipotent.net](http://omnipotent.net/jquery.sparkline/#s-docs)
@@ -319,7 +320,7 @@ $(".pie-chart3").easyPieChart({
     });
 })
 ```
-5.`jquery.validate.js`
+#### `jquery.validate.js`
 用途：表单验证插件
 用法：添加DOM元素自定义属性(具体内容见官方API)
 传送门：[jqueryvalidation.org](http://jqueryvalidation.org/)
