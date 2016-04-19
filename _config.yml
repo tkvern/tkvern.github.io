@@ -3,11 +3,11 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Hexo
+title: tkvern
 subtitle:
 description:
-author: John Doe
-language:
+author: tkvern
+language: zh-CN
 timezone: Asia/Shanghai
 
 # URL
@@ -68,4 +68,7 @@ theme: landscape
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
-  type:
+  type: git
+  repo: git@github.com:tkvern/tkvern.github.io.git
+  branch: master
+  message:
