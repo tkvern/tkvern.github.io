@@ -3,6 +3,7 @@ title: Rails常见问题及解决办法
 tags: PostgreSQL
 categories: Ruby on Rails
 ---
+
 ## No pg_config...
  *问题重现*: 在`bundle`的时候出现gem包`pg-0.18.4`安装出错的情况，错误代码如下:
 ```console
@@ -142,7 +143,7 @@ host    all         all         ::1/128               md5
 $ service postgresql restart
 ```
 
-# type "json" does not exist
+## type "json" does not exist
 
 *问题重现*: 执行`rake db:migrate`时出现错误，错误代码如下：
 ```console
@@ -190,7 +191,7 @@ yum -y install postgresql94-server
 $ service postgresql-9.4 start
 ```
 
-# type "geography" does not exist
+## type "geography" does not exist
 *问题重现*:执行`rake db:migrate`时出现错误，错误代码如下：
 
 ```console
