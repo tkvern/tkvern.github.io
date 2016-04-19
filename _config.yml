@@ -3,8 +3,8 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: tkvern & Blog
-subtitle: Web Development && Designer
+title: TKVERN BLOG
+subtitle: Web Development & Designer
 description: Full Stack & Front-end & Ruby on Rails and engineer. Believe what you believe, and stick to what you insist on.
 author: tkvern
 language: zh-Hans
@@ -86,4 +86,5 @@ swiftype_key: owZE9q6-js34CkR18nAm
 
 google_site_verification: nITMHgGRG-3HZXe-SEJlmJxgA7J95q-z75xLLN4qNe4
 
-
+sitemap:
+  path: sitemap.xml
