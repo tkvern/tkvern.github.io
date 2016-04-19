@@ -8,25 +8,12 @@ Author ：[tkvern](https://github.com/tkvern)
 
 ---
 
-##工具介绍
 
-| 工具        | 描述  | 版本  |
-
-| --------    | :----- | :-----|
-
-| 操作系统    | CentOS | 6.5+  |
-
-| Web服务器  | Nginx  | 1.8.0 |
-
-| 语言环境    | PHP    | 5.6+  |
-
-| 数据库      | MySQL  | 5.6+  |
-
-##环境准备
+## 环境准备
 
 首先我们需要有一台CentOS6.5以上的主机，如果你还没有使用过Linux的话，本教程就不太适用了。。
 
-使用`Drupal`需要`Nginx` `PHP` `MySQL`这些东西，如果觉得安装麻烦可以使用lnmp进行一键安装，
+使用`Drupal`需要`Nginx` `PHP` `MySQL`这些东西，如果觉得安装麻烦可以使用lnmp进行一键安装，<!-- more -->
 
 推荐两个安装链接:
 
@@ -36,7 +23,7 @@ Author ：[tkvern](https://github.com/tkvern)
 
 安装方法不再敖述，上面的链接附带教程。有了lnmp环境就可以开始下一步
 
-##安装PHP扩展
+## 安装PHP扩展
 
 这些扩展在使用`drush`和`Drupal`的时候需要用到，所以一定要装好。
 
@@ -50,7 +37,7 @@ php-fpm (pid  4054) is running...
 
 ```
 
-###2. 安装常用扩展
+### 2. 安装常用扩展
 
 - `php-gd` 图像处理
 
@@ -72,7 +59,7 @@ $ yum install php-gd php-mysqlnd php-pdo php-mcrypt php-mbstring php-xmlrpc php-
 
 ```
 
-###3. 重启php-fpm服务
+### 3. 重启php-fpm服务
 
 安装完扩展后需要重启服务生效
 
@@ -82,7 +69,7 @@ $ service php-fpm restart
 
 ```
 
-##安装PHP包管理工具Composer
+## 安装PHP包管理工具Composer
 
 Composer可以方便的管理PHP的依赖
 
@@ -104,7 +91,7 @@ $ mv composer.phar /usr/local/bin/composer
 
 ```
 
-###安装Drush
+### 安装Drush
 
 `Drush`命令行主要为了管理Drupal，这里使用Drush开发版
 
@@ -182,11 +169,11 @@ Global options (see `drush topic core-global-options` for the full list):
 
 ```
 
-##开启Drupal
+## 开启Drupal
 
 完成上面的准备后就可以开启Drupal了
 
-###创建Drupal项目
+### 创建Drupal项目
 
 第一步,在项目目录下载drupal。目前有部分modules不支持8.x以上版本，所以我们在这里指定drupal-7.43
 

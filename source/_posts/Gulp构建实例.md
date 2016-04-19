@@ -3,6 +3,7 @@ title: Gulp构建实例
 tags: Gulp
 categories: Front-end
 ---
+
 ## 1.结构说明
 
 `assets`项目资源目录，`dev`开发目录，`dist`编译输出目录，`gulpfile.js`自动化工具API
@@ -15,29 +16,33 @@ categories: Front-end
 ```console
 $ npm install gulp -g
 ```
-  
+<!-- more -->
 3.进入到需要gulp管理的项目路径, 如 `/gulp` 再安装一遍
 ```console
 $ npm install gulp --save-dev
 ```
   
 4.安装gulp插件
-```console
-$ npm install gulp-ruby-sass gulp-autoprefixer gulp-minify-css gulp-jshint gulp-concat gulp-uglify gulp-imagemin gulp-notify gulp-rename gulp-livereload gulp-cache del --save-dev
 
-``` 
->   sass的编译 (`gulp-ruby-sass`)
-    自动添加css前缀（`gulp-autoprefixer`）
-    压缩css（`gulp-minify-css`）
-    js代码校验（`gulp-jshint`）
-    合并js文件（`gulp-concat`）
-    压缩js代码（`gulp-uglify`）
-    压缩图片（`gulp-imagemin`）
-    自动刷新页面（`gulp-livereload`）
-    图片缓存，只有图片替换了才压缩（`gulp-cache`）
-    更改提醒（`gulp-notify`）
-    清除文件（`del`）
+ 
+```console
+$ npm install --save-dev gulp-ruby-sass gulp-autoprefixer gulp-minify-css gulp-jshint gulp-concat gulp-uglify gulp-imagemin gulp-notify gulp-rename gulp-livereload gulp-cache del
 ```
+
+```javascript
+  sass的编译 (`gulp-ruby-sass`)
+  自动添加css前缀（`gulp-autoprefixer`）
+  压缩css（`gulp-minify-css`）
+  js代码校验（`gulp-jshint`）
+  合并js文件（`gulp-concat`）
+  压缩js代码（`gulp-uglify`）
+  压缩图片（`gulp-imagemin`）
+  自动刷新页面（`gulp-livereload`）
+  图片缓存，只有图片替换了才压缩（`gulp-cache`）
+  更改提醒（`gulp-notify`）
+  清除文件（`del`）
+```
+
   
   
 5.运行task任务
@@ -64,7 +69,7 @@ $ gulp watch
 1.`error.js`
 用途：低版本浏览器访问限制
 用法：在`head`标签中最先引入下列代码
-```html
+```javascript
     <!--[if lt IE 9]>
       <script src="dist/js/error.min.js"></script>
     <![endif]-->
@@ -319,7 +324,8 @@ $(".pie-chart3").easyPieChart({
 用法：添加DOM元素自定义属性(具体内容见官方API)
 传送门：[jqueryvalidation.org](http://jqueryvalidation.org/)
 例:
->(1)required:true               必输字段
+```html
+(1)required:true               必输字段
 (2)remote:"check.php"          使用ajax方法调用check.php验证输入值
 (3)email:true                  必须输入正确格式的电子邮件
 (4)url:true                    必须输入正确格式的网址
@@ -336,3 +342,4 @@ $(".pie-chart3").easyPieChart({
 (15)range:[5,10]               输入值必须介于 5 和 10 之间
 (16)max:5                      输入值不能大于5
 (17)min:10                     输入值不能小于10
+```

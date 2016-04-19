@@ -5,9 +5,9 @@
 # Site
 title: tkvern
 subtitle:
-description:
+description: Web Development & Designer
 author: tkvern
-language: zh-CN
+language: zh-Hans
 timezone: Asia/Shanghai
 
 # URL
@@ -63,7 +63,16 @@ pagination_dir: page
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: primer
+theme: next
+stylus:
+  compress: true
+
+# Avatar
+avatar: https://avatars1.githubusercontent.com/u/10667077?v=3&s=460
+
+#duoshuo
+duoshuo_shortname: vern
+
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html

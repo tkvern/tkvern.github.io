@@ -5,7 +5,7 @@ categories: Ruby on Rails
 ---
 
 ## No pg_config...
- *问题重现*: 在`bundle`的时候出现gem包`pg-0.18.4`安装出错的情况，错误代码如下:
+ *问题重现*: 在`bundle`的时候出现gem包`pg-0.18.4`安装出错的情况，错误代码如下:<!-- more -->
 ```console
 $ bundle
 .
@@ -97,7 +97,7 @@ $ gem install pg -v '0.18.4' -- --with-pg-config=/usr/pgsql-9.4/bin/pg_config
 ## 无法连接pgsql
 *问题重现*: 运行`rails s -b 0.0.0.0 -p 3000`后，在浏览器打开项目首页出现下面问题
 
-```console
+```ruby
 PG::ConnectionBad (FATAL:  Ident authentication failed for user "postgres"
 ):
   activerecord (4.2.3) lib/active_record/connection_adapters/postgresql_adapter.rb:655:in `initialize'
