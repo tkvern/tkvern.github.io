@@ -24,14 +24,14 @@
 
 
 {% if theme.fancybox %}
-  <link href="{{ url_for(theme.vendors._internal) }}/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+  <link href="{{ config.qiniu.urlPrefix }}{{ url_for(theme.vendors._internal) }}/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
 {% endif %}
 
 {% include "./head/external-fonts.swig" %}
 
-<link href="{{ url_for(theme.vendors._internal) }}/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+<link href="{{ config.qiniu.urlPrefix }}{{ url_for(theme.vendors._internal) }}/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
 
-<link href="{{ url_for(theme.css) }}/main.css?v={{ theme.version }}" rel="stylesheet" type="text/css" />
+<link href="{{ config.qiniu.urlPrefix }}{{ url_for(theme.css) }}/main.css?v={{ theme.version }}" rel="stylesheet" type="text/css" />
 
 {% if page.keywords %}
   <meta name="keywords" content="{{ page.keywords }}" />
@@ -51,7 +51,7 @@
 
 
 {% if theme.favicon %}
-  <link rel="shortcut icon" type="image/x-icon" href="{{ url_for(theme.favicon) }}?v={{ theme.version }}" />
+  <link rel="shortcut icon" type="image/x-icon" href="{{ config.qiniu.urlPrefix }}{{ url_for(theme.favicon) }}?v={{ theme.version }}" />
 {% endif %}
 
 
