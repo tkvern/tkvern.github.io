@@ -4,7 +4,7 @@ tags: Drupal
 categories: php
 ---
 
-![Drupal1](http://7xs0pm.com1.z0.glb.clouddn.com/drupal1.png)
+![Drupal1](https://o5zglbuyp.qnssl.com/drupal1.png)
 ## 环境准备
 
 首先我们需要有一台CentOS6.5以上的主机，如果你还没有使用过Linux的话，本教程就不太适用了。。

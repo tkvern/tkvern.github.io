@@ -4,7 +4,7 @@ tags: Drupal
 categories: php
 ---
 
-![Drupal2](http://7xs0pm.com1.z0.glb.clouddn.com/drupal2.png)
+![Drupal2](https://o5zglbuyp.qnssl.com/drupal2.png)
 ## 安装Drupal常用模块
 
 <!-- more -->

@@ -3,7 +3,8 @@ title: Gulp构建实例
 tags: Gulp
 categories: Front-end
 ---
-![gulp](http://7xs0pm.com1.z0.glb.clouddn.com/gulpbg.png)
+
+![gulp](https://o5zglbuyp.qnssl.com/gulpbg.png)
 ## 结构说明
 
 `assets`项目资源目录，`dev`开发目录，`dist`编译输出目录，`gulpfile.js`自动化工具API
