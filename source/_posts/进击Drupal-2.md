@@ -4,10 +4,6 @@ tags: Drupal
 categories: php
 ---
 
-Author ：[tkvern](https://github.com/tkvern)
-
----
-
 ## 安装Drupal常用模块
 
 - `ctools`其他模块会依赖这个模块

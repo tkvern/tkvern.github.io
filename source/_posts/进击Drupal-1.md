@@ -4,11 +4,6 @@ tags: Drupal
 categories: php
 ---
 
-Author ：[tkvern](https://github.com/tkvern)
-
----
-
-
 ## 环境准备
 
 首先我们需要有一台CentOS6.5以上的主机，如果你还没有使用过Linux的话，本教程就不太适用了。。
