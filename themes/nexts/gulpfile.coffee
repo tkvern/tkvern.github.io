@@ -26,3 +26,10 @@ gulp.task 'css', ->
     .pipe gulp.dest('./source/vendors/')    
     .pipe notify({ message: 'Css file is done' })
 
+
+gulp.task 'vendorsjs', ->
+  return gulp.src([
+    './source/vendors/**/*.js'
+  ]).pipe jshint()
+    .pipe jshint.reporter(stylish)
+    .pipe notify({ message: 'JS file is done' })

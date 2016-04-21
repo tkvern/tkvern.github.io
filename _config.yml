@@ -97,6 +97,7 @@ qiniu:
   secret_key: iJCgBx6O9T36E8ufyqRONUJ6XTel2Uu7C3gzB7AH
   dirPrefix: static
   urlPrefix: http://7xs0pm.com1.z0.glb.clouddn.com/static
+  # urlPrefix:
   local_dir: public
   update_exist: true
   image: 
