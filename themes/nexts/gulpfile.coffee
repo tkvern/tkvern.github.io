@@ -29,7 +29,9 @@ gulp.task 'css', ->
 
 gulp.task 'vendorsjs', ->
   return gulp.src([
-    './source/vendors/**/*.js'
+    './source/vendors/jquery_lazyload/*.js'
   ]).pipe jshint()
     .pipe jshint.reporter(stylish)
+    .pipe uglify()
+    .pipe gulp.dest('./source/vendors/jquery_lazyload/')
     .pipe notify({ message: 'JS file is done' })
