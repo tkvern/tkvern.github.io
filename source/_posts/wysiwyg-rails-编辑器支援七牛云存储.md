@@ -3,7 +3,7 @@ title: wysiwyg-rails-编辑器支援七牛云存储
 tags: 七牛云存储
 categories: Ruby on Rails
 ---
-
+![froala](http://7xs0pm.com1.z0.glb.clouddn.com/froalabg.png)
 [wysiwyg-rails-qiniu](https://github.com/tkvern/wysiwyg-rails-qiniu) 是基于 [wysiwyg-rails](https://rubygems.org/gems/wysiwyg-rails)制作, 上传的资源直接支持七牛云存储
 在使用该gem包前,你得会使用七牛云存储
 传送门: [Rails 进阶—— 云存储实战](https://ruby-china.org/topics/29010)

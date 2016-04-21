@@ -3,11 +3,12 @@ title: Gulp构建实例
 tags: Gulp
 categories: Front-end
 ---
-
+![gulp](http://7xs0pm.com1.z0.glb.clouddn.com/gulpbg.png)
 ## 结构说明
 
 `assets`项目资源目录，`dev`开发目录，`dist`编译输出目录，`gulpfile.js`自动化工具API
 
+<!-- more -->
 ## gulp的使用
 
 ### 安装node环境(自行goole即可)
@@ -16,7 +17,7 @@ categories: Front-end
 ```console
 $ npm install gulp -g
 ```
-<!-- more -->
+
 ### 进入到需要gulp管理的项目路径, 如 `/gulp` 再安装一遍
 ```console
 $ npm install gulp --save-dev

@@ -4,7 +4,10 @@ tags: Drupal
 categories: php
 ---
 
+![Drupal2](http://7xs0pm.com1.z0.glb.clouddn.com/drupal2.png)
 ## 安装Drupal常用模块
+
+<!-- more -->
 
 - `ctools`其他模块会依赖这个模块
 ```console
@@ -18,7 +21,6 @@ $ drush dl views
 $ drush en views views_ui -y
 ```
 
-<!-- more -->
 
 - `rules`执行设定任务
 ```console

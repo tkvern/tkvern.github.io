@@ -5,7 +5,8 @@ categories: Ruby on Rails
 ---
 
 ## No pg_config...
- *问题重现*: 在`bundle`的时候出现gem包`pg-0.18.4`安装出错的情况，错误代码如下:<!-- more -->
+ *问题重现*: 在`bundle`的时候出现gem包`pg-0.18.4`安装出错的情况，错误代码如下:
+ <!-- more -->
 ```console
 $ bundle
 .
