@@ -6,13 +6,14 @@
 title: TKVERN BLOG
 subtitle: Web Development & Designer
 description: Full Stack & Front-end & Ruby on Rails and engineer. Believe what you believe, and stick to what you insist on.
-author: tkvern
-language: zh-Hans
+author: TKVERN
+language: en #zh-Hans
 timezone: Asia/Shanghai
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://tkvern.com
+url: https://tkvern.com
+enforce_ssl: tkvern.com
 root: /
 permalink: :year:month:day/:title/
 permalink_defaults:
@@ -96,7 +97,7 @@ qiniu:
   access_key: Uu3lFFZPwE7jBd2PZB_OJsHjRkSpeFcKlIuKqw-0
   secret_key: iJCgBx6O9T36E8ufyqRONUJ6XTel2Uu7C3gzB7AH
   dirPrefix: static
-  urlPrefix: http://7xs0pm.com1.z0.glb.clouddn.com/static
+  urlPrefix: https://o5zglbuyp.qnssl.com/static
   # urlPrefix:
   local_dir: public
   update_exist: true
@@ -108,4 +109,8 @@ qiniu:
   css:
     folder: css
 
-
+# archive_generator
+archive_generator:
+  per_page: 20
+  yearly: true
+  monthly: true

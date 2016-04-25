@@ -2,6 +2,7 @@
 title: Gulp构建实例
 tags: Gulp
 categories: Front-end
+date: 2015-12-10 21:26:49
 ---
 
 ![gulp](https://o5zglbuyp.qnssl.com/gulpbg.png)

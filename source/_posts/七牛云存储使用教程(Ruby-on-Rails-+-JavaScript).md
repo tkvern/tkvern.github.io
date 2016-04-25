@@ -2,6 +2,7 @@
 title: 七牛云存储使用教程(Ruby-on-Rails-+-JavaScript)
 tags: 七牛云存储
 categories: Ruby on Rails
+date: 2016-02-18 21:26:49
 ---
 
 ![qiniu](https://o5zglbuyp.qnssl.com/qiniubg.png)

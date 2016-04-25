@@ -1,7 +1,8 @@
 ---
-title: Arduino-uno从入门到精通1
+title: Arduino-uno从入门1
 tags: Arduino
 categories: 智能硬件
+date: 2016-04-16 21:26:49
 ---
 
 ![Ariduino](https://o5zglbuyp.qnssl.com/illu-arduino-UNO.png)

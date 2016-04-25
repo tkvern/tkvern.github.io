@@ -70,6 +70,12 @@
   })
 }}
 
+<link rel="canonical" href=" { { site.url } }{ { page.url } }" />
+ <script type="text/javascript">
+    var host = "tkvern.com";
+    if ((host == window.location.host) && (window.location.protocol != "https:"))
+        window.location.protocol = "https";
+</script>
 
 {# Export some HEXO Configurations to Front-End #}
 <script type="text/javascript" id="hexo.configuration">

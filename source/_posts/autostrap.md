@@ -1,6 +1,6 @@
 ---
 title: 基于原生JS移动端响应式解决方案——AUTOSTRAP
-date: 2016-04-19 22:41:14
+date: 2015-08-19 22:41:14
 tags: autostrap
 categories: Front-end
 ---

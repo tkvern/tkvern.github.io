@@ -2,6 +2,7 @@
 title: wysiwyg-rails-编辑器支援七牛云存储
 tags: 七牛云存储
 categories: Ruby on Rails
+date: 2016-03-20 21:26:49
 ---
 
 ![froala](https://o5zglbuyp.qnssl.com/froalabg.png)

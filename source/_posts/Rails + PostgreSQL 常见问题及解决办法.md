@@ -1,7 +1,8 @@
 ---
-title: Rails常见问题及解决办法
+title: Rails + PostgreSQL 常见问题及解决办法
 tags: PostgreSQL
 categories: Ruby on Rails
+date: 2016-04-18 21:26:49
 ---
 
 ## No pg_config...
