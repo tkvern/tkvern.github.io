@@ -72,7 +72,9 @@ stylus:
 avatar: https://o5zglbuyp.qnssl.com/10667077.jpeg
 
 #duoshuo
-duoshuo_shortname: vern
+# duoshuo_shortname: vern
+
+disqus_shortname: tkvern
 
 
 # Deployment
