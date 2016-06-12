@@ -1,7 +1,7 @@
 ---
 title: FlowRouter 中文文档
 date: 2016-06-12 15:24:15
-tags: FlowRo
+tags: FlowRouter
 categories: Front-end
 ---
 
