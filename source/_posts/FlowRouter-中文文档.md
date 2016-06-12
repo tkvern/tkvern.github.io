@@ -1,9 +1,10 @@
 ---
 title: FlowRouter 中文文档
 date: 2016-06-12 15:24:15
-tags: FlowRouer
+tags: FlowRo
 categories: Front-end
 ---
+
 
  TKVERN 翻译 | 源文档链接[FlowRouter](https://github.com/kadirahq/flow-router/) 
  (如果你发现翻译中存在谬误的地方, 请留言, 我会继续造福社会. 建议结合源文档查看翻译)
@@ -192,7 +193,7 @@ FlowRouter.route('/blog/:postId', {
 
 Triggers 是 FlowRouter 可以允许你在 **enter** 这个 route 之前和 **exit** 这个 route 之后执行相应的任务.
 
-#### Defining triggers for a route
+### Defining triggers for a route
 
 这里是如何为一个 route 定义 triggers :
 
@@ -218,7 +219,7 @@ function trackRouteClose(context) {
 }
 ```
 
-#### Defining triggers for a group route
+### Defining triggers for a group route
 
 这里是如何在一个 group 定义里定义 triggers.
 
@@ -232,7 +233,7 @@ var adminRoutes = FlowRouter.group({
 
 > 你可以添加 triggers 到单个 routes 或是 group .
 
-#### Defining Triggers Globally
+### Defining Triggers Globally
 
 你同样可以定义全局 triggers. 这里是怎么做:
 
@@ -249,7 +250,7 @@ FlowRouter.triggers.exit([trackRouteExit], {except: ["home"]});
 
 > 如果你想了解更多关于 triggers 和 设计决策, 访问 [here](https://github.com/meteorhacks/flow-router/pull/59).
 
-#### Redirecting With Triggers
+### Redirecting With Triggers
 
 你可以使用 triggers 重定向到一个不同 route . 你可以在triggers enter 和 exit 做到这一点. 看看如何做的吧:
 
@@ -272,7 +273,7 @@ FlowRouter.route('/', {
 
 检查这个 [PR](https://github.com/meteorhacks/flow-router/pull/172) 以了解更多关于 redirect 的 API.
 
-#### Stopping the Callback With Triggers
+### Stopping the Callback With Triggers
 
 在有些情况, 你也许需要停止使用 triggers 的 route callback. 你可以在 **before** triggers, 使用第三个参数: `stop` function. 例如, 你可以检查前缀, 如果失败, 在before action停止和显示 notFound layout.
 
@@ -298,7 +299,8 @@ function localeCheck(context, redirect, stop) {
 }
 ```
 
-> **Note**: 当你使用 stop function,即使你不使用它,你应该通过第二个 **redirect** 参数.
+ > **Note**: 当你使用 stop function,即使你不使用它,你应该通过第二个 **redirect** 参数.
+
 
 ## Not Found Routes
 
@@ -320,7 +322,7 @@ FlowRouter.notFound = {
 
 FlowRouter 有丰富的 API 帮助你浏览这个 router 和获取这个 router 的信息.
 
-#### FlowRouter.getParam(paramName);
+### FlowRouter.getParam(paramName);
 
 你可以使用 Reactive function 获取 URL 的一个参数.
 
@@ -332,7 +334,7 @@ var appId = FlowRouter.getParam("appId");
 console.log(appId); // prints "this-is-my-app"
 ```
 
-#### FlowRouter.getQueryParam(queryStringKey);
+### FlowRouter.getQueryParam(queryStringKey);
 
 你可以用Reactive function 的 queryString 查询你需要的value.
 
@@ -344,7 +346,7 @@ var color = FlowRouter.getQueryParam("color");
 console.log(color); // prints "red"
 ```
 
-#### FlowRouter.path(pathDef, params, queryParams)
+### FlowRouter.path(pathDef, params, queryParams)
 
 从定义的path中生成path. 都有 `params` 和 `queryParams` 两个选项.
 
@@ -361,7 +363,7 @@ console.log(path); // prints "/blog/met%20eor/abc?show=y%2Be%3Ds&color=black"
 
 如果没有 params 或 queryParams, 这将只会返回 pathDef.
 
-##### Using Route name instead of the pathDef
+#### Using Route name instead of the pathDef
 
 你也可以使用 route's name 代替 pathDef. 那么, FlowRouter 会从给定的 route 选择 pathDef. 看下面的例子:
 
@@ -380,7 +382,7 @@ var path = FlowRouter.path("blogPostRoute", params, queryParams);
 console.log(path); // prints "/blog/meteor/abc?show=yes&color=black"
 ```
 
-#### FlowRouter.go(pathDef, params, queryParams);
+### FlowRouter.go(pathDef, params, queryParams);
 
 这将通过 `FlowRouter.path` 基于 arguments 和 re-route 到达相应的 path ,  .
 
@@ -391,11 +393,11 @@ FlowRouter.go("/blog");
 ```
 
 
-#### FlowRouter.url(pathDef, params, queryParams)
+### FlowRouter.url(pathDef, params, queryParams)
 
 就像 `FlowRouter.path`, 但给出的是绝对路径. (在后端使用 `Meteor.absoluteUrl`.)
 
-#### FlowRouter.setParams(newParams)
+### FlowRouter.setParams(newParams)
 
 这会改变当前的 params, re-route 到新的 path.
 
@@ -408,7 +410,7 @@ FlowRouter.setParams({appId: "new-id"});
 //      /apps/new-id?show=yes&color=red
 ```
 
-#### FlowRouter.setQueryParams(newQueryParams)
+### FlowRouter.setQueryParams(newQueryParams)
 
 就像 `FlowRouter.setParams`, 但是是 queryString params.
 
@@ -418,7 +420,7 @@ FlowRouter.setParams({appId: "new-id"});
 FlowRouter.setQueryParams({paramToRemove: null});
 ```
 
-#### FlowRouter.getRouteName()
+### FlowRouter.getRouteName()
 
 获取route reactively 的 name.
 
@@ -429,7 +431,7 @@ Tracker.autorun(function() {
 });
 ```
 
-#### FlowRouter.current()
+### FlowRouter.current()
 
 获取 router 的当前状态. **This API is not reactive**.
 如果你需要观察 path 的变化,可以使用 `FlowRouter.watchPathChange()`.
@@ -452,7 +454,7 @@ console.log(current);
 // }
 ```
 
-#### FlowRouter.watchPathChange()
+### FlowRouter.watchPathChange()
 
 监听 path 的变化.如果你需要像使用 API 一样获得 params 或queryParams 可以用 `FlowRouter.getQueryParam()`.
 
@@ -465,7 +467,7 @@ Tracker.autorun(function() {
 });
 ```
 
-#### FlowRouter.withReplaceState(fn)
+### FlowRouter.withReplaceState(fn)
 通常, 所有的 route 改变通过像 `FlowRouter.go` 和 `FlowRouter.setParams()` 这样的 APIs 添加 URL item 到浏览器的 history. 例如, 运行下面的代码:
 
 ```js
@@ -490,13 +492,13 @@ FlowRouter.withReplaceState(function() {
 
 > 我们命名这个功能为 `withReplaceState` , 因为, replaceState 是 underline API 用于此功能. 阅读更多关于 [replace state & the history API](https://developer.mozilla.org/en-US/docs/Web/Guide/API/DOM/Manipulating_the_browser_history).
 
-#### FlowRouter.reload()
+### FlowRouter.reload()
 
 FlowRouter routes 是幂等的. 这意味着, 即使你多次调用 `FlowRouter.go()` 到相同的 URL , 但是它只在第一次运行时激活. 这也是真实的直接点击路径.
 
 因此, 如果你真的需要 reload 这个 route, 这个就是你想要的 API .
 
-#### FlowRouter.wait() and FlowRouter.initialize()
+### FlowRouter.wait() and FlowRouter.initialize()
 
 在默认情况下, FlowRouter 初始化这个路由 process 在 `Meteor.startup()` 中回调. 对大多数app而言是这样工作. 但是, 一些 app 自定义初始化需要在 FlowRouter 初始化之后.
 
@@ -514,7 +516,7 @@ WhenEverYourAppIsReady(function() {
 
 查看更多信息访问 [issue #180](https://github.com/meteorhacks/flow-router/issues/180).
 
-#### FlowRouter.onRouteRegister(cb)
+### FlowRouter.onRouteRegister(cb)
 
 这个 API 是特地为开发人员开发插件设计的. 他们可以监听任何 registered route 和为 FlowRouter 添加自定义功能. 这都工作在服务器端和客户端.
 
@@ -769,17 +771,17 @@ FlowRouter 3.0 将有服务器端渲染的支持. 我们已经开始了初步版
 
 以下是将应用迁移到 2.0 版本的步骤.
 
-#### Use the New FlowRouter Package
+### Use the New FlowRouter Package
 * Now FlowRouter comes as `kadira:flow-router`
 * So, remove `meteorhacks:flow-router` with : `meteor remove meteorhacks:flow-router`
 * Then, add `kadira:flow-router` with `meteor add kadira:flow-router`
 
-#### Change FlowLayout into BlazeLayout
+### Change FlowLayout into BlazeLayout
 * 我们重新命名了 FlowLayout 为 [BlazeLayout](https://github.com/kadirahq/blaze-layout).
 * 因此, 移除 `meteorhacks:flow-layout` 和添加 `kadira:blaze-layout` 即可.
 * 你需要使用 `BlazeLayout.render()` 代替 `FlowLayout.render()`
 
-#### Stop using deprecated Apis
+### Stop using deprecated Apis
 * 这没有中间件支持. 使用 triggers 代替.
 * 这没有 API 叫 `.reactiveCurrent()`, 使用 `.watchPathChange()` 代替.
 * 早些时候,你可以用 `FlowRouter.current().params.query` 访问和查询params. 但是, 现在你不能这样总了. 使用 `FlowRouter.current().queryParams` 代替.
