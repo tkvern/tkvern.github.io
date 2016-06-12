@@ -6,7 +6,7 @@ categories: Front-end
 ---
 
 
- TKVERN 翻译 | 源文档链接[FlowRouter](https://github.com/kadirahq/flow-router/) 
+ [TKVERN](https://tkvern.com/) 翻译 | 源文档链接[FlowRouter](https://github.com/kadirahq/flow-router/) 
  (如果你发现翻译中存在谬误的地方, 请留言, 我会继续造福社会. 建议结合源文档查看翻译)
 
 为Meteor精心设计的客户端Router
