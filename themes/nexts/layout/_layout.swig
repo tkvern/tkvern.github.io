@@ -24,7 +24,7 @@
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <a href="https://github.com/tkvern"><img  class="hidden-xs hidden-sm" style="position: absolute;top: 0;left: 0;border: 0;" src="https://o5zglbuyp.qnssl.com/forkme.png" alt="Fork me on GitHub" data-canonical-src="https://o5zglbuyp.qnssl.com/forkme.png"></a>
+      <a href="https://github.com/tkvern"><img  class="hidden-xs hidden-sm" style="position: absolute;top: 0;left: 0;border: 0;" src="/images/forkme.png" alt="Fork me on GitHub" data-canonical-src="/images/forkme.png"></a>
       <div class="header-inner"> {%- include '_partials/header.swig' %} </div>
     </header>
 

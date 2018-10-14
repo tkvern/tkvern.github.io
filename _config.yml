@@ -69,7 +69,7 @@ stylus:
   compress: true
 
 # Avatar
-avatar: https://o5zglbuyp.qnssl.com/10667077.jpeg
+avatar: /images/10667077.jpeg
 
 #duoshuo
 # duoshuo_shortname: vern
@@ -99,7 +99,7 @@ qiniu:
   access_key: Uu3lFFZPwE7jBd2PZB_OJsHjRkSpeFcKlIuKqw-0
   secret_key: iJCgBx6O9T36E8ufyqRONUJ6XTel2Uu7C3gzB7AH
   dirPrefix: static
-  urlPrefix: https://o5zglbuyp.qnssl.com/static
+  urlPrefix: 
   # urlPrefix:
   local_dir: public
   update_exist: true
