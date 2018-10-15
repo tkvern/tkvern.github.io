@@ -5,7 +5,7 @@ categories: php
 date: 2016-03-21 22:26:49
 ---
 
-![Drupal2](https://o5zglbuyp.qnssl.com/drupal2.png)
+![Drupal2](http://pgl9fxcdp.bkt.clouddn.com/drupal2.png)
 ## 安装Drupal常用模块
 
 <!-- more -->

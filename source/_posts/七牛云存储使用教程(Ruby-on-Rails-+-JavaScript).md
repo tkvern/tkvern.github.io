@@ -5,7 +5,7 @@ categories: Ruby on Rails
 date: 2016-02-18 21:26:49
 ---
 
-![qiniu](https://o5zglbuyp.qnssl.com/qiniubg.png)
+![qiniu](http://pgl9fxcdp.bkt.clouddn.com/qiniubg.png)
 ## 吐槽
 写教程之前不得不吐槽一下[七牛](http://developer.qiniu.com/docs/v6/sdk/index.html)的官方文档，API的说明是很全面，但是读起来超蛋疼。为什么这么说呢，按照我以往的看API的文档都会有示例代码跑起来帮助理解，而七牛的API文档对于刚接触这种第三方服务商SDK的开发者来说不是太友好。建议七牛借鉴下[百度地图SDK](http://developer.baidu.com/map/index.php?title=jspopular)的文档写法。
 

@@ -5,7 +5,7 @@ tags: Meteor
 categories: Front-end
 ---
 
-![meteor](https://o5zglbuyp.qnssl.com/meteorbg2.png)
+![meteor](http://pgl9fxcdp.bkt.clouddn.com/meteorbg2.png)
 记一次Meteor项目部署配置,使用 `CentOS` + `Meteor` + `React` + `Mongdb` + `Nginx`。
 node版本与Meteor依赖一致`v0.10.43`
 自定义服务配置比较麻烦，给出配置文件示例。

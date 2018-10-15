@@ -33,4 +33,4 @@ _Work_: Front-end & Ruby on Rails engineer
 
 ----
 
-[![verncake@gmail.com](https://o5zglbuyp.qnssl.com/verncakegmail.png)](mailto:verncake@gmail.com)
+[![verncake@gmail.com](http://pgl9fxcdp.bkt.clouddn.com/verncakegmail.png)](mailto:verncake@gmail.com)

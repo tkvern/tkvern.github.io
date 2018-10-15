@@ -5,7 +5,7 @@ tags: will_paginate
 categories: Ruby on Rails
 ---
 
-![will-paginate-bg](https://o5zglbuyp.qnssl.com/will-paginate-bg.png)
+![will-paginate-bg](http://pgl9fxcdp.bkt.clouddn.com/will-paginate-bg.png)
 ## 为什么重写will_paginate
 相信很多同学在使用`will_paginate`的时候都会遇到这样一个问题：
 自带分页样式太LOW了，有木有好看一点的，能不能自己定制呢。于是我们在[RubyGems](https://rubygems.org/search?utf8=%E2%9C%93&query=will_paginate)搜索will_paginate的主题gem包。发现有各种各样主题的，但却找不到你想要的，怎么办？
@@ -16,11 +16,11 @@ categories: Ruby on Rails
 
 ## 预览效果
 先来看看`will_paginate`默认的效果是怎么样？为了方便后续区分，默认效果叫`Old`，修改后效果叫`New`
-![will-paginate-pagelist](https://o5zglbuyp.qnssl.com/will-paginate-pagelist.png)
+![will-paginate-pagelist](http://pgl9fxcdp.bkt.clouddn.com/will-paginate-pagelist.png)
 上图中的`Old`分页稍显简陋。
 
 下图是修改后需要`New`的效果
-![will-paginate-materiaizepg](https://o5zglbuyp.qnssl.com/will-paginate-materiaizepg.png)
+![will-paginate-materiaizepg](http://pgl9fxcdp.bkt.clouddn.com/will-paginate-materiaizepg.png)
 
 ## 分析结构
 `Old`代码结构
@@ -376,4 +376,4 @@ require 'materialize_renderer'
 
 ## 完成
 完成这些操作之后，重启服务器。恭喜你，完成了对`will_paginate`的修改。看看`New`吧
-![will-paginate-done](https://o5zglbuyp.qnssl.com/will-paginate-done.png)
+![will-paginate-done](http://pgl9fxcdp.bkt.clouddn.com/will-paginate-done.png)

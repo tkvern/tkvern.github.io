@@ -5,7 +5,7 @@ categories: php
 date: 2016-03-21 21:26:49
 ---
 
-![Drupal1](https://o5zglbuyp.qnssl.com/drupal1.png)
+![Drupal1](http://pgl9fxcdp.bkt.clouddn.com/drupal1.png)
 ## 环境准备
 
 首先我们需要有一台CentOS6.5以上的主机，如果你还没有使用过Linux的话，本教程就不太适用了。。
