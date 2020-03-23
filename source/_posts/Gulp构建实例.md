@@ -5,7 +5,7 @@ categories: Front-end
 date: 2015-12-10 21:26:49
 ---
 
-![gulp](http://pgl9fxcdp.bkt.clouddn.com/gulpbg.png)
+![gulp](/images/cover/gulpbg.png)
 ## 结构说明
 
 `assets`项目资源目录，`dev`开发目录，`dist`编译输出目录，`gulpfile.js`自动化工具API

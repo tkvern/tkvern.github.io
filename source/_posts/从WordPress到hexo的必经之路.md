@@ -5,7 +5,7 @@ categories: Front-end
 date: 2016-04-20 21:26:49
 ---
 
-![NexT](http://pgl9fxcdp.bkt.clouddn.com/hexo-theme-next.png)
+![NexT](/images/cover/hexo-theme-next.png)
 ## 前言
 本来不打算写关于hexo教程的，Google上关于hexo的文章到处都有，重复造轮子的事情本身意义不大。之前的博客一直使用的是WordPress，朋友说用WordPress来做博客会存在种种问题，WP就像是一把瑞士军刀，在灵巧以及功能性上已经失去了平衡。然后去尝试了各种博客构建方案，折腾完后发现，Hexo已经在简洁之道上了。
 <!-- more -->
@@ -38,7 +38,7 @@ $ hexo server
 ### 配置`_config.yml`文件
 打开`localhost:4000`后会有一个`hello world`文件，那么恭喜你，你已经构建好了一个博客。对于大多数人来说看到hexo的文件目录都会有些困惑。该从哪里入手？
 
-![listblog](http://pgl9fxcdp.bkt.clouddn.com/listblog.png)
+![listblog](/images/hexo/listblog.png)
 
 打开`_config.yml`文件，大部分的参数默认即可。简单晒下我的配置文件
 

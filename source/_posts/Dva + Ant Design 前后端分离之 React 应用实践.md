@@ -5,7 +5,7 @@ tags: React
 categories: Front-end
 ---
 
-![qiniu](http://pgl9fxcdp.bkt.clouddn.com/201702041848001.jpeg)
+![qiniu](/images/cover/201702041848001.jpeg)
 
 继 [Rails 从入门到完全放弃 拥抱 Elixir + Phoenix + React + Redux](https://ruby-china.org/topics/30594) 这篇文章被喷之后，笔者很长一段时候没有上社区逛了。现在 [tkvern](tkvern.com) 又回归了，给大家带来React实践的一些经验，一些踩坑的经验。
 

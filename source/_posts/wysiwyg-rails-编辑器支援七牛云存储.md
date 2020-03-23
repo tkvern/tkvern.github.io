@@ -5,7 +5,7 @@ categories: Ruby on Rails
 date: 2016-03-20 21:26:49
 ---
 
-![froala](http://pgl9fxcdp.bkt.clouddn.com/froalabg.png)
+![froala](/images/cover/froalabg.png)
 [wysiwyg-rails-qiniu](https://github.com/tkvern/wysiwyg-rails-qiniu) 是基于 [wysiwyg-rails](https://rubygems.org/gems/wysiwyg-rails)制作, 上传的资源直接支持七牛云存储
 在使用该gem包前,你得会使用七牛云存储
 传送门: [Rails 进阶—— 云存储实战](https://ruby-china.org/topics/29010)
