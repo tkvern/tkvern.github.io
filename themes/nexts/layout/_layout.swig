@@ -12,7 +12,7 @@
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="{{ config.language }}">
-
+<div style="display:none"><img src='/images/10667077.jpeg' /></div>
   {% include '_scripts/third-party/analytics.swig' %}
 
   {% set container_class = "container one-collumn " %}
