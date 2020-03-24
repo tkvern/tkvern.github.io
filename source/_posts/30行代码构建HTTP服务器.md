@@ -4,6 +4,8 @@ date: 2020-03-24 19:50:56
 tags:
 ---
 
+![nodejs](/images/cover/Node-js.jpg)
+
 前两天调代码，想查看测试覆盖率生成的网页报告文件，没有安装HTTP服务器客户端。就在VS Code中下载一个叫`Live Server`的插件，用来启动HTTP服务。感觉效果还不错，然后今天和大家用Node来实现一个。
 
 <!-- more -->
