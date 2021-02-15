@@ -15,6 +15,7 @@
     </div>
 
     {% for post in page.posts %}
+
       {# Show year #}
       {% set year %}
       {% set post.year = date(post.date, 'YYYY') %}
