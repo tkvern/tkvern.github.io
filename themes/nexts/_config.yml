@@ -220,7 +220,7 @@ baidu_analytics: 6dbe8d3fc8c188c1852bf28873a922ba
 #    button | slide
 baidushare:
   baidushare: true
-  type: slide
+  type: button
 
 # Share
 #jiathis:
