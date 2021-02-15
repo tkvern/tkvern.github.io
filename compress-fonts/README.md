@@ -1,6 +1,5 @@
-
-使用前，先全局安装 font-spider
+在项目目录执行下面命令，对字体进行压缩
 
 ```bash
-$ npm install font-spider -g
+$ npm run font
 ```
