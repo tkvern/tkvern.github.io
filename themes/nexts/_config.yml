@@ -218,8 +218,9 @@ baidu_analytics: 6dbe8d3fc8c188c1852bf28873a922ba
 # Baidu Share
 # Available value:
 #    button | slide
-#baidushare:
-##  type: button
+baidushare:
+  baidushare: true
+  type: slide
 
 # Share
 #jiathis:
