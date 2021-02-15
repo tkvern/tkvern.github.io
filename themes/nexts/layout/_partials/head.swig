@@ -33,6 +33,8 @@
 
 <link href="{{ config.qiniu.urlPrefix }}{{ url_for(theme.css) }}/main.css?v={{ theme.version }}" rel="stylesheet" type="text/css" />
 
+<link rel="stylesheet" href="/css/poem.css">
+
 {% if page.keywords %}
   <meta name="keywords" content="{{ page.keywords }}" />
 {% elif page.tags and page.tags.length %}
