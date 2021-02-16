@@ -354,4 +354,4 @@ local_search:
   enable: true
 
 # 百度收录
-baidu-site-verification: code-dn5tsPOogu
+baidu_site_verification: code-dn5tsPOogu
