@@ -15,3 +15,6 @@ $ hexo g -w & hexo serve
 ```bash
 $ npm run font
 ```
+
+## 部署
+每次有更新诗词，部署前需要运行`npm run font`确保字体文件更新
