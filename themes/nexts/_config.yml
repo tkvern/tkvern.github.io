@@ -232,6 +232,7 @@ baidushare:
 # Google Webmaster tools verification setting
 # See: https://www.google.com/webmasters/
 #google_site_verification:
+google_site_verification: nITMHgGRG-3HZXe-SEJlmJxgA7J95q-z75xLLN4qNe4
 
 # Google Analytics
 #google_analytics:
@@ -351,3 +352,6 @@ since: 2015
 # Local search
 local_search:
   enable: true
+
+# 百度收录
+baidu-site-verification: code-dn5tsPOogu
