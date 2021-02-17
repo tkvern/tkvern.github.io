@@ -41,10 +41,10 @@ const readChinese = function (dirs) {
           // 读取成功时
           // 输出字节数组
           // 有poem的才提取
-          if(data.match(/class="poem"/g)){
-            const str = data.match(reg);
-            strArr = [...strArr, ...str];
-          }
+          const poemArr =
+            data.replace(/\s*/g, "").match(/<pclass=\"poem\".*?<\/p>/) || [];
+          const str = poemArr.join("").match(reg) || [];
+          strArr = [...strArr, ...str];
         }
         iterator(i + 1);
       });
