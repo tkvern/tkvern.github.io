@@ -11,7 +11,7 @@ _English Name_: Vern Brandl.
 _Location_: ShenZhen, China.
 _Group_: EIMS.
 _Motto_: Believe what you believe, and stick to what you insist on.
-_Work_: Front-end & Ruby on Rails engineer
+_Work_: Front-end & Ruby on Rails engineer & Node.js engineer
 
 ----
 
