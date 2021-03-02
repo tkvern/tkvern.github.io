@@ -1,6 +1,5 @@
 const fs = require("fs");
 const path = require("path");
-const { arch } = require("process");
 const postsDir = "../source/_posts"; // 文章所在目录
 
 // 读取目录下的文件
