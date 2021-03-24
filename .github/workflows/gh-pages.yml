@@ -56,13 +56,14 @@ jobs:
         run: |
           mkdir -p ~/.ssh/
           echo "$ACTIONS_DEPLOY_KEY" > ~/.ssh/id_rsa
+          chmod 700 ~/.ssh
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan github.com >> ~/.ssh/known_hosts
+          git config --global user.email github-actions[bot]@users.noreply.github.com
+          git config --global user.name github-actions[bot]
           ssh -T git@github.com
 
 #       - name: Deploy
 #         run: |
-#           git config --global user.email github-actions[bot]@users.noreply.github.com
-#           git config --global user.name github-actions[bot]
 #           ./node_modules/hexo/bin/hexo d
     
