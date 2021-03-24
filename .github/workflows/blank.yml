@@ -1,53 +1,34 @@
-# This is a basic workflow to help you get started with Actions
+name: Pages
 
-name: Deploy CI
-
-# Controls when the action will run. 
 on:
-  # Triggers the workflow on push or pull request events but only for the master branch
   push:
-    branches: [ master ]
+    branches:
+      - source  # default branch
 
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
-
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
-  build:
-    # The type of runner that the job will run on
-    runs-on: ${{ matrix.os }}
-    
-    container: node:10.18-jessie
-    
-    strategy:
-      matrix:
-        node-version: [12.x]
-        os: [ubuntu-latest]
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
+  pages:
+    runs-on: ubuntu-latest
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-
-      - name: Use Node.js ${{ matrix.node-version }}
+      - name: Use Node.js 12.x
         uses: actions/setup-node@v1
         with:
-          node-version: ${{ matrix.node-version }}
-
-      - run: npm install
-      - run: ls -al ./node_modules/hexo
-      - name: Generate files
+          node-version: '12.x'
+      - name: Cache NPM dependencies
+        uses: actions/cache@v2
+        with:
+          path: node_modules
+          key: ${{ runner.OS }}-npm-cache
+          restore-keys: |
+            ${{ runner.OS }}-npm-cache
+      - name: Install Dependencies
+        run: npm install
+      - name: Build
         run: ./node_modules/hexo/bin/hexo g
-      
+        
       - name: Optimize font
         run: npm run font
-
-      - name: Set git config
-        run: |
-          git config --global user.email tkvern@qq.com
-          git config --global user.name tkvern
-      
+        
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
