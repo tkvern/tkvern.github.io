@@ -84,7 +84,7 @@ deploy:
   repo: https://github.com/tkvern/tkvern.github.io.git
   branch: master
   message:
-  token: $GITHUB_TOKEN
+  token: GITHUB_TOKEN
 
 # swiftype_key: owZE9q6-js34CkR18nAm
 
