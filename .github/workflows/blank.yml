@@ -44,7 +44,6 @@ jobs:
             ${{ runner.OS }}-npm-cache
 
       - run: npm install
-      - run: ls -al ./node_modules/hexo
       - name: Generate files
         run: ./node_modules/hexo/bin/hexo g
       
