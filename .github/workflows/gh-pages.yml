@@ -55,7 +55,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_REF: github.com/tkvern/tkvern.github.io
         run: |
-          git clone https://GITHUB:TOKEN:${GITHUB_TOKEN}@${GH_REF} .deploy_git
+          git clone https://GITHUB_TOKEN:${GITHUB_TOKEN}@${GH_REF} .deploy_git
           cd .deploy_git
           git checkout master
           cd ../
