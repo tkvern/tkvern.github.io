@@ -81,9 +81,10 @@ avatar: /images/10667077.jpeg
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repo: /tkvern/tkvern.github.io.git/
+  repo: https://github.com/tkvern/tkvern.github.io.git
   branch: master
   message:
+  token: $GITHUB_TOKEN
 
 # swiftype_key: owZE9q6-js34CkR18nAm
 
