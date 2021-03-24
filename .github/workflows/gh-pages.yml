@@ -56,7 +56,6 @@ jobs:
           deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
           publish_dir: ./public
           publish_branch: master  # deploying branch
-          external_repository: tkvern/tkvern.github.io
 
 #       - name: Setup Deploy Private Key
 #         env:
