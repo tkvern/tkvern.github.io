@@ -83,8 +83,8 @@ deploy:
   type: git
   repo: https://github.com/tkvern/tkvern.github.io.git
   branch: master
-  message:
-  token: GITHUB_TOKEN
+  message: Site updated: {{ now('YYYY-MM-DD HH:mm:ss') }}
+  token: $GITHUB_TOKEN
 
 # swiftype_key: owZE9q6-js34CkR18nAm
 
