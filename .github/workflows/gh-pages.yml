@@ -35,20 +35,21 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
     
-      - name: Cache NPM dependencies
-        uses: actions/cache@v2
-        with:
-          path: node_modules
-          key: ${{ runner.OS }}-npm-cache
-          restore-keys: |
-            ${{ runner.OS }}-npm-cache
+#       - name: Cache NPM dependencies
+#         uses: actions/cache@v2
+#         with:
+#           path: node_modules
+#           key: ${{ runner.OS }}-npm-cache
+#           restore-keys: |
+#             ${{ runner.OS }}-npm-cache
 
-      - run: npm install
-      - name: Generate files
-        run: ./node_modules/hexo/bin/hexo g
+#       - run: npm install
+#       - name: Generate files
+#         run: ./node_modules/hexo/bin/hexo g
       
-      - name: Optimize font
-        run: npm run font
+#       - name: Optimize font
+#         run: npm run font
+
       - name: Setup Deploy Private Key
         env:
           ACTIONS_DEPLOY_KEY: ${{ secrets.ACTIONS_DEPLOY_KEY }}
@@ -58,9 +59,11 @@ jobs:
           cat ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan github.com >> ~/.ssh/known_hosts
-      - name: Deploy
-        run: |
-          git config --global user.email github-actions[bot]@users.noreply.github.com
-          git config --global user.name github-actions[bot]
-          ./node_modules/hexo/bin/hexo d
+          ssh -T git@github.com
+
+#       - name: Deploy
+#         run: |
+#           git config --global user.email github-actions[bot]@users.noreply.github.com
+#           git config --global user.name github-actions[bot]
+#           ./node_modules/hexo/bin/hexo d
     
