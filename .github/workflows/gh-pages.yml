@@ -29,9 +29,6 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-        with: 
-          submodules: true  # Fetch Hugo themes (true OR recursive)
-          fetch-depth: 0    # Fetch all history for .GitInfo and .Lastmod
 
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
@@ -60,3 +57,4 @@ jobs:
           external_repository: tkvern/tkvern.github.io
           publish_dir: ./public
           publish_branch: master  # deploying branch
+          force_orphan: true
