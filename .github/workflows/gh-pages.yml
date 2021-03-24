@@ -49,16 +49,29 @@ jobs:
       
       - name: Optimize font
         run: npm run font
-        
+
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          personal_token: ${{ secrets.PERSONAL_TOKEN }}
           deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
-          external_repository: tkvern/tkvern.github.io
-          user_name: 'github-actions[bot]'
-          user_email: 'github-actions[bot]@users.noreply.github.com'
           publish_dir: ./public
           publish_branch: master  # deploying branch
-          force_orphan: true
+          external_repository: tkvern/tkvern.github.io
+
+#       - name: Setup Deploy Private Key
+#         env:
+#           ACTIONS_DEPLOY_KEY: ${{ secrets.ACTIONS_DEPLOY_KEY }}
+#         run: |
+#           mkdir -p ~/.ssh/
+#           echo "$ACTIONS_DEPLOY_KEY" > ~/.ssh/id_rsa
+#           chmod 700 ~/.ssh
+#           chmod 600 ~/.ssh/id_rsa
+#           ssh-keyscan github.com >> ~/.ssh/known_hosts
+#           git config --global user.email github-actions[bot]@users.noreply.github.com
+#           git config --global user.name github-actions[bot]
+#           ssh -T git@github.com
+
+#       - name: Deploy
+#         run: |
+#           ./node_modules/hexo/bin/hexo d
+    
