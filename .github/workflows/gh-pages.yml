@@ -53,6 +53,7 @@ jobs:
         env:
           ACTIONS_DEPLOY_KEY: ${{ secrets.ACTIONS_DEPLOY_KEY }}
         run: |
+          echo "$ACTIONS_DEPLOY_KEY"
           mkdir -p ~/.ssh/
           echo "$ACTIONS_DEPLOY_KEY" > ~/.ssh/id_rsa 
           chmod 600 ~/.ssh/id_rsa
