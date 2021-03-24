@@ -36,12 +36,12 @@ jobs:
           node-version: ${{ matrix.node-version }}
 
       - run: npm install
-      - run: ls -al
+      - run: ls -al ./node_modules/hexo
       - name: Generate files
-        run: ./node_modules/hexo/hexo/bin/hexo g
+        run: ./node_modules/hexo/bin/hexo g
       
       - name: Optimize font
         run: npm run font
       
       - name: Deploy website
-        run: ./node_modules/hexo/hexo/bin/hexo d
+        run: ./node_modules/hexo/bin/hexo d
