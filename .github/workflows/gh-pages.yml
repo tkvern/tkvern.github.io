@@ -58,7 +58,6 @@ jobs:
         env:
           ACTIONS_DEPLOY_KEY: ${{ secrets.ACTIONS_DEPLOY_KEY }}
         run: |
-          ssh-keyscan github.com >> ~/.ssh/known_hosts
           git config --global user.email "tkvern@qq.com"
           git config --global user.name "tkvern"
           npm run deploy
