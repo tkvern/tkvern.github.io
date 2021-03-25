@@ -34,6 +34,10 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
+          
+      - uses: webfactory/ssh-agent@v0.5.1
+        with:
+          ssh-private-key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
     
       - name: Cache NPM dependencies
         uses: actions/cache@v2
@@ -54,9 +58,6 @@ jobs:
         env:
           ACTIONS_DEPLOY_KEY: ${{ secrets.ACTIONS_DEPLOY_KEY }}
         run: |
-          mkdir -p ~/.ssh/
-          echo "$ACTIONS_DEPLOY_KEY" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
           ssh-keyscan github.com >> ~/.ssh/known_hosts
           git config --global user.email "tkvern@qq.com"
           git config --global user.name "tkvern"
