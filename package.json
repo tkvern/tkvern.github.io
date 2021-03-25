@@ -23,6 +23,8 @@
     "hexo-server": "^0.2.2"
   },
   "scripts": {
-    "font": "node ./compress-fonts/index.js"
+    "font": "node ./compress-fonts/index.js",
+    "build": "hexo g",
+    "deploy": "hexo d"
   }
 }
