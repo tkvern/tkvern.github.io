@@ -34,6 +34,10 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
+          
+      - uses: webfactory/ssh-agent@v0.5.1
+        with:
+          ssh-private-key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
     
       - name: Cache NPM dependencies
         uses: actions/cache@v2
@@ -45,28 +49,18 @@ jobs:
 
       - run: npm install
       - name: Generate files
-        run: ./node_modules/hexo/bin/hexo g
+        run: npm run build
       
       - name: Optimize font
         run: npm run font
 
       - name: Deploy
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GH_REF: github.com/tkvern/tkvern.github.io
+          ACTIONS_DEPLOY_KEY: ${{ secrets.ACTIONS_DEPLOY_KEY }}
         run: |
-          git clone https://GITHUB_TOKEN:${GITHUB_TOKEN}@${GH_REF} .deploy_git
-          cd .deploy_git
-          git checkout master
-          cd ../
-          mv .deploy_git/.git/ public/
-          cd public/
-          git config --global user.name "tkvern" 
           git config --global user.email "tkvern@qq.com"
-          git add .
-          echo `date +%Y-%m-%d` | awk -F"-" '{printf("Update site date is %d/%d/%d\n",$1,$2,$3)}' > ../commit-message.log
-          git commit -F ../commit-message.log
-          git push --force --quiet origin master:master
+          git config --global user.name "tkvern"
+          npm run deploy
     
 
 
