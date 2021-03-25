@@ -61,18 +61,6 @@ jobs:
           git config --global user.email "tkvern@qq.com"
           git config --global user.name "tkvern"
           npm run deploy
-#          git clone https://GITHUB_TOKEN:${GITHUB_TOKEN}@${GH_REF} .deploy_git
-#          cd .deploy_git
-#          git checkout master
-#          cd ../
-#          mv .deploy_git/.git/ public/
-#          cd public/
-#          git config --global user.name "tkvern" 
-#          git config --global user.email "tkvern@qq.com"
-#          git add .
-#          echo `date +%Y-%m-%d` | awk -F"-" '{printf("Update site date is %d/%d/%d\n",$1,$2,$3)}' > ../commit-message.log
-#          git commit -F ../commit-message.log
-#          git push --force --quiet origin master:master
     
 
 
