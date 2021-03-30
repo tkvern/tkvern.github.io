@@ -1,3 +1,7 @@
+# Vern 的个人博客
+
+[![GitHub Actions status](https://github.com/tkvern/blog-source/workflows/Deploy%20CI/badge.svg)](https://github.com/tkvern/blog-source)
+
 需要全局安装 hexo
 
 ```bash
