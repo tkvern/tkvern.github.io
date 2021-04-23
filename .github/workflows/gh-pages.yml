@@ -47,12 +47,13 @@ jobs:
           restore-keys: |
             ${{ runner.OS }}-npm-cache
 
+      - name: Optimize font
+        run: npm run font
+
       - run: npm install
       - name: Generate files
         run: npm run build
       
-      - name: Optimize font
-        run: npm run font
 
       - name: Deploy
         env:
