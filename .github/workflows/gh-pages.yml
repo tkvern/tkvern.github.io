@@ -48,11 +48,13 @@ jobs:
             ${{ runner.OS }}-npm-cache
 
       - run: npm install
+
+      - name: Optimize font
+        run: npm run font
+
       - name: Generate files
         run: npm run build
       
-      - name: Optimize font
-        run: npm run font
 
       - name: Deploy
         env:
