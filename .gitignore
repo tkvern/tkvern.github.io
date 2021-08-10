@@ -8,3 +8,4 @@ public/
 .deploy*/
 compress-fonts/index.html
 themes/nexts/source/fonts/Yanzhi.ttf
+package-lock.json
