@@ -1,0 +1,950 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="google-site-verification" content="nITMHgGRG-3HZXe-SEJlmJxgA7J95q-z75xLLN4qNe4">
+
+
+
+
+  <meta name="baidu-site-verification" content="code-dn5tsPOogu">
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css">
+
+<link rel="stylesheet" href="/css/poem.css">
+
+
+  <meta name="keywords" content="Rails,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="TKVERN BLOG" type="application/atom+xml">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2">
+
+
+
+
+
+
+<meta name="description" content="前言这是一篇关于Rails的开发经历的文章，旨在将Rails中遇到的各种问题分享给还未接触Rails或是已经上路的朋友。虽说做Rails的开发时间不长，刚好一年多。但是，在这一年的时间中，该使用的技术架构，Ruby-China 推荐的Gem包，都尝试过使用过了，也为业务开发了一些Gem包。谈不上精通Rails，如果把Rails作者定为最高等级，他是F1赛车手，我该是个跑出租的老司机。">
+<meta name="keywords" content="Rails">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Rails 从入门到完全放弃">
+<meta property="og:url" content="https://tkvern.com/20160721/Rails从入门到完全放弃/index.html">
+<meta property="og:site_name" content="TKVERN BLOG">
+<meta property="og:description" content="前言这是一篇关于Rails的开发经历的文章，旨在将Rails中遇到的各种问题分享给还未接触Rails或是已经上路的朋友。虽说做Rails的开发时间不长，刚好一年多。但是，在这一年的时间中，该使用的技术架构，Ruby-China 推荐的Gem包，都尝试过使用过了，也为业务开发了一些Gem包。谈不上精通Rails，如果把Rails作者定为最高等级，他是F1赛车手，我该是个跑出租的老司机。">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2023-01-20T15:23:47.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Rails 从入门到完全放弃">
+<meta name="twitter:description" content="前言这是一篇关于Rails的开发经历的文章，旨在将Rails中遇到的各种问题分享给还未接触Rails或是已经上路的朋友。虽说做Rails的开发时间不长，刚好一年多。但是，在这一年的时间中，该使用的技术架构，Ruby-China 推荐的Gem包，都尝试过使用过了，也为业务开发了一些Gem包。谈不上精通Rails，如果把Rails作者定为最高等级，他是F1赛车手，我该是个跑出租的老司机。">
+
+<link rel="canonical" href=" { { site.url } }{ { page.url } }">
+ <script type="text/javascript">
+    var host = "tkvern.com";
+    if ((host == window.location.host) && (window.location.protocol != "https:"))
+        window.location.protocol = "https";
+</script>
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 6265161176141792000,
+      author: 'tkvern'
+    }
+  };
+</script>
+
+  <title> Rails 从入门到完全放弃 | TKVERN BLOG </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+<div style="display:none"><img src="/images/10667077.jpeg"></div>
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?6dbe8d3fc8c188c1852bf28873a922ba";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <a href="https://github.com/tkvern"><img class="hidden-xs hidden-sm" style="position: absolute;top: 0;left: 0;border: 0;" src="/images/forkme.png" alt="Fork me on GitHub" data-canonical-src="/images/forkme.png"></a>
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">TKVERN BLOG</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Developer & Designer</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="#" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Rails 从入门到完全放弃
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2016-07-21T15:36:47+00:00" content="2016-07-21">
+              2016-07-21
+            </time>
+          </span>
+
+          
+            <span class="post-category">
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Ruby-on-Rails/" itemprop="url" rel="index">
+                    <span itemprop="name">Ruby on Rails</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+             <span id="/20160721/Rails从入门到完全放弃/" class="leancloud_visitors" data-flag-title="Rails 从入门到完全放弃">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">visitors </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>这是一篇关于Rails的开发经历的文章，旨在将Rails中遇到的各种问题分享给还未接触Rails或是已经上路的朋友。虽说做Rails的开发时间不长，刚好一年多。但是，在这一年的时间中，该使用的技术架构，<code>Ruby-China</code> 推荐的Gem包，都尝试过使用过了，也为业务开发了一些Gem包。谈不上精通Rails，如果把Rails作者定为最高等级，他是F1赛车手，我该是个跑出租的老司机。<br><a id="more"></a></p>
+<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>早前有做过Java，PHP，.Net的开发，相信玩Rails的朋友多多少少也都有写过，不过主要还是以前端为主。早在IE7/IE8 时代做前端开发，那时<code>Node.js</code>还没火起来，前端成了低技术含量又耗体力又没地位的活。不过，还好有<code>Node.js</code>，让我赶上了这个时代。</p>
+<h2 id="怎么接触到Rails"><a href="#怎么接触到Rails" class="headerlink" title="怎么接触到Rails"></a>怎么接触到Rails</h2><p>当公司的一个PHP的多人即时聊天项目接近尾声时，我们在思考能不能将程序员生产力解放出来？是不是可以尝试一些其他的技术架构。很快，经过多方研究，发现Rails是单兵作战的神器。相比PHP，可以达到Rails : PHP = 1 : 4 的效率。但对于一个技术架构成熟的技术团队来说，放弃原有的技术架构去使用一个从未接触过新技术，时间成本和决心是很重要的。但挑战往往会带来意想不到的收获。</p>
+<h2 id="在深大图书馆的-Rails之道"><a href="#在深大图书馆的-Rails之道" class="headerlink" title="在深大图书馆的 Rails之道"></a>在深大图书馆的 Rails之道</h2><p>学习新技术的第一件事就是去找学习资料。在google上找了很久，发现深大图书馆有各种各样的技术书籍，果不其然，在这里找到了<code>Ruby元编程</code>，<code>Rails之道</code>，<code>敏捷开发之道</code>这些书籍，但是版本比较老。为了能够掌握最新版本的知识，下载了相应的英文版PDF，一起结合。修炼Rails的过程是痛并快乐着的，因为要转变思维模式，去接受新的思想，去了解诸多的语法糖因何而生。学累了就躺会，饿了就上个外卖，脑袋成浆糊了就洗把脸。其实接触一门新语言并不是多难，这是一个循序渐进的过程。好在前端底子厚，学习<code>ERB</code>，<code>UJS</code>，<code>RJS</code>的过程比较轻松，但是<code>Turbolinks</code>对于前端工程师来说就是噩梦，一直到现在我都用的Pjax。不喜欢<code>Turbolinks</code>的做法，<code>Pjax</code>显得很机智。关于<code>Turbolinks</code>和<code>Pjax</code>我并不是挑起战争，仁者见仁，智者见智。</p>
+<h2 id="用Rails对电商的探索"><a href="#用Rails对电商的探索" class="headerlink" title="用Rails对电商的探索"></a>用Rails对电商的探索</h2><p>在构建电商系统的时候，很自然就 pull 了<code>ECShop</code>的源码来学习。<br>业务上的问题并不大，有现成案例，结合需求来订制开发很快。<br>同时在开发过程中<code>Ruby-China</code>社区也提供了许多帮助。类似查询 <code>N + 1</code>问题，<code>CanCanCan</code>权限问题…..</p>
+<h3 id="文件上传"><a href="#文件上传" class="headerlink" title="文件上传"></a>文件上传</h3><h4 id="上传图片"><a href="#上传图片" class="headerlink" title="上传图片"></a>上传图片</h4><p>对于图片等资源的处理，最开始没有选用<code>Carrierwave</code>的方案，而是使用<code>七牛云存储JS SDK</code>，开始接触的时候，发现并没有多少参考文档，于是想是不是这个东西比较简单也比较少人用，还是<code>Ruby-China</code> 社区的朋友太懒。后面深入研究后发现，这类云存储的方法还是用得比较多，也比较便捷，但对于新手还是有一定门槛，所以做完之后顺带写了相应的<a href="https://ruby-china.org/topics/29010" target="_blank" rel="noopener">教程</a>造福社会。</p>
+<h4 id="富文本编辑器上传图片"><a href="#富文本编辑器上传图片" class="headerlink" title="富文本编辑器上传图片"></a>富文本编辑器上传图片</h4><p>在富文本编辑器中<a href="https://www.froala.com/wysiwyg-editor" target="_blank" rel="noopener">Froala</a>可以说是佼佼者，我们选用了Froala。但是遇到一个问题，Froala中的图片上传仅支持<code>Amazon云</code>，因此不得不改造<code>Froala</code>的源码。幸运的是这个过程并不困难，我将改造后的Froala用策略模式做成了一个Gem: <a href="https://github.com/tkvern/wysiwyg-rails-qiniu" target="_blank" rel="noopener">wysiwyg-rails-qiniu</a>，又一次造福社会。</p>
+<h3 id="猴子补丁"><a href="#猴子补丁" class="headerlink" title="猴子补丁"></a>猴子补丁</h3><p>在使用<code>will_paginate</code>的时候，分页的结构与样式与<code>Materia UI</code>的风格并不相符，并且没有找到合适的Gem，所以大胆的用起了<code>打开类</code>的法术，并且纪录了这一过程《 <a href="https://tkvern.com/20160507/%E5%85%83%E7%BC%96%E7%A8%8B%E4%B9%8B%E9%87%8D%E5%86%99will-paginate/">为什么重写will_paginate</a> 》</p>
+<h3 id="Pjax"><a href="#Pjax" class="headerlink" title="Pjax"></a>Pjax</h3><p>使用Pjax的过程相对比较顺利，在听完<code>Rei</code>大神对<code>Turbolinks</code>的讲解之后，还是坚定不移的使用<code>Pjax</code>，值得注意的是在使用<code>WiceGrid</code>的时候，会存在初始化组件问题，当时是使用<code>data-skip-pjax</code>解决。不过现在前后端分离，前端使用React ＋ Redux操作DOM比以往轻松多了。事实上<code>WiceGrid</code>的筛选方式对于用户并不友好。</p>
+<h3 id="Devise-和-OmniAuth"><a href="#Devise-和-OmniAuth" class="headerlink" title="Devise 和 OmniAuth"></a>Devise 和 OmniAuth</h3><p>这两个Gem的使用不多，在尝试过<code>Devise</code>之后，还是得自己手写一遍登录等功能，第三方登录开始有考虑用，后面发现还用不上就没有研究了。</p>
+<h3 id="china-city"><a href="#china-city" class="headerlink" title="china_city"></a>china_city</h3><p>在使用china_city的时候发现一个小问题。<br><figure class="highlight coffee"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="params">($)</span> -&gt;</span></span><br><span class="line">  $.fn.china_city = <span class="function"><span class="params">()</span> -&gt;</span></span><br><span class="line">    @each -&gt;</span><br><span class="line">      <span class="regexp">//</span> 下面这一行选择.city-select的时候没有限制为select</span><br><span class="line">      <span class="regexp">//</span> 如果<span class="class"><span class="keyword">class</span>有冲突会出现<span class="title">bug</span>.</span></span><br><span class="line">      <span class="regexp">//</span> 所以更正为 $(@).find(<span class="string">'select.city-select'</span>)</span><br><span class="line">      selects = $(@).find(<span class="string">'.city-select'</span>)</span><br><span class="line">      selects.change -&gt;</span><br><span class="line">        .</span><br><span class="line">        .</span><br><span class="line">        .</span><br><span class="line">)(jQuery)</span><br></pre></td></tr></table></figure></p>
+<h3 id="前端css框架"><a href="#前端css框架" class="headerlink" title="前端css框架"></a>前端css框架</h3><p>在开发中多次切换了前端技术栈。只想告诉大家，<code>Materia UI</code>并不适合后台使用，而且与诸多的Gem包存在兼容问题，Rails中大部分跟前端有关的Gem都是基于<code>Bootstrap</code>。所以觉得<code>Bootstrap</code>审美疲劳的朋友，还是继续用着吧。</p>
+<h3 id="前端JS处理"><a href="#前端JS处理" class="headerlink" title="前端JS处理"></a>前端JS处理</h3><p>随着JS的增多，维护起来会越来越难，在Rails的项目中并没有做JS模块化，而是将JS用工厂模式汇集到了一起，新的功能代码会放到工厂车间去，在使用的时候 new 一个工厂，调用需要的功能即可，同时保证了可复用性。</p>
+<h3 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h3><p>其实Rails的应用部署相对比较容易，没有太多的内容。只要注意配置文件加后缀防止被新的<code>commit</code>覆盖就好了，一般来说，写好shell脚本实现一键部署也并非难事。</p>
+<h3 id="微信支付"><a href="#微信支付" class="headerlink" title="微信支付"></a>微信支付</h3><p>现今主流的是微信支付和支付宝支付，银联的太蛋疼了。相比与微信支付，支付宝的文档真心不友好，看到吐，而且申请流程繁琐。如果你有打算在项目中使用支付宝支付，最好提前两个月做申请。虽然我不太喜欢马化腾，但是微信支付的文档我给32个赞，使用起来也方便。微信支付的申请流程更加透明一些，每个节点都很快。使用下面的Gem<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">gem <span class="string">'wechat'</span></span><br><span class="line">gem <span class="string">'wx_pay'</span></span><br></pre></td></tr></table></figure></p>
+<p>但是也有一个问题待解决，就是在支付时取消订单，数据库状态更新，而微信支付的数据状态未更新，再进行支付的时候就会出现订单号已存在的<code>error</code>。</p>
+<h4 id="微信支付虚拟键盘"><a href="#微信支付虚拟键盘" class="headerlink" title="微信支付虚拟键盘"></a>微信支付虚拟键盘</h4><p>在便利店用过微信支付的朋友应该知道， <code>好近</code>这样的第三方支付商的虚拟键盘。开始做虚拟键盘的时候想扒一下<code>好近</code>的源码，奈何用微信开发调试工具根本拿不到。所以只能自己写，遇到的第一个问题就是点击事件延迟300ms，虽说可用<code>Tap</code>事件，被搞得不要不要的。先后尝试了<code>JqueryMobile.Tap</code>，<code>FastClick</code>等解决方法，仍然是在<code>Android</code>上延迟超高，<code>IOS</code>流畅。后面灵感闪现，我为什么要给用户一个完整的点击事件呢？一碰到就触发键盘不是可以让用户得到的反馈跟好么。索性偷懒了一把。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(element).on(<span class="string">'touchstart'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;<span class="comment">/* do something */</span>&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="Rails-的问题"><a href="#Rails-的问题" class="headerlink" title="Rails 的问题"></a>Rails 的问题</h2><p>Rails从诞生到现在，已有经年。开发过程中最拖慢开发进度的不是需求变动，也不是技术点，使用了<code>assets pipeline</code>的话，在调试页面的时候资源加载总是很慢。实在受不了的时候尝试了结合<code>Node.js</code>，用<code>Gulp</code> <code>browser sync</code>，来代理资源，虽说速度快超多，但不是官方集成的方案，多多少少让强迫症的人很难受。对于业务复杂的电商系统来说，Rails标准的<code>Action</code>肯定不够用，而自定义的写出来感觉不伦不类，可能是功夫不到家，但是没有找到更好的编程参考。其他的就是性能问题了，了解<code>Elixir</code>的朋友应该就知道了。</p>
+<h2 id="跟着Peter学Meteor"><a href="#跟着Peter学Meteor" class="headerlink" title="跟着Peter学Meteor"></a>跟着Peter学Meteor</h2><p>响应<code>Peter</code>的号召，我也全情的投入到了<code>Meteor</code> ＋ <code>React</code> ＋ <code>Redux</code> 的大军中去了。虽说没用<code>Meteor</code>做过大型项目，但是小应用做起来是得新应手了。好像也没有看到有多少大型项目用<code>Meteor</code> + <code>React</code> + <code>Redux</code> 技术栈的。用上<code>React</code>前端代码思路和结构变得清晰多了。也可以使用诸多的<code>React</code>组件了。类似于<a href="http://amazeui.org/" target="_blank" rel="noopener">Amazeui</a>，<a href="http://ant.design/" target="_blank" rel="noopener">Ant Design</a>，这些优秀的设计，连UI的费用都省了。</p>
+<h2 id="我与Elixir-和-Phoenix-不能说的秘密"><a href="#我与Elixir-和-Phoenix-不能说的秘密" class="headerlink" title="我与Elixir 和 Phoenix 不能说的秘密"></a>我与Elixir 和 Phoenix 不能说的秘密</h2><p><code>Elixir</code>不用我说，相信大家都有耳闻了，函数式编程是未来。一个专业前端的Rails工程师切换到<code>Elixir</code>的过程没有第一次经历的痛苦，当你接受了函数式的思想之后相当顺畅。社区里面有的人说<code>Phoenix</code>抄<code>Rails</code>的，我并不认同，<code>Phoenix</code>传承了敏捷开发的思想，也为开发者提供了诸多的便利，像<code>Hot load</code>的技术也被集成进来，对于<code>Socket</code>的支持也是相当的好。融合<code>Elixir</code>的特性，让多线程成为利器，利好多多，如果可以，你应该像我一样去深入研究下<code>Phoenix</code>，还有你们常用的<code>Devise</code>也是<code>Phoenix</code>的作者写的。当<code>Rails</code>老了，你还有<code>Phoenix</code></p>
+<h2 id="结束语"><a href="#结束语" class="headerlink" title="结束语"></a>结束语</h2><p>AD：你错过了房地产，错过了网购，错过了炒股，别再错过<code>Elixir</code> <code>Phoenix</code> <code>React</code> <code>Redux</code>。<br>作者：本猿不才，文采平平，且读切珍惜。</p>
+
+      
+    </div>
+    
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+<div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" , disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}" style="cursor: pointer; border: 0; outline: 0; border-radius: 100%; padding: 0; margin: 0; letter-spacing: normal; text-transform: none; text-indent: 0px; text-shadow: none">
+    <span onmouseover="this.style.color='rgb(236,96,0)';this.style.background='rgb(204,204,204)'" onmouseout="this.style.color='#fff';this.style.background='rgb(236,96,0)'" style="display: inline-block; width: 70px; height: 70px; border-radius: 100%; line-height: 81px; color: #fff; font: 400 35px/75px 'microsofty'; background: rgb(236,96,0)">赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/IMG_2826.JPG" alt="TKVERN WeChat Pay" style="width: 200px; max-width: 100%; display: inline-block">
+        <p>微信打赏</p>
+      </div>
+    
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/T1WIRpXmBaXXXXXXXX.jpg" alt="TKVERN Alipay" style="width: 200px; max-width: 100%; display: inline-block">
+        <p>支付宝打赏</p>
+      </div>
+    
+  </div>
+</div>
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Rails/" rel="tag">#Rails</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/20160612/FlowRouter-中文文档/" rel="next" title="FlowRouter 中文文档">
+                <i class="fa fa-chevron-left"></i> FlowRouter 中文文档
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/20170113/回家/" rel="prev" title="回家">
+                回家 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/10667077.jpeg" alt="TKVERN">
+          <p class="site-author-name" itemprop="name">TKVERN</p>
+          <p class="site-description motion-element" itemprop="description">Developer & Designer. Believe what you believe, and stick to what you insist on.</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">76</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">categories</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-name">tags</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="http://eims.com.cn/" target="_blank" title="EIMS">
+                  
+                    <i class="fa fa-group"></i>
+                  
+                  EIMS
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href target="_blank" title="ShenZhen, China">
+                  
+                    <i class="fa fa-map-marker"></i>
+                  
+                  ShenZhen, China
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/tkvern" target="_blank" title="Github">
+                  
+                    <i class="fa fa-github"></i>
+                  
+                  Github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="mailto:verncake@gmail.com" target="_blank" title="verncake@gmail.com">
+                  
+                    <i class="fa fa-envelope"></i>
+                  
+                  verncake@gmail.com
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#背景"><span class="nav-number">2.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#怎么接触到Rails"><span class="nav-number">3.</span> <span class="nav-text">怎么接触到Rails</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在深大图书馆的-Rails之道"><span class="nav-number">4.</span> <span class="nav-text">在深大图书馆的 Rails之道</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#用Rails对电商的探索"><span class="nav-number">5.</span> <span class="nav-text">用Rails对电商的探索</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#文件上传"><span class="nav-number">5.1.</span> <span class="nav-text">文件上传</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#上传图片"><span class="nav-number">5.1.1.</span> <span class="nav-text">上传图片</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#富文本编辑器上传图片"><span class="nav-number">5.1.2.</span> <span class="nav-text">富文本编辑器上传图片</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#猴子补丁"><span class="nav-number">5.2.</span> <span class="nav-text">猴子补丁</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Pjax"><span class="nav-number">5.3.</span> <span class="nav-text">Pjax</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Devise-和-OmniAuth"><span class="nav-number">5.4.</span> <span class="nav-text">Devise 和 OmniAuth</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#china-city"><span class="nav-number">5.5.</span> <span class="nav-text">china_city</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#前端css框架"><span class="nav-number">5.6.</span> <span class="nav-text">前端css框架</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#前端JS处理"><span class="nav-number">5.7.</span> <span class="nav-text">前端JS处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#部署"><span class="nav-number">5.8.</span> <span class="nav-text">部署</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#微信支付"><span class="nav-number">5.9.</span> <span class="nav-text">微信支付</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#微信支付虚拟键盘"><span class="nav-number">5.9.1.</span> <span class="nav-text">微信支付虚拟键盘</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Rails-的问题"><span class="nav-number">6.</span> <span class="nav-text">Rails 的问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#跟着Peter学Meteor"><span class="nav-number">7.</span> <span class="nav-text">跟着Peter学Meteor</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#我与Elixir-和-Phoenix-不能说的秘密"><span class="nav-number">8.</span> <span class="nav-text">我与Elixir 和 Phoenix 不能说的秘密</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结束语"><span class="nav-number">9.</span> <span class="nav-text">结束语</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">TKVERN</span>
+  <span class="with-love">
+    <i class="fa fa-eye"></i>
+  </span>
+  <span id="visitors" itemprop="copyrightHolder"></span>
+  <br>
+  Powered by <a class="theme-link" href="http://hexo.io" rel="external nofollow">Hexo</a>
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" rel="external nofollow">NexT</a>
+  <span>本站所有内容除特别声明外，均采用 <a target="_blank" href="https://zh.wikipedia.org/wiki/%E7%9F%A5%E8%AF%86%E5%85%B1%E4%BA%AB%E8%AE%B8%E5%8F%AF%E5%8D%8F%E8%AE%AE" rel="external nofollow"><i class="fa fa-creative-commons fa-fw"></i> BY-NC-SA </a>许可协议。转载请注明出处！</span>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+       search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            isfetched = true;
+            $('.popup').detach().appendTo('.header-inner');
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var matchcounts = 0;
+                var str='<ul class=\"search-result-list\">';                
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length > 1) {
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = true;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = data.url;
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '' && data_content != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title < 0 && index_content < 0 ){
+                                isMatch = false;
+                            } else {
+                                if (index_content < 0) {
+                                    index_content = 0;
+                                }
+                                if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            }
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        matchcounts += 1;
+                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out 100 characters
+                            var start = first_occur - 20;
+                            var end = first_occur + 80;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 50;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substring(start, end);
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                            });
+                            
+                            str += "<p class=\"search-result\">" + match_content +"...</p>"
+                        }
+                        str += "</li>";
+                    }
+                })};
+                str += "</ul>";
+                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+                $resultContent.innerHTML = str;
+            });
+            proceedsearch();
+        }
+    });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("pjTDSznF2e8sNaJ7pB3OtPAF-gzGzoHsz", "S4dEfsJlgqUdQFYB5BAnLAK0");</script>
+  <script>
+    function showSum(){
+      var $visitorsSum = $("#visitors");
+      AV.Query.doCloudQuery('select time from Counter').then(function(data) {
+        var results = data.results;
+        var time = 0;
+        if (results.length !== 0) {
+          for (var i = 0; i < results.length; i++) {
+            time += results[i].get('time');
+          }
+        }
+        $visitorsSum.text(time);
+      }, function(error) {
+        console.log(error);
+      });
+    }
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+      showSum();
+    });
+  </script>
+
+
+
+  
+
+</body>
+</html>

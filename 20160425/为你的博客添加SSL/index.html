@@ -1,0 +1,954 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="google-site-verification" content="nITMHgGRG-3HZXe-SEJlmJxgA7J95q-z75xLLN4qNe4">
+
+
+
+
+  <meta name="baidu-site-verification" content="code-dn5tsPOogu">
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css">
+
+<link rel="stylesheet" href="/css/poem.css">
+
+
+  <meta name="keywords" content="hexo,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="TKVERN BLOG" type="application/atom+xml">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2">
+
+
+
+
+
+
+<meta name="description" content="为什么添加SSL好奇心总会驱使你去探索未知的东西，当完成Hexo博客构建之后，是不是给自己的博客添加SSL呢？在一定程度上HTTPS比HTTP更安全这是众所周知的，当然，使用HTTPS连接后，网页的第一次加载速度会较HTTP稍慢一些，但是并不影响后续请求的速度。所以SSL你还是值得一试。">
+<meta name="keywords" content="hexo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="为你的博客添加SSL">
+<meta property="og:url" content="https://tkvern.com/20160425/为你的博客添加SSL/index.html">
+<meta property="og:site_name" content="TKVERN BLOG">
+<meta property="og:description" content="为什么添加SSL好奇心总会驱使你去探索未知的东西，当完成Hexo博客构建之后，是不是给自己的博客添加SSL呢？在一定程度上HTTPS比HTTP更安全这是众所周知的，当然，使用HTTPS连接后，网页的第一次加载速度会较HTTP稍慢一些，但是并不影响后续请求的速度。所以SSL你还是值得一试。">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://tkvern.com/images/cover/https&http.png">
+<meta property="og:image" content="https://tkvern.com/images/ssl/searchdomain.png">
+<meta property="og:image" content="https://tkvern.com/images/ssl/setdomain.png">
+<meta property="og:image" content="https://tkvern.com/images/ssl/dnsset.png">
+<meta property="og:image" content="https://tkvern.com/images/ssl/setfree.png">
+<meta property="og:image" content="https://tkvern.com/images/ssl/updatednsset.png">
+<meta property="og:image" content="https://tkvern.com/images/ssl/setaliyundns.png">
+<meta property="og:image" content="https://tkvern.com/images/ssl/cnamebg.png">
+<meta property="og:image" content="https://tkvern.com/images/ssl/yaoshilist.png">
+<meta property="og:updated_time" content="2023-01-20T15:23:47.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="为你的博客添加SSL">
+<meta name="twitter:description" content="为什么添加SSL好奇心总会驱使你去探索未知的东西，当完成Hexo博客构建之后，是不是给自己的博客添加SSL呢？在一定程度上HTTPS比HTTP更安全这是众所周知的，当然，使用HTTPS连接后，网页的第一次加载速度会较HTTP稍慢一些，但是并不影响后续请求的速度。所以SSL你还是值得一试。">
+<meta name="twitter:image" content="https://tkvern.com/images/cover/https&http.png">
+
+<link rel="canonical" href=" { { site.url } }{ { page.url } }">
+ <script type="text/javascript">
+    var host = "tkvern.com";
+    if ((host == window.location.host) && (window.location.protocol != "https:"))
+        window.location.protocol = "https";
+</script>
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 6265161176141792000,
+      author: 'tkvern'
+    }
+  };
+</script>
+
+  <title> 为你的博客添加SSL | TKVERN BLOG </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+<div style="display:none"><img src="/images/10667077.jpeg"></div>
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?6dbe8d3fc8c188c1852bf28873a922ba";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <a href="https://github.com/tkvern"><img class="hidden-xs hidden-sm" style="position: absolute;top: 0;left: 0;border: 0;" src="/images/forkme.png" alt="Fork me on GitHub" data-canonical-src="/images/forkme.png"></a>
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">TKVERN BLOG</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Developer & Designer</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="#" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                为你的博客添加SSL
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2016-04-25T11:58:20+00:00" content="2016-04-25">
+              2016-04-25
+            </time>
+          </span>
+
+          
+            <span class="post-category">
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Front-end/" itemprop="url" rel="index">
+                    <span itemprop="name">Front-end</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+             <span id="/20160425/为你的博客添加SSL/" class="leancloud_visitors" data-flag-title="为你的博客添加SSL">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">visitors </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="/images/cover/https&amp;http.png" alt="https&amp;http"></p>
+<h1 id="为什么添加SSL"><a href="#为什么添加SSL" class="headerlink" title="为什么添加SSL"></a>为什么添加SSL</h1><p>好奇心总会驱使你去探索未知的东西，当完成Hexo博客构建之后，是不是给自己的博客添加SSL呢？<br>在一定程度上HTTPS比HTTP更安全这是众所周知的，当然，使用HTTPS连接后，网页的第一次加载速度会较HTTP稍慢一些，但是并不影响后续请求的速度。所以SSL你还是值得一试。</p>
+<a id="more"></a>
+<h1 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h1><p>本文使用的是<a href="https://www.cloudflare.com/" target="_blank" rel="noopener">CloudFlare</a>的免费SSL证书，如果你使用的是别的签书机构话，本文也可供参考。</p>
+<h2 id="注册CloudFlare"><a href="#注册CloudFlare" class="headerlink" title="注册CloudFlare"></a>注册CloudFlare</h2><p>注册传送门<a href="https://www.cloudflare.com/a/sign-up" target="_blank" rel="noopener">Sign-up</a>。(如果地址无法打开，请确认你已翻墙。)</p>
+<h2 id="添加站点"><a href="#添加站点" class="headerlink" title="添加站点"></a>添加站点</h2><p>输入你的域名地址，点击<code>Begin Scan</code><br><img src="/images/ssl/searchdomain.png" alt="searchdomain"></p>
+<h2 id="继续设置"><a href="#继续设置" class="headerlink" title="继续设置"></a>继续设置</h2><p>等待进度条完成，点击<code>Continue Setup</code>进行站点设置<br><img src="/images/ssl/setdomain.png" alt="setdomain"></p>
+<h2 id="设置DNS"><a href="#设置DNS" class="headerlink" title="设置DNS"></a>设置DNS</h2><p>使用CloudFlare CDN加速设置<code>Type A</code>即可，设置相应的GitPages IP，完成后继续下一步。<br><img src="/images/ssl/dnsset.png" alt="dnsset"></p>
+<h2 id="选择Plan"><a href="#选择Plan" class="headerlink" title="选择Plan"></a>选择Plan</h2><p>选择第一个<code>Free</code>，然后继续下一步<br><img src="/images/ssl/setfree.png" alt="setfree"></p>
+<h2 id="设置DNS解析地址"><a href="#设置DNS解析地址" class="headerlink" title="设置DNS解析地址"></a>设置DNS解析地址</h2><p>将给出的DNS设置的相应的域名上<br><img src="/images/ssl/updatednsset.png" alt="updatednsset"></p>
+<p>下面的我在<a href="https://www.aliyun.com/" target="_blank" rel="noopener">阿里云</a>设置后下效果<br><img src="/images/ssl/setaliyundns.png" alt="setaliyundns"></p>
+<h2 id="配置CNAME"><a href="#配置CNAME" class="headerlink" title="配置CNAME"></a>配置CNAME</h2><p>如果你的GitPages还没有配置，请在<code>source</code>目录下添加<code>CNAME</code>文件。<br><img src="/images/ssl/cnamebg.png" alt="cnamebg"></p>
+<h2 id="站点config配置"><a href="#站点config配置" class="headerlink" title="站点config配置"></a>站点<code>config</code>配置</h2><p>如果你的站点有用到HTTP的资源，请修改为HTTPS。参考下面示例代码配置你的站点<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">.</span><br><span class="line">.</span><br><span class="line"># URL</span><br><span class="line">## If your site is put in a subdirectory, set url as &apos;http://yoursite.com/child&apos; and root as &apos;/child/&apos;</span><br><span class="line">url: https://tkvern.com   #填写你的域名</span><br><span class="line">enforce_ssl: tkvern.com   #填写你的域名</span><br><span class="line">root: /</span><br><span class="line">permalink: :year:month:day/:title/</span><br><span class="line">permalink_defaults:</span><br><span class="line">.</span><br><span class="line">.</span><br><span class="line">.</span><br></pre></td></tr></table></figure></p>
+<h2 id="重新部署"><a href="#重新部署" class="headerlink" title="重新部署"></a>重新部署</h2><figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> hexo clean</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> hexo g -d</span></span><br></pre></td></tr></table></figure>
+<h2 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h2><p>当配置完成后，等待一段时间，访问你的站点可能浏览器会提示HTTPS连接不安全，不用理会，继续等待24小时左右你就可以在你的站点看到绿色小钥匙了。<br><img src="/images/ssl/yaoshilist.png" alt="yaoshilist"></p>
+
+      
+    </div>
+    
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+<div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" , disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}" style="cursor: pointer; border: 0; outline: 0; border-radius: 100%; padding: 0; margin: 0; letter-spacing: normal; text-transform: none; text-indent: 0px; text-shadow: none">
+    <span onmouseover="this.style.color='rgb(236,96,0)';this.style.background='rgb(204,204,204)'" onmouseout="this.style.color='#fff';this.style.background='rgb(236,96,0)'" style="display: inline-block; width: 70px; height: 70px; border-radius: 100%; line-height: 81px; color: #fff; font: 400 35px/75px 'microsofty'; background: rgb(236,96,0)">赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/IMG_2826.JPG" alt="TKVERN WeChat Pay" style="width: 200px; max-width: 100%; display: inline-block">
+        <p>微信打赏</p>
+      </div>
+    
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/T1WIRpXmBaXXXXXXXX.jpg" alt="TKVERN Alipay" style="width: 200px; max-width: 100%; display: inline-block">
+        <p>支付宝打赏</p>
+      </div>
+    
+  </div>
+</div>
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/hexo/" rel="tag">#hexo</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/20160425/Meteor项目部署笔记/" rel="next" title="Meteor项目部署笔记">
+                <i class="fa fa-chevron-left"></i> Meteor项目部署笔记
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/20160507/元编程之重写will-paginate/" rel="prev" title="元编程之重写will_paginate">
+                元编程之重写will_paginate <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/10667077.jpeg" alt="TKVERN">
+          <p class="site-author-name" itemprop="name">TKVERN</p>
+          <p class="site-description motion-element" itemprop="description">Developer & Designer. Believe what you believe, and stick to what you insist on.</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">76</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">categories</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-name">tags</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="http://eims.com.cn/" target="_blank" title="EIMS">
+                  
+                    <i class="fa fa-group"></i>
+                  
+                  EIMS
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href target="_blank" title="ShenZhen, China">
+                  
+                    <i class="fa fa-map-marker"></i>
+                  
+                  ShenZhen, China
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/tkvern" target="_blank" title="Github">
+                  
+                    <i class="fa fa-github"></i>
+                  
+                  Github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="mailto:verncake@gmail.com" target="_blank" title="verncake@gmail.com">
+                  
+                    <i class="fa fa-envelope"></i>
+                  
+                  verncake@gmail.com
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#为什么添加SSL"><span class="nav-number">1.</span> <span class="nav-text">为什么添加SSL</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#开始"><span class="nav-number">2.</span> <span class="nav-text">开始</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#注册CloudFlare"><span class="nav-number">2.1.</span> <span class="nav-text">注册CloudFlare</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#添加站点"><span class="nav-number">2.2.</span> <span class="nav-text">添加站点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#继续设置"><span class="nav-number">2.3.</span> <span class="nav-text">继续设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设置DNS"><span class="nav-number">2.4.</span> <span class="nav-text">设置DNS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#选择Plan"><span class="nav-number">2.5.</span> <span class="nav-text">选择Plan</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设置DNS解析地址"><span class="nav-number">2.6.</span> <span class="nav-text">设置DNS解析地址</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置CNAME"><span class="nav-number">2.7.</span> <span class="nav-text">配置CNAME</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#站点config配置"><span class="nav-number">2.8.</span> <span class="nav-text">站点config配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#重新部署"><span class="nav-number">2.9.</span> <span class="nav-text">重新部署</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#补充"><span class="nav-number">2.10.</span> <span class="nav-text">补充</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">TKVERN</span>
+  <span class="with-love">
+    <i class="fa fa-eye"></i>
+  </span>
+  <span id="visitors" itemprop="copyrightHolder"></span>
+  <br>
+  Powered by <a class="theme-link" href="http://hexo.io" rel="external nofollow">Hexo</a>
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" rel="external nofollow">NexT</a>
+  <span>本站所有内容除特别声明外，均采用 <a target="_blank" href="https://zh.wikipedia.org/wiki/%E7%9F%A5%E8%AF%86%E5%85%B1%E4%BA%AB%E8%AE%B8%E5%8F%AF%E5%8D%8F%E8%AE%AE" rel="external nofollow"><i class="fa fa-creative-commons fa-fw"></i> BY-NC-SA </a>许可协议。转载请注明出处！</span>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+       search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            isfetched = true;
+            $('.popup').detach().appendTo('.header-inner');
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var matchcounts = 0;
+                var str='<ul class=\"search-result-list\">';                
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length > 1) {
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = true;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = data.url;
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '' && data_content != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title < 0 && index_content < 0 ){
+                                isMatch = false;
+                            } else {
+                                if (index_content < 0) {
+                                    index_content = 0;
+                                }
+                                if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            }
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        matchcounts += 1;
+                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out 100 characters
+                            var start = first_occur - 20;
+                            var end = first_occur + 80;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 50;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substring(start, end);
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                            });
+                            
+                            str += "<p class=\"search-result\">" + match_content +"...</p>"
+                        }
+                        str += "</li>";
+                    }
+                })};
+                str += "</ul>";
+                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+                $resultContent.innerHTML = str;
+            });
+            proceedsearch();
+        }
+    });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("pjTDSznF2e8sNaJ7pB3OtPAF-gzGzoHsz", "S4dEfsJlgqUdQFYB5BAnLAK0");</script>
+  <script>
+    function showSum(){
+      var $visitorsSum = $("#visitors");
+      AV.Query.doCloudQuery('select time from Counter').then(function(data) {
+        var results = data.results;
+        var time = 0;
+        if (results.length !== 0) {
+          for (var i = 0; i < results.length; i++) {
+            time += results[i].get('time');
+          }
+        }
+        $visitorsSum.text(time);
+      }, function(error) {
+        console.log(error);
+      });
+    }
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+      showSum();
+    });
+  </script>
+
+
+
+  
+
+</body>
+</html>

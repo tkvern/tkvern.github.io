@@ -1,0 +1,418 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>TKVERN BLOG</title>
+  
+  <subtitle>Developer &amp; Designer</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="https://tkvern.com/"/>
+  <updated>2023-01-20T15:23:47.000Z</updated>
+  <id>https://tkvern.com/</id>
+  
+  <author>
+    <name>TKVERN</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>烟火</title>
+    <link href="https://tkvern.com/20230113/%E7%83%9F%E7%81%AB/"/>
+    <id>https://tkvern.com/20230113/烟火/</id>
+    <published>2023-01-13T21:42:00.000Z</published>
+    <updated>2023-01-20T15:23:47.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>今晨早起，记昨夜放烟花杂事有感</p><a id="more"></a><p class="poem"><br>烟火<br>张翔<br><br>不知天上逍遥仙<br>可食人间烟火味<br>倘若仙途有来路<br>不念凡尘飞升去<br><br></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;今晨早起，记昨夜放烟花杂事有感&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="诗词作品" scheme="https://tkvern.com/categories/%E8%AF%97%E8%AF%8D%E4%BD%9C%E5%93%81/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>小米路由器 SSH密码根据SN破解</title>
+    <link href="https://tkvern.com/20220507/%E5%B0%8F%E7%B1%B3%E8%B7%AF%E7%94%B1%E5%99%A8%20SSH%E5%AF%86%E7%A0%81%E6%A0%B9%E6%8D%AESN%E7%A0%B4%E8%A7%A3/"/>
+    <id>https://tkvern.com/20220507/小米路由器 SSH密码根据SN破解/</id>
+    <published>2022-05-07T03:25:00.000Z</published>
+    <updated>2023-01-20T15:23:47.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>写了个 Node.js 命令行版的，测试了一下，和官方给出的 SSH 密码一样。</p><a id="more"></a><p>源码如下:<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> Crypto = <span class="built_in">require</span>(<span class="string">'crypto'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> salt = &#123;</span><br><span class="line">    <span class="string">'r1d'</span>: <span class="string">'A2E371B0-B34B-48A5-8C40-A7133F3B5D88'</span>,</span><br><span class="line">    <span class="string">'others'</span>: <span class="string">'d44fb0960aa0-a5e6-4a30-250f-6d2df50a'</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getPasswd</span>(<span class="params">sn</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> md5 = Crypto.createHash(<span class="string">'md5'</span>);</span><br><span class="line">    <span class="keyword">const</span> hex = md5.update(sn + getSalt(sn)).digest(<span class="string">'hex'</span>)</span><br><span class="line">    <span class="keyword">return</span> hex.substring(<span class="number">0</span>, <span class="number">8</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getSalt</span>(<span class="params">sn</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (sn.includes(<span class="string">'/'</span>)) &#123;</span><br><span class="line">        <span class="keyword">return</span> swapSalt(salt[<span class="string">'others'</span>]);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> salt[<span class="string">'r1d'</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">swapSalt</span>(<span class="params">s</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> s.split(<span class="string">'-'</span>).reverse().join(<span class="string">'-'</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> SN = process.argv[<span class="number">2</span>]</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">`Usage: <span class="subst">$&#123;SN&#125;</span> SN`</span> )</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> passwd = getPasswd(SN)</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'decrypt password:'</span>, passwd)</span><br></pre></td></tr></table></figure></p><h2 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h2><ul><li><p>复制代码到文件，index.js</p></li><li><p>命令行运行代码</p>  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ node index.js 36418/K1WW04216</span><br><span class="line">Usage: 36418/K1WW04216 SN</span><br><span class="line">decrypt password: f25b355a</span><br></pre></td></tr></table></figure></li><li><p>登录到路由器，没有ssh的，先sudo apt-get install ssh</p><p>  用户名：root<br>  密码：f25b355a</p></li><li><p>看到 ARE U OK即破解成功</p></li></ul>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;写了个 Node.js 命令行版的，测试了一下，和官方给出的 SSH 密码一样。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Front-end" scheme="https://tkvern.com/categories/Front-end/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>记得我有一个女朋友</title>
+    <link href="https://tkvern.com/20211106/%E8%AE%B0%E5%BE%97%E6%88%91%E6%9C%89%E4%B8%80%E4%B8%AA%E5%A5%B3%E6%9C%8B%E5%8F%8B/"/>
+    <id>https://tkvern.com/20211106/记得我有一个女朋友/</id>
+    <published>2021-11-06T04:32:00.000Z</published>
+    <updated>2023-01-20T15:23:47.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>(Cover 我有一个男朋友)</p><a id="more"></a><p class="poem"><br>记得我有一个女朋友<br>张翔<br><br>记得我有一个女朋友<br>她会时常偷偷看我的眼眸<br>举她起来也不会觉得费手<br>给她讲梦里的浪漫星球<br><br>记得我有一个女朋友<br>下雨天的约会是在她家门口<br>酒吧鼓手敲着周五下班的节奏<br>爵士加一杯果汁也会上头<br><br>记得我有一个女朋友<br>那是我们还养着一只雪白色的大狗<br>取了个可爱的名字叫妞妞<br>笑我幼稚我总会说<br>你很欠揍<br><br>记得我有一个女朋友<br>她总开心跟我一起吃肉肉<br>吃得白白胖胖还有点变丑<br>可在我的眼里依然温柔<br><br>记得我有一个女朋友<br>我会晚上带她去看脱口秀<br>她总吹牛自己有多能喝酒<br>醉到怀里总还要啃我几口<br><br>记得我有一个女朋友<br>也许我会问她是否愿意到白头<br>无论健康疾病或贫穷富有<br>这时戴上戒指<br>我说<br>与子携手<br><br>可是呀<br>我们已经<br>分开好久<br><br></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;(Cover 我有一个男朋友)&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="诗词作品" scheme="https://tkvern.com/categories/%E8%AF%97%E8%AF%8D%E4%BD%9C%E5%93%81/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>故里街三十二号</title>
+    <link href="https://tkvern.com/20210827/%E6%95%85%E9%87%8C%E8%A1%97%E4%B8%89%E5%8D%81%E4%BA%8C%E5%8F%B7/"/>
+    <id>https://tkvern.com/20210827/故里街三十二号/</id>
+    <published>2021-08-27T18:20:00.000Z</published>
+    <updated>2023-01-20T15:23:47.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>又回到故里街，仍是故里街，不见故里人</p><a id="more"></a><p class="poem"><br>故里街三十二号<br>张翔<br><br>夜里的灯还亮着<br>歌还唱着<br>城市的人还没回家呢<br>到故里的末班车<br>有多少人等到了<br><br>梦一场的故事还述说着<br>喝醉的姑娘<br>你的家在哪里呢<br>是离家太远<br>等不到故里的车么<br><br>喝杯故里的酒<br>一杯敬过往<br>一杯敬明天<br>往事都如烟<br><br>听首故里的歌<br>一首唱过往<br>一首唱明天<br>往后都开心<br><br>写行故里的诗<br>一行写过往<br>一行写明天<br>往事不牵连<br><br>爱个故里的人<br>一个在过往<br>一个在明天<br>夜里说晚安<br><br></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;又回到故里街，仍是故里街，不见故里人&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="诗词作品" scheme="https://tkvern.com/categories/%E8%AF%97%E8%AF%8D%E4%BD%9C%E5%93%81/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>观海栈桥</title>
+    <link href="https://tkvern.com/20210819/%E8%A7%82%E6%B5%B7%E6%A0%88%E6%A1%A5/"/>
+    <id>https://tkvern.com/20210819/观海栈桥/</id>
+    <published>2021-08-19T05:19:00.000Z</published>
+    <updated>2023-01-20T15:23:47.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>未完，观海栈桥是一个地名。</p><a id="more"></a><p class="poem"><br>观海栈桥<br>张翔<br><br>那一晚星光灿烂<br>风儿撩拨海浪<br>握着你的手<br>温暖 柔软<br><br>这一首琴声悠然<br>月儿陶醉梦乡<br>拥入我怀抱<br>酥香 芬芳<br><br>有一个银河幻想<br>你和我在徜徉<br>河里留下的是<br>爱的 模样<br><br></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;未完，观海栈桥是一个地名。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="诗词作品" scheme="https://tkvern.com/categories/%E8%AF%97%E8%AF%8D%E4%BD%9C%E5%93%81/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>三行情诗</title>
+    <link href="https://tkvern.com/20210814/%E4%B8%89%E8%A1%8C%E6%83%85%E8%AF%97/"/>
+    <id>https://tkvern.com/20210814/三行情诗/</id>
+    <published>2021-08-14T06:13:00.000Z</published>
+    <updated>2023-01-20T15:23:47.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>今日中国七夕情人节，送一首情诗（杨辉三角）</p><a id="more"></a><p class="poem"><br>三行情诗<br>张翔<br><br>这行是你<br>这行是你<br>这行依旧是你<br><br></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;今日中国七夕情人节，送一首情诗（杨辉三角）&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="诗词作品" scheme="https://tkvern.com/categories/%E8%AF%97%E8%AF%8D%E4%BD%9C%E5%93%81/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>就忘记</title>
+    <link href="https://tkvern.com/20210810/%E5%B0%B1%E5%BF%98%E8%AE%B0/"/>
+    <id>https://tkvern.com/20210810/就忘记/</id>
+    <published>2021-08-10T08:11:00.000Z</published>
+    <updated>2023-01-20T15:23:47.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>有时候不经意的人或事，又会想起关于她的，好多记忆，好多画面。<br>好与坏都是生命体验的一部分，就开始的新生活吧。<br>（写得不太好，后半段烂尾了😭，缺少一些画面和情感的融合）<br>作于深圳，2021-08-10 16:11 笔</p><hr><p>2021-08-17 20:24 更新，有了新的思路，把后半段的画面补上了</p><a id="more"></a><p class="poem"><br>就忘记<br>张翔<br><br>思念有多长<br>分开有多难<br>拉拉扯扯的画面就留着回忆吧<br>我不在的以后<br>有些伤痛  醒来就忘了吧<br>要像个孩子一样快乐呀<br><br>最近还好吗<br>你新的生活<br>喜怒哀乐的细节都有人分享吧<br>我不在的以后<br>有些快乐  就永远记着吧<br>要像第一次见你那样呀<br><br>让工作把我的时间占据<br>不再思考关于你的情绪<br>让时间把我的记忆抹去<br>不再回忆关于你的过去<br>夜里的想念就留给自己<br>不再查看关于你的消息<br>往后的日子也留给自己<br>就忘记关于你的点点滴滴<br>去填满心的每一道缝隙<br><br></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;有时候不经意的人或事，又会想起关于她的，好多记忆，好多画面。&lt;br&gt;好与坏都是生命体验的一部分，就开始的新生活吧。&lt;br&gt;（写得不太好，后半段烂尾了😭，缺少一些画面和情感的融合）&lt;br&gt;作于深圳，2021-08-10 16:11 笔&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;2021-08-17 20:24 更新，有了新的思路，把后半段的画面补上了&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="诗词作品" scheme="https://tkvern.com/categories/%E8%AF%97%E8%AF%8D%E4%BD%9C%E5%93%81/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>让你的文字自动适配背景颜色</title>
+    <link href="https://tkvern.com/20210224/%E8%AE%A9%E4%BD%A0%E7%9A%84%E6%96%87%E5%AD%97%E8%87%AA%E5%8A%A8%E9%80%82%E9%85%8D%E8%83%8C%E6%99%AF%E9%A2%9C%E8%89%B2/"/>
+    <id>https://tkvern.com/20210224/让你的文字自动适配背景颜色/</id>
+    <published>2021-02-24T16:00:00.000Z</published>
+    <updated>2023-01-20T15:23:47.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>网传，产品经理要求App开发人员，让用户App的主题颜色能根据手机壳自动调整。</p><p>刚好笔者要做一个类似的事情，根据背景颜色自动改变文字的颜色，以便于用户识别。</p><a id="more"></a><p><img src="https://user-images.githubusercontent.com/10667077/112811656-deb44f00-90ae-11eb-8f09-ad15e04eae03.png" alt="image"></p><p><img src="https://user-images.githubusercontent.com/10667077/112811719-eb38a780-90ae-11eb-8283-8529f3da83bf.jpeg" alt="alicl-bwq9y"></p><hr><h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><p>产品设计了一个人机校验组件，大致长这个样子。背景会每次随机取不同图片，开始的时候，箭头设置为蓝色。在背景为蓝色的时候，用户就分辨箭头就有些困难了。怎么解决这个问题呢？</p><p><img src="https://user-images.githubusercontent.com/10667077/112797691-5463ef00-909e-11eb-9834-7ba744f897c9.png" alt="image3"></p><h2 id="思路与实现"><a href="#思路与实现" class="headerlink" title="思路与实现"></a>思路与实现</h2><h3 id="第一步"><a href="#第一步" class="headerlink" title="第一步"></a>第一步</h3><p>取到箭头底部背景的范围坐标。这个比较简单，基本运算就搞定，done</p><h3 id="第二步"><a href="#第二步" class="headerlink" title="第二步"></a>第二步</h3><p>要识别图片，我们需要借助 Canvas，将图片绘制到 Canvas 上，来操作图像数据。</p><p><em>创建 Canvas 容器</em><br><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> c4 = <span class="built_in">document</span>.createElement(<span class="string">'canvas'</span>)</span><br><span class="line">c4.width = <span class="number">190</span></span><br><span class="line">c4.height = <span class="number">190</span></span><br><span class="line"><span class="keyword">const</span> ctx4 = c4.getContext(<span class="string">'2d'</span>)</span><br></pre></td></tr></table></figure></p><p><em>放入图片</em><br><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 识别图片</span></span><br><span class="line"><span class="keyword">const</span> image = <span class="keyword">new</span> Image()</span><br><span class="line">image.onload = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    ctx4?.drawImage(image, <span class="number">0</span>, <span class="number">0</span>, <span class="number">191</span>, <span class="number">190</span>) <span class="comment">// 绘制图片到 Canvas</span></span><br><span class="line">    <span class="keyword">const</span> color = analysisColor(ctx4?.getImageData(<span class="number">0</span>, <span class="number">0</span>, <span class="number">191</span>, <span class="number">190</span>)) <span class="comment">// 分析颜色分布</span></span><br><span class="line">    setFontColor(color) <span class="comment">// 设置字体颜色</span></span><br><span class="line">    resolve(<span class="literal">true</span>) <span class="comment">// 完成Promise</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">image.src = images[<span class="string">`code-<span class="subst">$&#123;index&#125;</span>`</span>] <span class="comment">// 取本次随机图片的地址设置到 image</span></span><br></pre></td></tr></table></figure></p><h3 id="跨域问题"><a href="#跨域问题" class="headerlink" title="跨域问题"></a>跨域问题</h3><p>可是进展并没有那么顺利，背景图片不在同域下面，Canvas 不允许跨域的图片，怎么办呢？</p><p><img src="https://user-images.githubusercontent.com/10667077/112800951-e968e700-90a2-11eb-8087-29e1783e7666.png" alt="image"></p><h3 id="第三步"><a href="#第三步" class="headerlink" title="第三步"></a>第三步</h3><p>既然 Canvas 不允许跨域的图片，在无后端代理支持的情况下，怎么高效的解决这个问题呢？(本地是跨域，线上同域)</p><p>把图片下载的本地！借助 XMLHttpRequest 将图片先缓存到本地转成 Blob 对象，Canvas 是可以访问本地 Blob 的数据。</p><p><em>下载图片，解决图片跨域问题</em><br><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 下载图片，解决图片跨域问题</span></span><br><span class="line"><span class="keyword">const</span> xhr = <span class="keyword">new</span> XMLHttpRequest()</span><br><span class="line">xhr.open(<span class="string">'get'</span>, images[<span class="string">`code-<span class="subst">$&#123;index&#125;</span>`</span>], <span class="literal">true</span>)</span><br><span class="line">xhr.responseType = <span class="string">'blob'</span></span><br><span class="line">xhr.onload = <span class="function"><span class="keyword">function</span> <span class="title">loaded</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>.status === <span class="number">200</span>) &#123;</span><br><span class="line">        <span class="keyword">const</span> blob = <span class="keyword">this</span>.response</span><br><span class="line">        image.src = <span class="built_in">window</span>.URL.createObjectURL(blob)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">xhr.send()</span><br></pre></td></tr></table></figure></p><h3 id="第四步"><a href="#第四步" class="headerlink" title="第四步"></a>第四步</h3><p>解决了跨域问题，接下来就是分析颜色了，<em>getImageData</em> 取到的就是图片 rgba 的数组。<br>这个时候就可以将计算好的坐标，代入到图片 rgba 里面计算其分布。</p><p>说到这里就要补一下图像算法的知识了。</p><p>许多从自然场景中拍摄的图像，其色彩分布上会给人一种和谐、一致的感觉；反过来，在许多界面设计应用中，我们也希望选择的颜色可以达到这样的效果，但对一般人来说却并不那么容易，这属于色彩心理学的范畴。从彩色图像中提取其中的主题颜色，不仅可以用于色彩设计，也可用于图像分类、搜索、识别等，本文分别总结并实现图像主题颜色提取的几种算法，包括颜色量化法（ColorQuantization）、聚类(Clustering)和颜色建模的方法</p><h4 id="颜色量化算法"><a href="#颜色量化算法" class="headerlink" title="颜色量化算法"></a>颜色量化算法</h4><p>彩色图像一般采用RGB色彩模式，每个像素由RGB三个颜色分量组成。随着硬件的不断升级，彩色图像的存储由最初的8位、16位变成现在的24位、32真彩色。所谓全彩是指每个像素由8位（$2^8$=0~255）表示，红绿蓝三原色组合共有1677万（256 x 256 x 256 ）万种颜色，如果将RGB看作是三维空间中的三个坐标，可以得到下面这样一张色彩空间图：</p><p><img src="https://user-images.githubusercontent.com/10667077/112802124-62b50980-90a4-11eb-94f6-32305e435e32.png" alt="image"></p><p><a href="https://www.pyimagesearch.com/2014/12/01/complete-guide-building-image-search-engine-python-opencv/" target="_blank" rel="noopener">RGB color cube</a></p><p>当然，一张图像不可能包含所有颜色，我们将一张彩色图像所包含的像素投射到色彩空间中，可以更直观地感受图像中颜色的分布：</p><p><img src="https://user-images.githubusercontent.com/10667077/112802295-9728c580-90a4-11eb-9837-1ae563db6e5b.png" alt="image"></p><p>因此颜色量化问题可以用所有矢量量化（vector quantization, VQ）算法解决。这里采用开源图像处理库 Leptonica 中用到的两种算法：中位切分法、八叉树算法。</p><p>这里核心使用中位切分法（Median cut） 参考项目 <a href="https://github.com/lokesh/color-thief" target="_blank" rel="noopener">Github: color-thief</a></p><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 计算图片中间值</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">analysisColor</span>(<span class="params">rgbaArray: <span class="built_in">any</span></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// Todo something，返回该区域颜色的主色</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h3 id="第五步"><a href="#第五步" class="headerlink" title="第五步"></a>第五步</h3><p>到这里，这个需求就算实现了基本核心的部分了，但是在运行过程中，发现性能消耗极大。大部分花在了 Canvas 绘制和图像遍历上</p><p><img src="https://user-images.githubusercontent.com/10667077/112803557-02bf6280-90a6-11eb-92bd-5ec56f5fd983.png" alt="image"></p><p>怎么来优化这个过程呢？能不能只提取图像的特征信息进行分析呢？</p><p>带着这两个问题，查阅了图像特征算法相关的文献后，找到了 方向梯度直方图（Histogram of Oriented Gradient, HOG） 这个算法。</p><h3 id="基HOG特征"><a href="#基HOG特征" class="headerlink" title="基HOG特征"></a>基HOG特征</h3><p>方向梯度直方图（Histogram of Oriented Gradient, HOG）特征是一种在计算机视觉和图像处理中用来进行物体检测的特征描述子。它通过计算和统计图像局部区域的梯度方向直方图来构成特征。Hog特征结合 SVM分类器已经被广泛应用于图像识别中，尤其在行人检测中获得了极大的成功。需要提醒的是，HOG+SVM进行行人检测的方法是法国研究人员Dalal 在2005的CVPR上提出的，而如今虽然有很多行人检测算法不断提出，但基本都是以HOG+SVM的思路为主。</p><h4 id="主要思想"><a href="#主要思想" class="headerlink" title="主要思想"></a>主要思想</h4><p>在一副图像中，局部目标的表象和形状（appearance and shape）能够被梯度或边缘的方向密度分布很好地描述。（本质：梯度的统计信息，而梯度主要存在于边缘的地方）。</p><h4 id="具体的实现方法是"><a href="#具体的实现方法是" class="headerlink" title="具体的实现方法是"></a>具体的实现方法是</h4><p>首先将图像分成小的连通区域，我们把它叫细胞单元。然后采集细胞单元中各像素点的梯度的或边缘的方向直方图。最后把这些直方图组合起来就可以构成特征描述器。</p><h4 id="提高性能"><a href="#提高性能" class="headerlink" title="提高性能"></a>提高性能</h4><p>把这些局部直方图在图像的更大的范围内（我们把它叫区间或block）进行对比度归一化（contrast-normalized），所采用的方 法是：先计算各直方图在这个区间（block）中的密度，然后根据这个密度对区间中的各个细胞单元做归一化。通过这个归一化后，能对光照变化和阴影获得更 好的效果。</p><h4 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h4><p>与其他的特征描述方法相比，HOG有很多优点。首先，由于HOG是在图像的局部方格单元上操作，所以它对图像几何的和光学的形变都能保持很好的不 变性，这两种形变只会出现在更大的空间领域上。其次，在粗的空域抽样、精细的方向抽样以及较强的局部光学归一化等条件下，只要行人大体上能够保持直立的姿 势，可以容许行人有一些细微的肢体动作，这些细微的动作可以被忽略而不影响检测效果。因此HOG特征是特别适合于做图像中的人体检测的。</p><p><em>HOG特征提取算法的实现过程</em></p><p><img src="https://user-images.githubusercontent.com/10667077/112806597-89297380-90a9-11eb-9d06-bb303795770c.png" alt="image"></p><h3 id="第六步"><a href="#第六步" class="headerlink" title="第六步"></a>第六步</h3><p>基于此，来做我们自己的算法实现。将原图在绘制时，按照等比平铺，一步步的绘制到 Canvas 格子上去。随着尺寸的缩小，图像的特征依然得以保留，大致效果如下。</p><p><img src="https://user-images.githubusercontent.com/10667077/112809701-da873200-90ac-11eb-8168-abd491fad785.png" alt="image"></p><p>在实验多个不同的压缩尺寸后，发现 16x16 这个尺寸能兼顾特征与识别性能，再小一些的格子比如 8x8 就会丢失特征值。</p><p><em>贴一下大致的实现过程</em><br><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> checkBack = <span class="keyword">async</span> (index: <span class="built_in">number</span>) =&gt; &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="comment">// 计算图片中间值</span></span><br><span class="line">      <span class="function"><span class="keyword">function</span> <span class="title">analysisColor</span>(<span class="params">rgbaArray: <span class="built_in">any</span></span>) </span>&#123;</span><br><span class="line">        <span class="comment">// Todo something，返回该区域颜色的主色</span></span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">const</span> c4 = <span class="built_in">document</span>.createElement(<span class="string">'canvas'</span>) <span class="comment">// 压缩尺寸计算用</span></span><br><span class="line">      c4.width = <span class="number">16</span></span><br><span class="line">      c4.height = <span class="number">16</span></span><br><span class="line">      <span class="keyword">const</span> ctx4 = c4.getContext(<span class="string">'2d'</span>)</span><br><span class="line"></span><br><span class="line">      <span class="comment">// 识别图片</span></span><br><span class="line">      <span class="keyword">const</span> image = <span class="keyword">new</span> Image()</span><br><span class="line">      image.onload = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">        ctx4?.drawImage(image, <span class="number">0</span>, <span class="number">0</span>, <span class="number">17</span>, <span class="number">16</span>) <span class="comment">// 绘制图片到 Canvas</span></span><br><span class="line">        <span class="keyword">const</span> color = analysisColor(ctx4?.getImageData(<span class="number">0</span>, <span class="number">0</span>, <span class="number">17</span>, <span class="number">16</span>)) <span class="comment">// 分析颜色分布</span></span><br><span class="line">        setFontColor(color) <span class="comment">// 设置字体颜色</span></span><br><span class="line">        resolve(<span class="literal">true</span>) <span class="comment">// 完成Promise</span></span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="comment">// 下载图片，解决图片跨域问题</span></span><br><span class="line">      <span class="keyword">const</span> xhr = <span class="keyword">new</span> XMLHttpRequest()</span><br><span class="line">      xhr.open(<span class="string">'get'</span>, images[<span class="string">`code-<span class="subst">$&#123;index&#125;</span>`</span>], <span class="literal">true</span>)</span><br><span class="line">      xhr.responseType = <span class="string">'blob'</span></span><br><span class="line">      xhr.onload = <span class="function"><span class="keyword">function</span> <span class="title">loaded</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">this</span>.status === <span class="number">200</span>) &#123;</span><br><span class="line">          <span class="keyword">const</span> blob = <span class="keyword">this</span>.response</span><br><span class="line">          image.src = <span class="built_in">window</span>.URL.createObjectURL(blob)</span><br><span class="line">          <span class="built_in">console</span>.log(image.src)</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      xhr.send()</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure></p><h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>我们再来看看优化后，分析过程的耗时，差不多提升了 100 倍的速度！！！</p><p><img src="https://user-images.githubusercontent.com/10667077/112803779-3d28ff80-90a6-11eb-82e1-c95be76b0dfc.png" alt="image"></p><p>最终的效果图:</p><p><img src="https://user-images.githubusercontent.com/10667077/112810638-cee83b00-90ad-11eb-8062-ac3a6b5ebda5.png" alt="image"></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;网传，产品经理要求App开发人员，让用户App的主题颜色能根据手机壳自动调整。&lt;/p&gt;
+&lt;p&gt;刚好笔者要做一个类似的事情，根据背景颜色自动改变文字的颜色，以便于用户识别。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Front-end" scheme="https://tkvern.com/categories/Front-end/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>丑奴儿</title>
+    <link href="https://tkvern.com/20210212/%E4%B8%91%E5%A5%B4%E5%84%BF/"/>
+    <id>https://tkvern.com/20210212/丑奴儿/</id>
+    <published>2021-02-12T15:30:00.000Z</published>
+    <updated>2023-01-20T15:23:47.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>词牌《丑奴儿》，这是一首写在深夜的词，春节短暂相聚即将分离，表达离别的千愁万绪，作此诗于佛山， 2021-02-12 23:30 笔</p><a id="more"></a><p class="poem"><br>丑奴儿<br>张翔<br><br>年幼未尝愁滋味<br>不说离愁<br>但有离愁<br>适逢别时上心头<br>而今尝尽愁滋味<br>不说愁绪<br>但有愁绪<br>旧瓶新酒杯莫拒<br><br></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;词牌《丑奴儿》，这是一首写在深夜的词，春节短暂相聚即将分离，表达离别的千愁万绪，作此诗于佛山， 2021-02-12 23:30 笔&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="诗词作品" scheme="https://tkvern.com/categories/%E8%AF%97%E8%AF%8D%E4%BD%9C%E5%93%81/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>下雨容易想你</title>
+    <link href="https://tkvern.com/20210210/%E4%B8%8B%E9%9B%A8%E5%AE%B9%E6%98%93%E6%83%B3%E4%BD%A0/"/>
+    <id>https://tkvern.com/20210210/下雨容易想你/</id>
+    <published>2021-02-10T17:30:00.000Z</published>
+    <updated>2023-01-20T15:23:47.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>下雨容易想你，作于佛山</p><a id="more"></a><p class="poem"><br>下雨容易想你<br>张翔<br><br>分开多久了<br>也没有再联系<br>也不再有你的动态和消息<br>偶尔也还是会想起你<br>想你的时候<br>就会写写关于你的歌曲<br>安静的夜里<br>窗外下着雨<br>可能下雨的天气<br>比较容易想起你<br>潮湿的街区<br>谁还没回去<br>可能回家的距离<br>还差一个你<br><br>你说我不够爱你<br>不够成熟的交出自己<br>而我们的相遇<br>是不在对的时机<br>你追问一个答案<br>我是不是真的爱你<br>是真的爱你<br><br></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;下雨容易想你，作于佛山&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="诗词作品" scheme="https://tkvern.com/categories/%E8%AF%97%E8%AF%8D%E4%BD%9C%E5%93%81/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>中间人</title>
+    <link href="https://tkvern.com/20210205/%E4%B8%AD%E9%97%B4%E4%BA%BA/"/>
+    <id>https://tkvern.com/20210205/中间人/</id>
+    <published>2021-02-05T17:57:00.000Z</published>
+    <updated>2023-01-20T15:23:47.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>饮酒高歌深夜，记下朋友的胡言真心话，作于深圳</p><a id="more"></a><p class="poem"><br>中间人<br>张翔<br><br>这夜里的故事很多<br>这世界也难以揣度<br>你说在你身边的人不是你爱的人<br>这感觉像是陌生的我<br>也不懂你心里的难过<br>这时刻是人生经历的折磨<br>我不愿你进这火坑<br>可你朋友圈述说着不快乐<br>可能你也是在恨我<br>我不想成为中间人<br>怕你会怪我<br>怕你会真爱的不是她<br>每一次天亮的时候<br>不想你坠入深渊爱河<br>人就是这么奇怪<br><br></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;饮酒高歌深夜，记下朋友的胡言真心话，作于深圳&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="诗词作品" scheme="https://tkvern.com/categories/%E8%AF%97%E8%AF%8D%E4%BD%9C%E5%93%81/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>这一夜</title>
+    <link href="https://tkvern.com/20210205/%E8%BF%99%E4%B8%80%E5%A4%9C/"/>
+    <id>https://tkvern.com/20210205/这一夜/</id>
+    <published>2021-02-05T17:55:00.000Z</published>
+    <updated>2023-01-20T15:23:47.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>饮酒高歌深夜，记下朋友的胡言真心话，作于深圳</p><a id="more"></a><p class="poem"><br>这一夜<br>张翔<br><br>这一夜不眠不休<br>怕陷入这一段爱的过程<br>不想再一次进入这情分<br>酒馆的灯火照不亮你的面容<br>再见见你最后一面<br>没有故事的山<br>再无法牵你的手<br>这一杯茶的的味道不记得<br>一开始关于你的是棋<br>再没有关于你的消息<br>可能是表白的时机不期<br>再不见你温柔的气<br>不想再见你的笑脸<br>不想再做卑微的棋<br><br></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;饮酒高歌深夜，记下朋友的胡言真心话，作于深圳&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="诗词作品" scheme="https://tkvern.com/categories/%E8%AF%97%E8%AF%8D%E4%BD%9C%E5%93%81/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>夜归・上集</title>
+    <link href="https://tkvern.com/20201205/%E5%A4%9C%E5%BD%92%E4%B8%8A%E9%9B%86/"/>
+    <id>https://tkvern.com/20201205/夜归上集/</id>
+    <published>2020-12-05T05:39:00.000Z</published>
+    <updated>2023-01-20T15:23:47.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>昨夜晚归家，作《夜归》上集，作此诗于深圳，2020-12-05 13:39 笔</p><a id="more"></a><p class="poem"><br>夜归・上<br>张翔<br><br>月下有寒影<br>风吹归路人<br>长有檐角灯<br>照入深巷里<br>门前守夜人<br>紧衣御长夜<br>掩窗点炉火<br>幽梦还乡来<br><br></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;昨夜晚归家，作《夜归》上集，作此诗于深圳，2020-12-05 13:39 笔&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="诗词作品" scheme="https://tkvern.com/categories/%E8%AF%97%E8%AF%8D%E4%BD%9C%E5%93%81/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>忆卿</title>
+    <link href="https://tkvern.com/20201203/%E5%BF%86%E5%8D%BF/"/>
+    <id>https://tkvern.com/20201203/忆卿/</id>
+    <published>2020-12-03T16:10:00.000Z</published>
+    <updated>2023-01-20T15:23:47.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>忆卿时，作于深圳，2020-12-04 00:10 笔</p><a id="more"></a><p class="poem"><br>忆卿<br>张翔<br><br>别忆卿时态<br>梦画妆容前<br>但闻细虫声<br>似有万语言<br><br></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;忆卿时，作于深圳，2020-12-04 00:10 笔&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="诗词作品" scheme="https://tkvern.com/categories/%E8%AF%97%E8%AF%8D%E4%BD%9C%E5%93%81/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>苍穹</title>
+    <link href="https://tkvern.com/20200611/%E8%8B%8D%E7%A9%B9/"/>
+    <id>https://tkvern.com/20200611/苍穹/</id>
+    <published>2020-06-11T15:30:00.000Z</published>
+    <updated>2023-01-20T15:23:47.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>观苍穹之下，作于深圳，2020-06-11 23:30 笔</p><a id="more"></a><p class="poem"><br>苍穹<br>张翔<br><br>渺渺苍穹外<br>浩瀚星河中<br>浮生若尘埃<br>流光皆微茫<br>孤坐夜幕下<br>纹刻青石上<br>谓生欲何求<br>百学以冥索<br><br></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;观苍穹之下，作于深圳，2020-06-11 23:30 笔&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="诗词作品" scheme="https://tkvern.com/categories/%E8%AF%97%E8%AF%8D%E4%BD%9C%E5%93%81/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>雨</title>
+    <link href="https://tkvern.com/20200528/%E9%9B%A8/"/>
+    <id>https://tkvern.com/20200528/雨/</id>
+    <published>2020-05-28T17:33:00.000Z</published>
+    <updated>2023-01-20T15:23:47.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>关于雨的一首诗，作此诗于深圳，2020-05-29 01:33 笔</p><a id="more"></a><p class="poem"><br>雨<br>张翔<br><br>垂帘听风易<br>四月初暮雨<br>淅淅沥沥<br>轻寒不知时限<br>行踪无定<br>离君不问归期<br>烟柳画桥<br>卿作桥边客<br>碧波花舫<br>予是泛舟人<br>醉卧十里酒香<br>不及远方不及卿<br><br></p><p><strong>注释</strong><br>【行踪无定】各处来往出没，没有固定住所<br>【桥边客】往往桥边客，金犹恨未平</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;关于雨的一首诗，作此诗于深圳，2020-05-29 01:33 笔&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="诗词作品" scheme="https://tkvern.com/categories/%E8%AF%97%E8%AF%8D%E4%BD%9C%E5%93%81/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>用deno构建HTTP服务器试试</title>
+    <link href="https://tkvern.com/20200401/%E7%94%A8deno%E6%9E%84%E5%BB%BAHTTP%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%AF%95%E8%AF%95/"/>
+    <id>https://tkvern.com/20200401/用deno构建HTTP服务器试试/</id>
+    <published>2020-04-01T12:26:16.000Z</published>
+    <updated>2023-01-20T15:23:47.000Z</updated>
+    
+    <content type="html"><![CDATA[<p><img src="/images/cover/deno.jpg" alt="deno"><br>恰巧今日有朋友聊到deno，学习了下deno，顺手写了个小玩具。(内容一会再补充……)<br>前端工程师无缝入手。</p><a id="more"></a><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; serve &#125; <span class="keyword">from</span> <span class="string">"https://deno.land/std@v0.36.0/http/server.ts"</span>;</span><br><span class="line"><span class="keyword">const</span> server = serve(&#123; port: <span class="number">8899</span> &#125;);</span><br><span class="line"><span class="keyword">const</span> CONTENT_TYPE_MAP: &#123; [index: <span class="built_in">string</span>]: <span class="built_in">any</span> &#125; = &#123; <span class="comment">// 定义Content-Type的HashMap</span></span><br><span class="line">  html: <span class="string">"text/html; charset=UTF-8"</span>,</span><br><span class="line">  htm: <span class="string">"text/html; charset=UTF-8"</span>,</span><br><span class="line">  js: <span class="string">"application/javascript; charset=UTF-8"</span>,</span><br><span class="line">  css: <span class="string">"text/css; charset=UTF-8"</span>,</span><br><span class="line">  txt: <span class="string">"text/plain; charset=UTF-8"</span>,</span><br><span class="line">  mainfest: <span class="string">"text/plain; charset=UTF-8"</span></span><br><span class="line">&#125;;</span><br><span class="line">(<span class="keyword">async</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">for</span> <span class="keyword">await</span> (<span class="keyword">const</span> req of server) &#123;</span><br><span class="line">    <span class="keyword">const</span> pathname = req.url.split(<span class="string">'?'</span>)[<span class="number">0</span>]</span><br><span class="line">    <span class="keyword">const</span> filename = <span class="string">'/Users/vernbrandl/Downloads/'</span> + pathname.substring(<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">const</span> suffix = filename.substring(filename.lastIndexOf(<span class="string">"."</span>) + <span class="number">1</span>); <span class="comment">// 获取文件后缀</span></span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">      <span class="keyword">const</span> content = <span class="keyword">await</span> Deno.readFile(filename)</span><br><span class="line">      <span class="keyword">const</span> headers = <span class="keyword">new</span> Headers(&#123;</span><br><span class="line">        <span class="string">"Content-Type"</span>: CONTENT_TYPE_MAP[suffix] || <span class="string">"application/octet-stream"</span></span><br><span class="line">      &#125;)</span><br><span class="line">      req.respond(&#123;</span><br><span class="line">        body: content, status: <span class="number">200</span>, headers</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125; <span class="keyword">catch</span> (error) &#123;</span><br><span class="line">      req.respond(&#123; body: <span class="string">"Not Found\n"</span>, status: <span class="number">404</span> &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)()</span><br></pre></td></tr></table></figure><p>项目地址 =&gt; <a href="https://github.com/tkvern/deno-http-server" target="_blank" rel="noopener">https://github.com/tkvern/deno-http-server</a></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;img src=&quot;/images/cover/deno.jpg&quot; alt=&quot;deno&quot;&gt;&lt;br&gt;恰巧今日有朋友聊到deno，学习了下deno，顺手写了个小玩具。(内容一会再补充……)&lt;br&gt;前端工程师无缝入手。&lt;/p&gt;
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>30行代码构建HTTP服务器</title>
+    <link href="https://tkvern.com/20200324/30%E8%A1%8C%E4%BB%A3%E7%A0%81%E6%9E%84%E5%BB%BAHTTP%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
+    <id>https://tkvern.com/20200324/30行代码构建HTTP服务器/</id>
+    <published>2020-03-24T11:50:56.000Z</published>
+    <updated>2023-01-20T15:23:47.000Z</updated>
+    
+    <content type="html"><![CDATA[<p><img src="/images/cover/Node-js.jpg" alt="nodejs"></p><p>前两天调代码，想查看测试覆盖率生成的网页报告文件，没有安装HTTP服务器客户端。就在VS Code中下载一个叫<code>Live Server</code>的插件，用来启动HTTP服务。感觉效果还不错，然后今天和大家用Node来实现一个。</p><a id="more"></a><h2 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h2><p>构建HTTP服务，需要先了解一下HTTP协议的基础知识</p><h3 id="HTTP工作原理"><a href="#HTTP工作原理" class="headerlink" title="HTTP工作原理"></a>HTTP工作原理</h3><p>HTTP协议定义Web客户端如何从Web服务器请求Web页面，以及服务器如何把Web页面传送给客户端。HTTP协议采用了请求/响应模型。客户端向服务器发送一个请求报文，请求报文包含请求的方法、URL、协议版本、请求头部和请求数据。服务器以一个状态行作为响应，响应的内容包括协议的版本、成功或者错误代码、服务器信息、响应头部和响应数据。</p><h3 id="HTTP请求格式"><a href="#HTTP请求格式" class="headerlink" title="HTTP请求格式"></a>HTTP请求格式</h3><p><img src="/images/http/http1.jpg" alt="request"></p><h3 id="HTTP响应格式"><a href="#HTTP响应格式" class="headerlink" title="HTTP响应格式"></a>HTTP响应格式</h3><p><img src="/images/http/http2.jpg" alt="response"></p><h2 id="编码"><a href="#编码" class="headerlink" title="编码"></a>编码</h2><p>这里的需求比较简单，只要能GET即可，不需要POST</p><p>这里会用到Node的<code>http</code>和<code>fs</code>模块</p><p><strong>导入模块</strong></p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> http = <span class="built_in">require</span>(<span class="string">"http"</span>);</span><br><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">"fs"</span>);</span><br></pre></td></tr></table></figure><p><strong>创建服务</strong></p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> server = http.createServer(); <span class="comment">// 创建服务</span></span><br><span class="line">server.listen(<span class="number">8888</span>); <span class="comment">// 监听端口</span></span><br></pre></td></tr></table></figure><p><strong>Content-Type的HashMap</strong></p><p>这里定义了我们网页中，常用的一些文件类型</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> CONTENT_TYPE_MAP = &#123; <span class="comment">// 定义Content-Type的HashMap</span></span><br><span class="line">  html: <span class="string">"text/html; charset=UTF-8"</span>,</span><br><span class="line">  htm: <span class="string">"text/html; charset=UTF-8"</span>,</span><br><span class="line">  js: <span class="string">"application/javascript; charset=UTF-8"</span>,</span><br><span class="line">  css: <span class="string">"text/css; charset=UTF-8"</span>,</span><br><span class="line">  txt: <span class="string">"text/plain; charset=UTF-8"</span>,</span><br><span class="line">  mainfest: <span class="string">"text/plain; charset=UTF-8"</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><p><strong>处理Request</strong></p><p>在返回response的时候，如果文件类型在<code>CONTENT_TYPE_MAP</code>中没有，我们则以<code>application/octet-stream</code>类型返回，浏览器端会直接将文件下载到本地。</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">server.on(<span class="string">"request"</span>, <span class="function"><span class="keyword">function</span>(<span class="params">request, response</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> url = <span class="built_in">require</span>(<span class="string">"url"</span>).parse(request.url);</span><br><span class="line">  <span class="keyword">const</span> filename = url.pathname.substring(<span class="number">1</span>);</span><br><span class="line">  <span class="keyword">const</span> suffix = filename.substring(filename.lastIndexOf(<span class="string">"."</span>) + <span class="number">1</span>); <span class="comment">// 获取文件后缀</span></span><br><span class="line">  fs.readFile(filename, <span class="function"><span class="keyword">function</span>(<span class="params">err, content</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (err) &#123;</span><br><span class="line">      response.writeHead(<span class="number">404</span>, &#123;</span><br><span class="line">        <span class="string">"Content-Type"</span>: <span class="string">"text/plain; charset=UTF-8"</span></span><br><span class="line">      &#125;);</span><br><span class="line">      response.write(err.message);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      response.writeHead(<span class="number">200</span>, &#123;</span><br><span class="line">        <span class="string">"Content-Type"</span>: CONTENT_TYPE_MAP[suffix] || <span class="string">"application/octet-stream"</span></span><br><span class="line">      &#125;);</span><br><span class="line">      response.write(content);</span><br><span class="line">    &#125;</span><br><span class="line">    response.end();</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure><p>到这里，借助Node V8引擎，一个极为轻量化、性能优异的基础HTTP服务器就开发完成了。需要本地启动HTTP服务器的时候，再也不用到网上下载啥客户端了，30行代码就搞定。需要的时候，直接命令行启动即可。</p><p>项目源码请访问: <a href="https://github.com/tkvern/node-http-server" target="_blank" rel="noopener">https://github.com/tkvern/node-http-server</a></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;img src=&quot;/images/cover/Node-js.jpg&quot; alt=&quot;nodejs&quot;&gt;&lt;/p&gt;
+&lt;p&gt;前两天调代码，想查看测试覆盖率生成的网页报告文件，没有安装HTTP服务器客户端。就在VS Code中下载一个叫&lt;code&gt;Live Server&lt;/code&gt;的插件，用来启动HTTP服务。感觉效果还不错，然后今天和大家用Node来实现一个。&lt;/p&gt;
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>用余弦定理+大数据找到心仪的对象</title>
+    <link href="https://tkvern.com/20200323/%E7%94%A8%E4%BD%99%E5%BC%A6%E5%AE%9A%E7%90%86+%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%89%BE%E5%88%B0%E5%BF%83%E4%BB%AA%E7%9A%84%E5%AF%B9%E8%B1%A1/"/>
+    <id>https://tkvern.com/20200323/用余弦定理+大数据找到心仪的对象/</id>
+    <published>2020-03-23T14:16:11.000Z</published>
+    <updated>2023-01-20T15:23:47.000Z</updated>
+    
+    <content type="html"><![CDATA[<p><img src="/images/cover/cosin.jpg" alt="cosin"></p><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>余弦定理和找对象似乎是两件八杆子打不着的事，但是它们却有着类似于余弦定理和Google的新闻自动分类一样的紧密联系。具体来说，找对象也可以和做Google的新闻自动分类一样，找到最契合的另一半。</p><a id="more"></a><h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p>找对象之前，先来看看文章自动分类的原理，我们做文章自动分类时，第一步是从分词入手</p><h3 id="第一步，分词"><a href="#第一步，分词" class="headerlink" title="第一步，分词"></a>第一步，分词</h3><p>这里使用了一个Node.js比较成熟的分词库，底层算法是基于c++做的实现，性能不错。</p><p>参见 <a href="https://github.com/tkvern/nodejs-text-similarity/blob/master/index.js#L88" target="_blank" rel="noopener">/index.js#L88</a></p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 简单分词</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;String&#125;</span> </span>text 文本</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@returns <span class="type">&#123;Array&#125;</span></span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">segment(text) &#123;</span><br><span class="line">  <span class="keyword">if</span> (!text) <span class="keyword">return</span> []</span><br><span class="line">  <span class="keyword">return</span> nodejieba.cut(text)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h3 id="第二步，-列出所有词"><a href="#第二步，-列出所有词" class="headerlink" title="第二步， 列出所有词"></a>第二步， 列出所有词</h3><p>分词之后我们将得到所有的词</p><p>参见 <a href="https://github.com/tkvern/nodejs-text-similarity/blob/master/index.js#L11" target="_blank" rel="noopener">/index.js#L11</a></p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 文本相似度查询</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;String&#125;</span> </span>textA 文本A</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;String&#125;</span> </span>textB 文本B</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">constructor</span>(textA, textB) &#123;</span><br><span class="line">  textA = <span class="string">""</span> + textA</span><br><span class="line">  textB = <span class="string">""</span> + textB</span><br><span class="line">  <span class="keyword">this</span>.segmentWordsA = <span class="keyword">this</span>.segment(textA)</span><br><span class="line">  <span class="keyword">this</span>.segmentWordsB = <span class="keyword">this</span>.segment(textB)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h3 id="第三步，统计词频率"><a href="#第三步，统计词频率" class="headerlink" title="第三步，统计词频率"></a>第三步，统计词频率</h3><p>当我们拿到所有词的数组后，还需要进行词频统计，<code>EXCLUDE_WORDS_ARRAY</code>这个是我们排出的一些语气助词。</p><p>参见 <a href="https://github.com/tkvern/nodejs-text-similarity/blob/master/index.js#L43" target="_blank" rel="noopener">/index.js#L43</a></p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 分析两段文本</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">analyse() &#123;</span><br><span class="line">  <span class="comment">// 分析A片段</span></span><br><span class="line">  <span class="keyword">this</span>.segmentWordsA.forEach(<span class="function"><span class="params">element</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (!<span class="keyword">this</span>.EXCLUDE_WORDS_ARRAY.includes(element)) &#123;</span><br><span class="line">      <span class="keyword">if</span> (!<span class="keyword">this</span>.distributionWordsArray.hasOwnProperty(element)) &#123;</span><br><span class="line">        <span class="keyword">this</span>.distributionWordsArray[element] = [<span class="number">1</span>, <span class="number">0</span>]</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">this</span>.distributionWordsArray[element][<span class="number">0</span>] += <span class="number">1</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 分析B片段</span></span><br><span class="line">  <span class="keyword">this</span>.segmentWordsB.forEach(<span class="function"><span class="params">element</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (!<span class="keyword">this</span>.EXCLUDE_WORDS_ARRAY.includes(element)) &#123;</span><br><span class="line">      <span class="keyword">if</span> (!<span class="keyword">this</span>.distributionWordsArray.hasOwnProperty(element)) &#123;</span><br><span class="line">        <span class="keyword">this</span>.distributionWordsArray[element] = [<span class="number">0</span>, <span class="number">1</span>]</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">this</span>.distributionWordsArray[element][<span class="number">1</span>] += <span class="number">1</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h3 id="第四步，根据词频向量计算相似程度"><a href="#第四步，根据词频向量计算相似程度" class="headerlink" title="第四步，根据词频向量计算相似程度"></a>第四步，根据词频向量计算相似程度</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">句子A： &quot;太阳刚升起夕阳已落下&quot;</span><br><span class="line">句子B： &quot;我在马路边夕阳已落下&quot;</span><br></pre></td></tr></table></figure><p>通过计算，我们会得到这样一个词频数组</p><p><img src="/images/cosin/131584975100.jpg" alt="向量"></p><p>结合余弦定理:</p><p><img src="/images/cosin/bg2013032002.png" alt="夹角"></p><p>对于n维向量的计算如下:</p><p><img src="/images/cosin/bg2013032007.png" alt="n维计算"></p><p>而计算出来的余弦值越接近1，则表明夹角越接近0度，也就是两个向量越相似。</p><p>参见<a href="(https://github.com/tkvern/nodejs-text-similarity/blob/master/index.js#L43">/index.js#71</a></p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 处理相似度</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@returns <span class="type">&#123;Number&#125;</span></span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">similarity() &#123;</span><br><span class="line">  <span class="keyword">let</span> [sum, sumWordsA, sumWordsB] = [<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>]</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">const</span> element <span class="keyword">in</span> <span class="keyword">this</span>.distributionWordsArray) &#123;</span><br><span class="line">    <span class="keyword">const</span> wordsA = <span class="keyword">this</span>.distributionWordsArray[element][<span class="number">0</span>]</span><br><span class="line">    <span class="keyword">const</span> wordsB = <span class="keyword">this</span>.distributionWordsArray[element][<span class="number">1</span>]</span><br><span class="line">    sum += (wordsA * wordsB)</span><br><span class="line">    sumWordsA += <span class="built_in">Math</span>.pow(wordsA, <span class="number">2</span>)</span><br><span class="line">    sumWordsB += <span class="built_in">Math</span>.pow(wordsB, <span class="number">2</span>)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> sum / <span class="built_in">Math</span>.sqrt(sumWordsA * sumWordsB)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h2 id="找对象"><a href="#找对象" class="headerlink" title="找对象"></a>找对象</h2><p>和做文章自动分类一样</p><h3 id="第一步，基本信息、个性、兴趣爱好分析"><a href="#第一步，基本信息、个性、兴趣爱好分析" class="headerlink" title="第一步，基本信息、个性、兴趣爱好分析"></a>第一步，基本信息、个性、兴趣爱好分析</h3><p>和分词原理类似，我们要将每个人的物理数据数字化，并按照不同的维度拆分</p><h3 id="第二步，列出所有数字化后的数据"><a href="#第二步，列出所有数字化后的数据" class="headerlink" title="第二步，列出所有数字化后的数据"></a>第二步，列出所有数字化后的数据</h3><p>分析之后，我们将得到数字化的人物画像。</p><h3 id="第三步，参数统计"><a href="#第三步，参数统计" class="headerlink" title="第三步，参数统计"></a>第三步，参数统计</h3><p>对数字化后的每一项数据，进行统计</p><h3 id="第四步，计算相似程度"><a href="#第四步，计算相似程度" class="headerlink" title="第四步，计算相似程度"></a>第四步，计算相似程度</h3><p>这里用到的计算方法和词频统计一样，而拓展一些的地方是，可以给某些参数增加权重。</p><p>这样就可以结合你的个人状况，找到最适合你的对象了。</p><h2 id="大数据"><a href="#大数据" class="headerlink" title="大数据"></a>大数据</h2><p>你应该已经注意到了，我们做文章自动分类的前提，是有足够多的文章数据</p><p>所以，用余弦定理+大数据找到心仪的对象，也需要有足够多的数字化数据。</p><p>而一切的前提，是要有足够多的对象数据，所以要先挖掘下数据吧。</p><p><img src="/images/cosin/happy.jpeg" alt="happy"></p><h2 id="Plan"><a href="#Plan" class="headerlink" title="Plan"></a>Plan</h2><p>我有个帮你找对象的计划，如果你有找对象的需求，可以提交到我的系统里面来哦～</p><h2 id="项目地址"><a href="#项目地址" class="headerlink" title="项目地址"></a>项目地址</h2><p>文中代码仓库请访问 <a href="https://github.com/tkvern/nodejs-text-similarity" target="_blank" rel="noopener">https://github.com/tkvern/nodejs-text-similarity</a></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;img src=&quot;/images/cover/cosin.jpg&quot; alt=&quot;cosin&quot;&gt;&lt;/p&gt;
+&lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;余弦定理和找对象似乎是两件八杆子打不着的事，但是它们却有着类似于余弦定理和Google的新闻自动分类一样的紧密联系。具体来说，找对象也可以和做Google的新闻自动分类一样，找到最契合的另一半。&lt;/p&gt;
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>梦回长安</title>
+    <link href="https://tkvern.com/20200315/%E6%A2%A6%E5%9B%9E%E9%95%BF%E5%AE%89/"/>
+    <id>https://tkvern.com/20200315/梦回长安/</id>
+    <published>2020-03-15T23:35:00.000Z</published>
+    <updated>2023-01-20T15:23:47.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>昨日酒醉，赋诗一首，作此诗于深圳，2020-03-16 07:35 笔</p><a id="more"></a><p class="poem"><br>梦回长安<br>张翔<br><br>霓裳羽衣相思久<br>梦回长安城里住<br>极乐宴上睹芳容<br>醉入酒池方醒悟<br><br></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;昨日酒醉，赋诗一首，作此诗于深圳，2020-03-16 07:35 笔&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="诗词作品" scheme="https://tkvern.com/categories/%E8%AF%97%E8%AF%8D%E4%BD%9C%E5%93%81/"/>
+    
+    
+  </entry>
+  
+</feed>

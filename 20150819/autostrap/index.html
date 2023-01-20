@@ -1,0 +1,940 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="nITMHgGRG-3HZXe-SEJlmJxgA7J95q-z75xLLN4qNe4" />
+
+
+
+
+  <meta name="baidu-site-verification" content="code-dn5tsPOogu" />
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+<link rel="stylesheet" href="/css/poem.css">
+
+
+  <meta name="keywords" content="autostrap," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="TKVERN BLOG" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="介绍就目前移动端而言，已有比较成熟都响应式框架，类似于Bootstrap、AmazeUI、Skeljs。但是对于普通开发者来说，为了满足快速开发的需求去学习和使用这些框架的时间成本是比较高的。所以，本着轻量、快速开发的原则，为大家提供了基于原生JS的移动动端解决方案，希望能在交流、使用中继续优化AutoStrap。">
+<meta name="keywords" content="autostrap">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基于原生JS移动端响应式解决方案——AUTOSTRAP">
+<meta property="og:url" content="https://tkvern.com/20150819/autostrap/index.html">
+<meta property="og:site_name" content="TKVERN BLOG">
+<meta property="og:description" content="介绍就目前移动端而言，已有比较成熟都响应式框架，类似于Bootstrap、AmazeUI、Skeljs。但是对于普通开发者来说，为了满足快速开发的需求去学习和使用这些框架的时间成本是比较高的。所以，本着轻量、快速开发的原则，为大家提供了基于原生JS的移动动端解决方案，希望能在交流、使用中继续优化AutoStrap。">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2023-01-20T15:23:47.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="基于原生JS移动端响应式解决方案——AUTOSTRAP">
+<meta name="twitter:description" content="介绍就目前移动端而言，已有比较成熟都响应式框架，类似于Bootstrap、AmazeUI、Skeljs。但是对于普通开发者来说，为了满足快速开发的需求去学习和使用这些框架的时间成本是比较高的。所以，本着轻量、快速开发的原则，为大家提供了基于原生JS的移动动端解决方案，希望能在交流、使用中继续优化AutoStrap。">
+
+<link rel="canonical" href=" { { site.url } }{ { page.url } }" />
+ <script type="text/javascript">
+    var host = "tkvern.com";
+    if ((host == window.location.host) && (window.location.protocol != "https:"))
+        window.location.protocol = "https";
+</script>
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 6265161176141792000,
+      author: 'tkvern'
+    }
+  };
+</script>
+
+  <title> 基于原生JS移动端响应式解决方案——AUTOSTRAP | TKVERN BLOG </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+<div style="display:none"><img src='/images/10667077.jpeg' /></div>
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?6dbe8d3fc8c188c1852bf28873a922ba";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <a href="https://github.com/tkvern"><img  class="hidden-xs hidden-sm" style="position: absolute;top: 0;left: 0;border: 0;" src="/images/forkme.png" alt="Fork me on GitHub" data-canonical-src="/images/forkme.png"></a>
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">TKVERN BLOG</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Developer & Designer</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="#" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                基于原生JS移动端响应式解决方案——AUTOSTRAP
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2015-08-19T14:41:14+00:00" content="2015-08-19">
+              2015-08-19
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Front-end/" itemprop="url" rel="index">
+                    <span itemprop="name">Front-end</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+             <span id="/20150819/autostrap/" class="leancloud_visitors" data-flag-title="基于原生JS移动端响应式解决方案——AUTOSTRAP">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">visitors </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>就目前移动端而言，已有比较成熟都响应式框架，类似于Bootstrap、AmazeUI、Skeljs。但是对于普通开发者来说，为了满足快速开发的需求去学习和使用这些框架的时间成本是比较高的。所以，本着轻量、快速开发的原则，为大家提供了基于原生JS的移动动端解决方案，希望能在交流、使用中继续优化AutoStrap。</p>
+<a id="more"></a>
+<h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p>目前我们熟悉的开源前端框架都是栅格化布局，通过mediaQuery，在不同分辨率加载不同的css达到响应式的效果。同时还提供了诸多的JS组件供开发者使用。而AutoStrap是使用viewport，以iPhone4分辨率为模板，根据可视宽高调节缩放比例实现。具体内容下面的代码会给出。</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="autostrap-js"><a href="#autostrap-js" class="headerlink" title="autostrap.js"></a>autostrap.js</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*!</span></span><br><span class="line"><span class="comment"> * AutoStrap v1.0.0 (http://largesoft.org)</span></span><br><span class="line"><span class="comment"> * Copyright 2015 Vern, Inc.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> g = <span class="built_in">document</span>.documentElement.clientWidth,</span><br><span class="line">    h = <span class="built_in">document</span>.documentElement.clientHeight,</span><br><span class="line">    clientWidth = <span class="built_in">document</span>.documentElement.clientWidth,</span><br><span class="line">    viewport = <span class="built_in">document</span>.getElementById(<span class="string">"MobileViewport"</span>);</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isWeixin</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> a = navigator.userAgent.toLowerCase();</span><br><span class="line">    <span class="keyword">return</span> <span class="string">"micromessenger"</span> == a.match(<span class="regexp">/MicroMessenger/i</span>) ? !<span class="number">0</span> : !<span class="number">1</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">renderPage</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> f = <span class="number">1</span>;</span><br><span class="line">    g / h &gt;= <span class="number">320</span> / <span class="number">486</span> ? (f = g / <span class="number">486</span>) : (f = g / <span class="number">320</span>);</span><br><span class="line">    <span class="keyword">if</span>(g == <span class="number">320</span>)&#123;</span><br><span class="line">        f = <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    viewport.content = <span class="string">"width=320, initial-scale="</span> + f + <span class="string">", maximum-scale="</span> + f + <span class="string">", user-scalable=no"</span>;</span><br><span class="line">    <span class="keyword">if</span> (<span class="number">320</span> != clientWidth &amp;&amp; clientWidth == <span class="built_in">document</span>.documentElement.clientWidth ||</span><br><span class="line">     isWeixin() &amp;&amp; (navigator.userAgent.indexOf(<span class="string">"Android"</span>) &gt; <span class="number">-1</span> ||</span><br><span class="line">      navigator.userAgent.indexOf(<span class="string">"Linux"</span>) &gt; <span class="number">-1</span>)) &#123;</span><br><span class="line">        <span class="keyword">var</span> i = <span class="number">320</span> / g,</span><br><span class="line">            j = <span class="number">486</span> / h,</span><br><span class="line">            k = <span class="built_in">Math</span>.max(i, j);</span><br><span class="line">        k = k &gt; <span class="number">1</span> ? k : <span class="number">160</span> * k, k = <span class="built_in">parseInt</span>(k), viewport.content= <span class="string">"width=320, target-densitydpi="</span> + k ;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">renderPage();</span><br></pre></td></tr></table></figure>
+<h3 id="autostrap-css"><a href="#autostrap-css" class="headerlink" title="autostrap.css"></a>autostrap.css</h3><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*!</span></span><br><span class="line"><span class="comment"> * AutoStrap v1.0.0 (http://largesoft.org)</span></span><br><span class="line"><span class="comment"> * Copyright 2015 Vern, Inc.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="selector-tag">html</span>, <span class="selector-tag">body</span>, <span class="selector-tag">div</span>, <span class="selector-tag">span</span>, <span class="selector-tag">applet</span>, <span class="selector-tag">object</span>, <span class="selector-tag">iframe</span>,</span><br><span class="line"><span class="selector-tag">h1</span>, <span class="selector-tag">h2</span>, <span class="selector-tag">h3</span>, <span class="selector-tag">h4</span>, <span class="selector-tag">h5</span>, <span class="selector-tag">h6</span>, <span class="selector-tag">p</span>, <span class="selector-tag">blockquote</span>, <span class="selector-tag">pre</span>,</span><br><span class="line"><span class="selector-tag">a</span>, <span class="selector-tag">abbr</span>, <span class="selector-tag">acronym</span>, <span class="selector-tag">address</span>, <span class="selector-tag">big</span>, <span class="selector-tag">cite</span>, <span class="selector-tag">code</span>,</span><br><span class="line"><span class="selector-tag">del</span>, <span class="selector-tag">dfn</span>, <span class="selector-tag">em</span>, <span class="selector-tag">font</span>, <span class="selector-tag">img</span>, <span class="selector-tag">ins</span>, <span class="selector-tag">kbd</span>, <span class="selector-tag">q</span>, <span class="selector-tag">s</span>, <span class="selector-tag">samp</span>,</span><br><span class="line"><span class="selector-tag">small</span>, <span class="selector-tag">strike</span>, <span class="selector-tag">strong</span>, <span class="selector-tag">sub</span>, <span class="selector-tag">sup</span>, <span class="selector-tag">tt</span>, <span class="selector-tag">var</span>,</span><br><span class="line"><span class="selector-tag">b</span>, <span class="selector-tag">u</span>, <span class="selector-tag">i</span>, <span class="selector-tag">center</span>,</span><br><span class="line"><span class="selector-tag">dl</span>, <span class="selector-tag">dt</span>, <span class="selector-tag">dd</span>, <span class="selector-tag">ol</span>, <span class="selector-tag">ul</span>, <span class="selector-tag">li</span>,</span><br><span class="line"><span class="selector-tag">fieldset</span>, <span class="selector-tag">form</span>, <span class="selector-tag">label</span>, <span class="selector-tag">legend</span>,</span><br><span class="line"><span class="selector-tag">table</span>, <span class="selector-tag">caption</span>, <span class="selector-tag">tbody</span>, <span class="selector-tag">tfoot</span>, <span class="selector-tag">thead</span>, <span class="selector-tag">tr</span>, <span class="selector-tag">th</span>, <span class="selector-tag">td</span> &#123;</span><br><span class="line">        <span class="attribute">margin</span>: <span class="number">0</span>;</span><br><span class="line">        <span class="attribute">padding</span>: <span class="number">0</span>;</span><br><span class="line">        <span class="attribute">border</span>: <span class="number">0</span>;</span><br><span class="line">        <span class="attribute">outline</span>: <span class="number">0</span>;</span><br><span class="line">        <span class="attribute">font-size</span>: <span class="number">100%</span>;</span><br><span class="line">        <span class="attribute">vertical-align</span>: baseline;</span><br><span class="line">        <span class="attribute">background</span>: transparent;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">body</span> &#123;<span class="attribute">line-height</span>: <span class="number">1</span>; <span class="attribute">background-color</span>: <span class="built_in">rgba</span>(<span class="number">233</span>,<span class="number">233</span>,<span class="number">231</span>,<span class="number">1</span>);&#125;</span><br><span class="line"><span class="selector-tag">body</span> *&#123;</span><br><span class="line">    <span class="attribute">max-width</span>: <span class="number">320px</span><span class="meta">!important</span>;</span><br><span class="line">    <span class="attribute">font-family</span>: <span class="string">"microsoft yahei"</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">ol</span>, <span class="selector-tag">ul</span> &#123;<span class="attribute">list-style</span>: none;&#125;</span><br><span class="line"><span class="selector-tag">blockquote</span>, <span class="selector-tag">q</span> &#123;<span class="attribute">quotes</span>: none;&#125;</span><br><span class="line"><span class="selector-tag">blockquote</span><span class="selector-pseudo">:before</span>, <span class="selector-tag">blockquote</span><span class="selector-pseudo">:after</span>,</span><br><span class="line"><span class="selector-tag">q</span><span class="selector-pseudo">:before</span>, <span class="selector-tag">q</span><span class="selector-pseudo">:after</span> &#123;<span class="attribute">content</span>: <span class="string">''</span>;<span class="attribute">content</span>: none;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* remember to define focus styles! */</span></span><br><span class="line"><span class="selector-pseudo">:focus</span> &#123;<span class="attribute">outline</span>: <span class="number">0</span>;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* remember to highlight inserts somehow! */</span></span><br><span class="line"><span class="selector-tag">ins</span> &#123;<span class="attribute">text-decoration</span>: none;&#125;</span><br><span class="line"><span class="selector-tag">del</span> &#123;<span class="attribute">text-decoration</span>: line-through;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* tables still need 'cellspacing="0"' in the markup */</span></span><br><span class="line"><span class="selector-tag">table</span> &#123;<span class="attribute">border-collapse</span>: collapse;<span class="attribute">border-spacing</span>: <span class="number">0</span>;&#125;</span><br><span class="line"><span class="selector-tag">hr</span>&#123;<span class="attribute">margin-top</span>: <span class="number">5px</span>;<span class="attribute">margin-bottom</span>: <span class="number">5px</span>;<span class="attribute">border</span>: <span class="number">0</span>;<span class="attribute">border-top</span>: <span class="number">1px</span> dashed <span class="number">#eee</span>;&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="html页面引入代码"><a href="#html页面引入代码" class="headerlink" title="html页面引入代码"></a>html页面引入代码</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">id</span>=<span class="string">"MobileViewport"</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=320, initial-scale=1, maximum-scale=1, user-scalable=no"</span> <span class="attr">servergenerated</span>=<span class="string">"true"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p>1、页面引入autostrap.js、autostrap.css文件<br>2、在<head><meta name="generator" content="Hexo 3.9.0">标签里面加入以下代码<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">id</span>=<span class="string">”MobileViewport”</span> <span class="attr">name</span>=<span class="string">”viewport”</span> <span class="attr">content</span>=<span class="string">”width</span>=<span class="string">320,</span> <span class="attr">initial-scale</span>=<span class="string">1,</span> <span class="attr">maximum-scale</span>=<span class="string">1,</span> <span class="attr">user-scalable</span>=<span class="string">no”</span> <span class="attr">servergenerated</span>=<span class="string">”true”</span>&gt;</span></span><br></pre></td></tr></table></figure></head></p>
+<h2 id="规范"><a href="#规范" class="headerlink" title="规范"></a>规范</h2><p><body>标签内都所以元素都大小不超过320px即可，如果有特殊动画超过320px，将body的overflow属性设为hidden即可</body></p>
+<h2 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h2><p>个人博客传送门：<a href="http://largesoft.org" target="_blank" rel="noopener">largesoft.org</a>(老博客地址已失效，请前往<a href="https://github.com/tkvern" target="_blank" rel="noopener">https://github.com/tkvern</a>)</p>
+
+      
+    </div>
+    
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+<div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton", disable="enable", onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}", style="cursor: pointer; border: 0; outline: 0; border-radius: 100%; padding: 0; margin: 0; letter-spacing: normal; text-transform: none; text-indent: 0px; text-shadow: none">
+    <span onmouseover="this.style.color='rgb(236,96,0)';this.style.background='rgb(204,204,204)'" onMouseOut="this.style.color='#fff';this.style.background='rgb(236,96,0)'" style="display: inline-block; width: 70px; height: 70px; border-radius: 100%; line-height: 81px; color: #fff; font: 400 35px/75px 'microsofty'; background: rgb(236,96,0)">赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/IMG_2826.JPG" alt="TKVERN WeChat Pay" style="width: 200px; max-width: 100%; display: inline-block"/>
+        <p>微信打赏</p>
+      </div>
+    
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/T1WIRpXmBaXXXXXXXX.jpg" alt="TKVERN Alipay" style="width: 200px; max-width: 100%; display: inline-block"/>
+        <p>支付宝打赏</p>
+      </div>
+    
+  </div>
+</div>
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/autostrap/" rel="tag">#autostrap</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/20140426/清晨风岳麓北/" rel="next" title="清晨风・岳麓北">
+                <i class="fa fa-chevron-left"></i> 清晨风・岳麓北
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/20151210/Gulp构建实例/" rel="prev" title="Gulp构建实例">
+                Gulp构建实例 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/10667077.jpeg"
+               alt="TKVERN" />
+          <p class="site-author-name" itemprop="name">TKVERN</p>
+          <p class="site-description motion-element" itemprop="description">Developer & Designer. Believe what you believe, and stick to what you insist on.</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">76</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">categories</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-name">tags</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="http://eims.com.cn/" target="_blank" title="EIMS">
+                  
+                    <i class="fa fa-group"></i>
+                  
+                  EIMS
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="" target="_blank" title="ShenZhen, China">
+                  
+                    <i class="fa fa-map-marker"></i>
+                  
+                  ShenZhen, China
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/tkvern" target="_blank" title="Github">
+                  
+                    <i class="fa fa-github"></i>
+                  
+                  Github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="mailto:verncake@gmail.com" target="_blank" title="verncake@gmail.com">
+                  
+                    <i class="fa fa-envelope"></i>
+                  
+                  verncake@gmail.com
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#介绍"><span class="nav-number">1.</span> <span class="nav-text">介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#原理"><span class="nav-number">2.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码"><span class="nav-number">3.</span> <span class="nav-text">代码</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#autostrap-js"><span class="nav-number">3.1.</span> <span class="nav-text">autostrap.js</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#autostrap-css"><span class="nav-number">3.2.</span> <span class="nav-text">autostrap.css</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#html页面引入代码"><span class="nav-number">3.3.</span> <span class="nav-text">html页面引入代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用"><span class="nav-number">4.</span> <span class="nav-text">使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#规范"><span class="nav-number">5.</span> <span class="nav-text">规范</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#下载"><span class="nav-number">6.</span> <span class="nav-text">下载</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">TKVERN</span>
+  <span class="with-love">
+    <i class="fa fa-eye"></i>
+  </span>
+  <span id="visitors" itemprop="copyrightHolder"></span>
+  <br/>
+  Powered by <a class="theme-link" href="http://hexo.io" rel="external nofollow">Hexo</a>
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" rel="external nofollow">NexT</a>
+  <span>本站所有内容除特别声明外，均采用 <a target="_blank" href="https://zh.wikipedia.org/wiki/%E7%9F%A5%E8%AF%86%E5%85%B1%E4%BA%AB%E8%AE%B8%E5%8F%AF%E5%8D%8F%E8%AE%AE" rel="external nofollow"><i class="fa fa-creative-commons fa-fw"></i> BY-NC-SA </a>许可协议。转载请注明出处！</span>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+       search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            isfetched = true;
+            $('.popup').detach().appendTo('.header-inner');
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var matchcounts = 0;
+                var str='<ul class=\"search-result-list\">';                
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length > 1) {
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = true;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = data.url;
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '' && data_content != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title < 0 && index_content < 0 ){
+                                isMatch = false;
+                            } else {
+                                if (index_content < 0) {
+                                    index_content = 0;
+                                }
+                                if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            }
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        matchcounts += 1;
+                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out 100 characters
+                            var start = first_occur - 20;
+                            var end = first_occur + 80;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 50;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substring(start, end);
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                            });
+                            
+                            str += "<p class=\"search-result\">" + match_content +"...</p>"
+                        }
+                        str += "</li>";
+                    }
+                })};
+                str += "</ul>";
+                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+                $resultContent.innerHTML = str;
+            });
+            proceedsearch();
+        }
+    });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("pjTDSznF2e8sNaJ7pB3OtPAF-gzGzoHsz", "S4dEfsJlgqUdQFYB5BAnLAK0");</script>
+  <script>
+    function showSum(){
+      var $visitorsSum = $("#visitors");
+      AV.Query.doCloudQuery('select time from Counter').then(function(data) {
+        var results = data.results;
+        var time = 0;
+        if (results.length !== 0) {
+          for (var i = 0; i < results.length; i++) {
+            time += results[i].get('time');
+          }
+        }
+        $visitorsSum.text(time);
+      }, function(error) {
+        console.log(error);
+      });
+    }
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+      showSum();
+    });
+  </script>
+
+
+
+  
+
+</body>
+</html>

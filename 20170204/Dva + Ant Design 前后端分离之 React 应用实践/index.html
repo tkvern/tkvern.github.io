@@ -1,0 +1,1026 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="google-site-verification" content="nITMHgGRG-3HZXe-SEJlmJxgA7J95q-z75xLLN4qNe4">
+
+
+
+
+  <meta name="baidu-site-verification" content="code-dn5tsPOogu">
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css">
+
+<link rel="stylesheet" href="/css/poem.css">
+
+
+  <meta name="keywords" content="React,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="TKVERN BLOG" type="application/atom+xml">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2">
+
+
+
+
+
+
+<meta name="description" content="继 Rails 从入门到完全放弃 拥抱 Elixir + Phoenix + React + Redux 这篇文章被喷之后，笔者很长一段时候没有上社区逛了。现在 tkvern 又回归了，给大家带来React实践的一些经验，一些踩坑的经验。 Rails嘛，很好用，Laravel也好用。Phoenix也好用。都好，哪个方便用哪个。 还有关于Turbolinks之争，不能单从页面渲染时间去对比，要综合">
+<meta name="keywords" content="React">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Dva + Ant Design 前后端分离之 React 应用实践">
+<meta property="og:url" content="https://tkvern.com/20170204/Dva + Ant Design 前后端分离之 React 应用实践/index.html">
+<meta property="og:site_name" content="TKVERN BLOG">
+<meta property="og:description" content="继 Rails 从入门到完全放弃 拥抱 Elixir + Phoenix + React + Redux 这篇文章被喷之后，笔者很长一段时候没有上社区逛了。现在 tkvern 又回归了，给大家带来React实践的一些经验，一些踩坑的经验。 Rails嘛，很好用，Laravel也好用。Phoenix也好用。都好，哪个方便用哪个。 还有关于Turbolinks之争，不能单从页面渲染时间去对比，要综合">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://tkvern.com/images/cover/201702041848001.jpeg">
+<meta property="og:updated_time" content="2023-01-20T15:23:47.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Dva + Ant Design 前后端分离之 React 应用实践">
+<meta name="twitter:description" content="继 Rails 从入门到完全放弃 拥抱 Elixir + Phoenix + React + Redux 这篇文章被喷之后，笔者很长一段时候没有上社区逛了。现在 tkvern 又回归了，给大家带来React实践的一些经验，一些踩坑的经验。 Rails嘛，很好用，Laravel也好用。Phoenix也好用。都好，哪个方便用哪个。 还有关于Turbolinks之争，不能单从页面渲染时间去对比，要综合">
+<meta name="twitter:image" content="https://tkvern.com/images/cover/201702041848001.jpeg">
+
+<link rel="canonical" href=" { { site.url } }{ { page.url } }">
+ <script type="text/javascript">
+    var host = "tkvern.com";
+    if ((host == window.location.host) && (window.location.protocol != "https:"))
+        window.location.protocol = "https";
+</script>
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 6265161176141792000,
+      author: 'tkvern'
+    }
+  };
+</script>
+
+  <title> Dva + Ant Design 前后端分离之 React 应用实践 | TKVERN BLOG </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+<div style="display:none"><img src="/images/10667077.jpeg"></div>
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?6dbe8d3fc8c188c1852bf28873a922ba";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <a href="https://github.com/tkvern"><img class="hidden-xs hidden-sm" style="position: absolute;top: 0;left: 0;border: 0;" src="/images/forkme.png" alt="Fork me on GitHub" data-canonical-src="/images/forkme.png"></a>
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">TKVERN BLOG</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Developer & Designer</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="#" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Dva + Ant Design 前后端分离之 React 应用实践
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2017-02-04T09:31:07+00:00" content="2017-02-04">
+              2017-02-04
+            </time>
+          </span>
+
+          
+            <span class="post-category">
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Front-end/" itemprop="url" rel="index">
+                    <span itemprop="name">Front-end</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+             <span id="/20170204/Dva + Ant Design 前后端分离之 React 应用实践/" class="leancloud_visitors" data-flag-title="Dva + Ant Design 前后端分离之 React 应用实践">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">visitors </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="/images/cover/201702041848001.jpeg" alt="qiniu"></p>
+<p>继 <a href="https://ruby-china.org/topics/30594" target="_blank" rel="noopener">Rails 从入门到完全放弃 拥抱 Elixir + Phoenix + React + Redux</a> 这篇文章被喷之后，笔者很长一段时候没有上社区逛了。现在 <a href="tkvern.com">tkvern</a> 又回归了，给大家带来React实践的一些经验，一些踩坑的经验。</p>
+<p>Rails嘛，很好用，Laravel也好用。Phoenix也好用。都好，哪个方便用哪个。</p>
+<p>还有关于<em>Turbolinks</em>之争，不能单从页面渲染时间去对比，要综合考虑。</p>
+<a id="more"></a>
+<h2 id="Why-Dva？"><a href="#Why-Dva？" class="headerlink" title="Why Dva？"></a>Why Dva？</h2><p>Dva是基于Redux做了一层封装，对于React的state管理，有很多方案，我选择了轻量、简单的Dva。至于Mobx，还没应用到项目中来。先等友军踩踩坑，再往里面跳。</p>
+<ul>
+<li><a href="https://github.com/dvajs/dva/issues/1" target="_blank" rel="noopener">Why dva and what’s dva</a></li>
+<li><a href="https://www.github.com/sorrycc/blog/issues/6" target="_blank" rel="noopener">支付宝前端应用架构的发展和选择</a></li>
+</ul>
+<p>顺便贴下Dva的特性：</p>
+<ul>
+<li><strong>易学易用</strong>：仅有 5 个 api，对 redux 用户尤其友好</li>
+<li><strong>elm 概念</strong>：通过 <code>reducers</code>, <code>effects</code> 和 <code>subscriptions</code> 组织 model</li>
+<li><strong>支持 mobile 和 react-native</strong>：跨平台 (<a href="https://github.com/sorrycc/dva-example-react-native" target="_blank" rel="noopener">react-native 例子</a>)</li>
+<li><strong>支持 HMR</strong>：目前基于 <a href="https://github.com/dvajs/babel-plugin-dva-hmr" target="_blank" rel="noopener">babel-plugin-dva-hmr</a> 支持 components 和 routes 的 HMR</li>
+<li><strong>动态加载 Model 和路由</strong>：按需加载加快访问速度 (<a href="https://github.com/dvajs/dva/tree/master/examples/dynamic-load" target="_blank" rel="noopener">例子</a>)</li>
+<li><strong>插件机制</strong>：比如 <a href="https://github.com/dvajs/dva-loading" target="_blank" rel="noopener">dva-loading</a> 可以自动处理 loading 状态，不用一遍遍地写 showLoading 和 hideLoading</li>
+<li><strong>完善的语法分析库 <a href="https://github.com/dvajs/dva-ast" target="_blank" rel="noopener">dva-ast</a></strong>：<a href="https://github.com/dvajs/dva-cli" target="_blank" rel="noopener">dva-cli</a> 基于此实现了智能创建 model, router 等</li>
+<li><strong>支持 TypeScript</strong>：通过 d.ts (<a href="https://github.com/sorrycc/dva-boilerplate-typescript" target="_blank" rel="noopener">例子</a>)</li>
+</ul>
+<h2 id="Why-Ant-Design"><a href="#Why-Ant-Design" class="headerlink" title="Why Ant Design?"></a>Why Ant Design?</h2><p>做为传道士，这么好的UI设计语言，肯定不会藏着掖着啦。蚂蚁金服的东西，确实不错，除了Ant Design外，还有Ant Design Mobile、AntV、AntMotion、G2。</p>
+<h2 id="Why-yarn"><a href="#Why-yarn" class="headerlink" title="Why yarn?"></a>Why yarn?</h2><p><code>npm install</code> 太慢，试试<a href="https://yarnpkg.com/" target="_blank" rel="noopener">yarn</a>吧。建议用<code>npm install yarn -g</code>进行安装。</p>
+<h2 id="开发过程中的前后端分离"><a href="#开发过程中的前后端分离" class="headerlink" title="开发过程中的前后端分离"></a>开发过程中的前后端分离</h2><p>项目开始了，前端视图写完，要开始数据交互了，后端提供的API还没好。</p>
+<p>那么问题来了，如何在不依靠后端提供API的情况下，实现数据交互？</p>
+<p>使用<a href="http://mockjs.com/" target="_blank" rel="noopener">Mock.js</a>可以解决这个问题。先对接好API数据格式，然后使用Mockjs拦截Ajax请求，模拟后端真实数据。</p>
+<p>在Mockjs官方提供的API不够用的情况下，还可以使用正则产生模拟数据。</p>
+<h3 id="如何对模拟做数据持久化处理？"><a href="#如何对模拟做数据持久化处理？" class="headerlink" title="如何对模拟做数据持久化处理？"></a>如何对模拟做数据持久化处理？</h3><p>这里给出一个模拟用户数据并持久化的实例实例：<a href="https://github.com/tkvern/dva-passport/blob/develop/resources/assets/ant_passport/mock/users.js" target="_blank" rel="noopener">mock/users.js</a></p>
+<p>代码摘要:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">'use strict'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> qs = <span class="built_in">require</span>(<span class="string">'qs'</span>);</span><br><span class="line"><span class="keyword">const</span> mockjs = <span class="built_in">require</span>(<span class="string">'mockjs'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> Random = mockjs.Random;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 数据持久化</span></span><br><span class="line"><span class="keyword">let</span> tableListData = &#123;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (!global.tableListData) &#123;</span><br><span class="line">  <span class="keyword">const</span> data = mockjs.mock(&#123;</span><br><span class="line">    <span class="string">'data|100'</span>: [&#123;</span><br><span class="line">      <span class="string">'id|+1'</span>: <span class="number">1</span>,</span><br><span class="line">      <span class="string">'name'</span>: <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> Random.cname();</span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="string">'mobile'</span>: <span class="regexp">/1(3[0-9]|4[57]|5[0-35-9]|7[01678]|8[0-9])\d&#123;8&#125;/</span>,</span><br><span class="line">      <span class="string">'avatar'</span>: <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> Random.image(<span class="string">'125x125'</span>);</span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="string">'status|1-2'</span>: <span class="number">1</span>,</span><br><span class="line">      <span class="string">'email'</span>: <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> Random.email(<span class="string">'visiondk.com'</span>);</span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="string">'isadmin|0-1'</span>: <span class="number">1</span>,</span><br><span class="line">      <span class="string">'created_at'</span>: <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> Random.datetime(<span class="string">'yyyy-MM-dd HH:mm:ss'</span>);</span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="string">'updated_at'</span>: <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> Random.datetime(<span class="string">'yyyy-MM-dd HH:mm:ss'</span>);</span><br><span class="line">      &#125;,</span><br><span class="line">    &#125;],</span><br><span class="line">    page: &#123;</span><br><span class="line">      total: <span class="number">100</span>,</span><br><span class="line">      current: <span class="number">1</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;);</span><br><span class="line">  tableListData = data;</span><br><span class="line">  global.tableListData = tableListData;</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">  tableListData = global.tableListData;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="模拟API怎么写？"><a href="#模拟API怎么写？" class="headerlink" title="模拟API怎么写？"></a>模拟API怎么写？</h3><p>完成持久化处理后，就可以像操作数据库一样进行增、删、改、查</p>
+<p>下面是一个删除用户的API</p>
+<p>参见<a href="https://github.com/tkvern/dva-passport/blob/develop/resources/assets/ant_passport/mock/users.js#L106" target="_blank" rel="noopener">mock/users.js#L106</a>：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'DELETE /api/users'</span> (req, res) &#123;</span><br><span class="line">    setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">const</span> deleteItem = qs.parse(req.body);</span><br><span class="line"></span><br><span class="line">      tableListData.data = tableListData.data.filter(<span class="function">(<span class="params">item</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (item.id === deleteItem.id) &#123;</span><br><span class="line">          <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">      &#125;);</span><br><span class="line"></span><br><span class="line">      tableListData.page.total = tableListData.data.length;</span><br><span class="line"></span><br><span class="line">      global.tableListData = tableListData;</span><br><span class="line"></span><br><span class="line">      res.json(&#123;</span><br><span class="line">        success: <span class="literal">true</span>,</span><br><span class="line">        data: tableListData.data,</span><br><span class="line">        page: tableListData.page,</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;, <span class="number">200</span>);</span><br><span class="line">  &#125;,</span><br></pre></td></tr></table></figure>
+<h3 id="还有一步"><a href="#还有一步" class="headerlink" title="还有一步"></a>还有一步</h3><p>模拟数据和API写好了，还需要拦截Ajax请求</p>
+<p>修改<code>package.json</code></p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">.</span><br><span class="line">.</span><br><span class="line">"scripts": &#123;</span><br><span class="line">  "start": "dora --plugins \"proxy,webpack,webpack-hmr\"",</span><br><span class="line">  "build": "atool-build -o ../../../public",</span><br><span class="line">  "test": "atool-test-mocha ./src/**/*-test.js"</span><br><span class="line">&#125;</span><br><span class="line">.</span><br><span class="line">.</span><br><span class="line">.</span><br></pre></td></tr></table></figure>
+<p>如果与<code>dora</code>有端口冲突可修改<code>dora</code>的端口号</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">"start": "dora --port 8888 --plugins \"proxy,webpack,webpack-hmr\"",</span><br></pre></td></tr></table></figure>
+<p>完成这些基本工作就做好了</p>
+<h3 id="友情提示"><a href="#友情提示" class="headerlink" title="友情提示"></a>友情提示</h3><p>在模拟数据环境，<code>services</code>下的模块这么写就好了，真实API则替换为真实API的地址。可将地址前缀写到统一配置中去。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> request <span class="keyword">from</span> <span class="string">'../utils/request'</span>;</span><br><span class="line"><span class="keyword">import</span> qs <span class="keyword">from</span> <span class="string">'qs'</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">query</span>(<span class="params">params</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> request(<span class="string">`/api/users?<span class="subst">$&#123;qs.stringify(params)&#125;</span>`</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">create</span>(<span class="params">params</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> request(<span class="string">'/api/users'</span>, &#123;</span><br><span class="line">    method: <span class="string">'post'</span>,</span><br><span class="line">    body: qs.stringify(params),</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">remove</span>(<span class="params">params</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> request(<span class="string">'/api/users'</span>, &#123;</span><br><span class="line">    method: <span class="string">'delete'</span>,</span><br><span class="line">    body: qs.stringify(params),</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">update</span>(<span class="params">params</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> request(<span class="string">'/api/users'</span>, &#123;</span><br><span class="line">    method: <span class="string">'put'</span>,</span><br><span class="line">    body: qs.stringify(params),</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>真实API参考实例: <a href="https://github.com/tkvern/dva-passport/blob/develop/resources/assets/ant_passport/src/services/users.js" target="_blank" rel="noopener">src/services/users.js</a></p>
+<h2 id="如何保持登录状态"><a href="#如何保持登录状态" class="headerlink" title="如何保持登录状态"></a>如何保持登录状态</h2><p>在看dva的引导手册时，并没有介绍登录相关的内容。因为不同的项目，对于登录这块的实现会有所不同，并不是唯一的。通常我们会使用Cookie的方式保持登录状态，或者 Auth 2.0的技术。</p>
+<p>这里介绍Cookie的方式。</p>
+<p>登录成功之后服务器会设置一个当前域可以使用的Cookie，例如<code>token</code>啥的。然后在每次数据请求的时候在<code>Request Headers</code>中携带<code>token</code>，后端会基于这个<code>token</code>进行权限验证。思路清晰了，来看看具体实现吧。（注：在这次项目中使用了统一登录模块，通过Header中的<code>Authorization</code>进行验证，将只介绍拿到<code>token</code>之后的数据处理）</p>
+<h3 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h3><p>对于操作Cookie的一些操作，建议先封装到工具类模块下。同时我把操作<code>LocalStrage</code>的一些操作也写进来了。</p>
+<p>参见<a href="https://github.com/tkvern/dva-passport/blob/develop/resources/assets/ant_passport/src/utils/helper.js" target="_blank" rel="noopener">src/utils/helper.js</a></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">.</span><br><span class="line">.</span><br><span class="line"><span class="comment">// Operation Cookie</span></span><br><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">getCookie</span>(<span class="params">name</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> reg = <span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="string">'(^| )'</span> + name + <span class="string">'=([^;]*)(;|$)'</span>);</span><br><span class="line">  <span class="keyword">const</span> arr = <span class="built_in">document</span>.cookie.match(reg);</span><br><span class="line">  <span class="keyword">if</span> (arr) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">decodeURIComponent</span>(arr[<span class="number">2</span>]);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">delCookie</span>(<span class="params">&#123; name, domain, path &#125;</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (getCookie(name)) &#123;</span><br><span class="line">    <span class="built_in">document</span>.cookie = name + <span class="string">'=; expires=Thu, 01-Jan-70 00:00:01 GMT; path='</span> + </span><br><span class="line">                      path + <span class="string">'; domain='</span> + </span><br><span class="line">                      domain;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">.</span><br><span class="line">.</span><br><span class="line">.</span><br></pre></td></tr></table></figure>
+<p>Header的预处理我放在了<a href="https://github.com/tkvern/dva-passport/blob/develop/resources/assets/ant_passport/src/utils/auth.js#L5" target="_blank" rel="noopener">src/utils/auth.js#L5</a>，这里后端返回的数据都是JSON格式，所以在Header里面需要添加<code>application/json</code>进去，而<code>Authorization</code>是后端用来验证用户信息的。变量<code>sso_token</code>为了方便代码阅读就没有按照规范命名了。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">getAuthHeader</span>(<span class="params">sso_token</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> (&#123;</span><br><span class="line">    headers: &#123;</span><br><span class="line">      <span class="string">'Accept'</span>: <span class="string">'application/json'</span>,</span><br><span class="line">      <span class="string">'Authorization'</span>: <span class="string">'Bearer '</span> + sso_token,</span><br><span class="line">      <span class="string">'Content-Type'</span>: <span class="string">'application/json'</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="修改Request"><a href="#修改Request" class="headerlink" title="修改Request"></a>修改Request</h3><p>这里没有使用自带的catch机制来处理请求错误，在开发过程中，最开始打算使用统一错误处理，但是发现请求失败后，不能在<code>models</code>层处理<code>components</code>，所以就换了一种方式处理，后面会讲到。</p>
+<p>参见<a href="https://github.com/tkvern/dva-passport/blob/develop/resources/assets/ant_passport/src/utils/request.js#L29" target="_blank" rel="noopener">src/utils/request.js#L29</a></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="function"><span class="keyword">function</span> <span class="title">request</span>(<span class="params">url, options</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> sso_token = getCookie(<span class="string">'sso_token'</span>);</span><br><span class="line">  <span class="keyword">const</span> authHeader = getAuthHeader(sso_token);</span><br><span class="line">  <span class="keyword">return</span> fetch(url, &#123; ...options, ...authHeader &#125;)</span><br><span class="line">    .then(checkStatus)</span><br><span class="line">    .then(parseJSON)</span><br><span class="line">    .then(<span class="function">(<span class="params">data</span>) =&gt;</span> (&#123; data &#125;));</span><br><span class="line">    <span class="comment">// .catch((err) =&gt; (&#123; err &#125;));</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>完成这些配置之后，每次向服务器发送的请求就都携带了用户<code>token</code>了。在<code>token</code>无效时，服务器会抛出<code>401</code>错误，这时就需要在中间件中处理<code>401</code>错误。</p>
+<p>参见<a href="https://github.com/tkvern/dva-passport/blob/develop/resources/assets/ant_passport/src/utils/request.js#L10" target="_blank" rel="noopener">src/utils/request.js#L10</a></p>
+<p><code>redirectLogin</code>是工具类<a href="https://github.com/tkvern/dva-passport/blob/develop/resources/assets/ant_passport/src/utils/auth" target="_blank" rel="noopener">src/utils/auth.js</a>中的重定向登录方法。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">checkStatus</span>(<span class="params">response</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (response &amp;&amp; response.status === <span class="number">401</span>) &#123;</span><br><span class="line">    redirectLogin();</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (response.status &gt;= <span class="number">200</span> &amp;&amp; response.status &lt; <span class="number">500</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> response;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">const</span> error = <span class="keyword">new</span> <span class="built_in">Error</span>(response.statusText);</span><br><span class="line">  error.response = response;</span><br><span class="line">  <span class="keyword">throw</span> error;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>到此为止，登录状态的配置基本完成。</p>
+<h2 id="Router"><a href="#Router" class="headerlink" title="Router"></a>Router</h2><p>我们的应用中会有多个页面，而且有的需要登录才可见，那么如何控制呢？</p>
+<p>React的路由控制是比较灵活的，来看看下面这个例子：</p>
+<p><a href="https://github.com/tkvern/dva-passport/blob/develop/resources/assets/ant_passport/src/router.jsx" target="_blank" rel="noopener">src/router.jsx</a></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">'react'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; Router, Route &#125; <span class="keyword">from</span> <span class="string">'dva/router'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; authenticated &#125; <span class="keyword">from</span> <span class="string">'./utils/auth'</span>;</span><br><span class="line"><span class="keyword">import</span> Dashboard <span class="keyword">from</span> <span class="string">'./routes/Dashboard'</span>;</span><br><span class="line"><span class="keyword">import</span> Users <span class="keyword">from</span> <span class="string">'./routes/Users'</span>;</span><br><span class="line"><span class="keyword">import</span> User <span class="keyword">from</span> <span class="string">'./routes/User'</span>;</span><br><span class="line"><span class="keyword">import</span> Password <span class="keyword">from</span> <span class="string">'./routes/Password'</span>;</span><br><span class="line"><span class="keyword">import</span> Roles <span class="keyword">from</span> <span class="string">'./routes/Roles'</span>;</span><br><span class="line"><span class="keyword">import</span> Permissions <span class="keyword">from</span> <span class="string">'./routes/Permissions'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="function"><span class="keyword">function</span> (<span class="params">&#123; history &#125;</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;Router history=&#123;history&#125;&gt;</span><br><span class="line">      &lt;Route path=<span class="string">"/"</span> component=&#123;Dashboard&#125; onEnter=&#123;authenticated&#125; /&gt;</span><br><span class="line">      &lt;Route path=<span class="string">"/user"</span> component=&#123;User&#125; onEnter=&#123;authenticated&#125; /&gt;</span><br><span class="line">      &lt;Route path=<span class="string">"/password"</span> component=&#123;Password&#125; onEnter=&#123;authenticated&#125; /&gt;</span><br><span class="line">      &lt;Route path=<span class="string">"/users"</span> component=&#123;Users&#125; onEnter=&#123;authenticated&#125; /&gt;</span><br><span class="line">      &lt;Route path=<span class="string">"/roles"</span> component=&#123;Roles&#125; onEnter=&#123;authenticated&#125; /&gt;</span><br><span class="line">      &lt;Route path=<span class="string">"/permissions"</span> component=&#123;Permissions&#125; onEnter=&#123;authenticated&#125; /&gt;</span><br><span class="line">    &lt;<span class="regexp">/Router&gt;</span></span><br><span class="line"><span class="regexp">  );</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br></pre></td></tr></table></figure>
+<p>对于路由的验证配置在<code>onEnter</code>属性中，<code>authenticated</code>方法可统一进行路由验证，要注意每一个<code>Route</code>节点的验证都需要配置相应的<code>onEnter</code>属性。如果权限较为复杂需对每一个<code>Route</code>单独验证。其实这种基于客户端渲染的应用，如果页面限制有遗漏也关系不太，后端提供的API会对数据进行验证，即使前端访问到没有权限的页面，也同样不用担心，做好客户端错误处理即可。</p>
+<h2 id="数据缓存"><a href="#数据缓存" class="headerlink" title="数据缓存"></a>数据缓存</h2><p>对于一个React应用来说，缓存是很重要的一步。前后端分离后，频繁的Ajax请求会消耗大量的服务器资源，如果一些不长变动的持久化数据不做缓存的话，会浪费许多资源。所以，比较常见的方法就是将数据缓存在<code>LocalStorage</code>中。针对一些敏感信息可适当进行加密混淆处理，我这里就不介绍了。</p>
+<h3 id="什么时候做数据缓存"><a href="#什么时候做数据缓存" class="headerlink" title="什么时候做数据缓存?"></a>什么时候做数据缓存?</h3><p>例：用户信息缓存</p>
+<p>参见<a href="https://github.com/tkvern/dva-passport/blob/develop/resources/assets/ant_passport/src/models/auth.js#L64" target="_blank" rel="noopener">src/models/auth.js#L64</a></p>
+<p>在<code>subscriptions</code>中配置了<code>setup</code>检测<code>LocalStorage</code>中的<code>user</code>是否存在。不存在时会去<code>query</code>用户信息，然后保存到<code>user</code>中，如果存在就将<code>user</code>中的数据添加到<code>state</code>的<code>user: {}</code>中。当然在进行请求时，已经在<code>src/utils/auth.js</code>验证用户信息是否正确，同时做了相应的限制<a href="https://github.com/tkvern/dva-passport/blob/develop/resources/assets/ant_passport/src/utils/auth.js#L20" target="_blank" rel="noopener">src/utils/auth.js#L20</a></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; parse &#125; <span class="keyword">from</span> <span class="string">'qs'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; message &#125; <span class="keyword">from</span> <span class="string">'antd'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; query, update, password &#125; <span class="keyword">from</span> <span class="string">'../services/auth'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; getLocalStorage, setLocalStorage &#125; <span class="keyword">from</span> <span class="string">'../utils/helper'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  namespace: <span class="string">'auth'</span>,</span><br><span class="line">  state: &#123;</span><br><span class="line">    user: &#123;&#125;,</span><br><span class="line">    isLogined: <span class="literal">false</span>,</span><br><span class="line">    currentMenu: [],</span><br><span class="line">  &#125;,</span><br><span class="line">  reducers: &#123;</span><br><span class="line">    querySuccess(state, action) &#123;</span><br><span class="line">      <span class="keyword">return</span> &#123; ...state, ...action.payload, <span class="attr">isLogined</span>: <span class="literal">true</span> &#125;;</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">  effects: &#123;</span><br><span class="line">    *query(&#123; payload &#125;, &#123; call, put &#125;) &#123;</span><br><span class="line">      <span class="keyword">const</span> &#123; data &#125; = <span class="keyword">yield</span> call(query, parse(payload));</span><br><span class="line">      <span class="keyword">if</span> (data &amp;&amp; data.err_msg === <span class="string">'SUCCESS'</span>) &#123;</span><br><span class="line">        setLocalStorage(<span class="string">'user'</span>, data.data);</span><br><span class="line">        <span class="keyword">yield</span> put(&#123;</span><br><span class="line">          type: <span class="string">'querySuccess'</span>,</span><br><span class="line">          payload: &#123;</span><br><span class="line">            user: data.data,</span><br><span class="line">          &#125;,</span><br><span class="line">        &#125;);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;</span><br><span class="line">  subscriptions: &#123;</span><br><span class="line">    setup(&#123; dispatch &#125;) &#123;</span><br><span class="line">      <span class="keyword">const</span> data = getLocalStorage(<span class="string">'user'</span>);</span><br><span class="line">      <span class="keyword">if</span> (!data) &#123;</span><br><span class="line">        dispatch(&#123;</span><br><span class="line">          type: <span class="string">'query'</span>,</span><br><span class="line">          payload: &#123;&#125;,</span><br><span class="line">        &#125;);</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        dispatch(&#123;</span><br><span class="line">          type: <span class="string">'querySuccess'</span>,</span><br><span class="line">          payload: &#123;</span><br><span class="line">            user: data,</span><br><span class="line">          &#125;,</span><br><span class="line">        &#125;);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>简单来说，就是没有缓存的时候缓存。</p>
+<h3 id="什么时候更新数据缓存？"><a href="#什么时候更新数据缓存？" class="headerlink" title="什么时候更新数据缓存？"></a>什么时候更新数据缓存？</h3><p>例如，<code>roles</code>中<code>添加</code>和<code>修改</code>功能都需要用到<code>permissions</code>的数据，哪我怎么拿到最新的<code>permissions</code>数据呢。首先，我在加载<code>roles</code>列表页面时就需要将<code>permissions</code>的数据缓存，这样，在每次点<code>添加</code>或<code>修改</code>功能时就不需要再去拉取已缓存的数据了。</p>
+<p>参见<a href="https://github.com/tkvern/dva-passport/blob/develop/resources/assets/ant_passport/src/models/roles.js#L166" target="_blank" rel="noopener">src/models/roles.js#L166</a></p>
+<p>在监听路由到<code>roles</code>时查询<code>permissions</code>是否缓存，将其更新到缓存中去。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">.</span><br><span class="line">.</span><br><span class="line">  subscriptions: &#123;</span><br><span class="line">    setup(&#123; dispatch, history &#125;) &#123;</span><br><span class="line">      history.listen(<span class="function">(<span class="params">location</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> match = pathToRegexp(<span class="string">'/roles'</span>).exec(location.pathname);</span><br><span class="line">        <span class="keyword">if</span> (match) &#123;</span><br><span class="line">          <span class="keyword">const</span> data = getLocalStorage(<span class="string">'permissions'</span>);</span><br><span class="line">          <span class="keyword">if</span> (!data) &#123;</span><br><span class="line">            dispatch(&#123;</span><br><span class="line">              type: <span class="string">'permissions/updateCache'</span>,</span><br><span class="line">            &#125;);</span><br><span class="line">          &#125;</span><br><span class="line">          dispatch(&#123;</span><br><span class="line">            type: <span class="string">'query'</span>,</span><br><span class="line">            payload: location.query,</span><br><span class="line">          &#125;);</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">.</span><br><span class="line">.</span><br><span class="line">.</span><br></pre></td></tr></table></figure>
+<h3 id="什么时候删除数据缓存？"><a href="#什么时候删除数据缓存？" class="headerlink" title="什么时候删除数据缓存？"></a>什么时候删除数据缓存？</h3><p>删除缓存的配置是比较灵活的，这里的业务场景并不复杂所以，我用了比较简单的处理方式。</p>
+<p>参见<a href="https://github.com/tkvern/dva-passport/blob/develop/resources/assets/ant_passport/src/models/permissions.js#L112" target="_blank" rel="noopener">src/models/permissions.js#L112</a></p>
+<p>在执行新增或更新操作成功后，将本地原有的缓存删除。加上数据联动的特性，当再次回到<code>roles</code>操作时，缓存已经更新了。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">.</span><br><span class="line">.</span><br><span class="line">  *update(&#123; payload &#125;, &#123; select, call, put &#125;) &#123;</span><br><span class="line">      <span class="keyword">yield</span> put(&#123; <span class="attr">type</span>: <span class="string">'hideModal'</span> &#125;);</span><br><span class="line">      <span class="keyword">yield</span> put(&#123; <span class="attr">type</span>: <span class="string">'showLoading'</span> &#125;);</span><br><span class="line">      <span class="keyword">const</span> id = <span class="keyword">yield</span> select(<span class="function">(<span class="params">&#123; permissions &#125;</span>) =&gt;</span> permissions.currentItem.id);</span><br><span class="line">      <span class="keyword">const</span> newRole = &#123; ...payload, id &#125;;</span><br><span class="line">      <span class="keyword">const</span> &#123; data &#125; = <span class="keyword">yield</span> call(update, newRole);</span><br><span class="line">      <span class="keyword">if</span> (data &amp;&amp; data.err_msg === <span class="string">'SUCCESS'</span>) &#123;</span><br><span class="line">        <span class="keyword">yield</span> put(&#123;</span><br><span class="line">          type: <span class="string">'updateSuccess'</span>,</span><br><span class="line">          payload: newRole,</span><br><span class="line">        &#125;);</span><br><span class="line">        localStorage.removeItem(<span class="string">'permissions'</span>);</span><br><span class="line">        message.success(<span class="string">'更新成功!'</span>);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">.</span><br><span class="line">.</span><br><span class="line">.</span><br></pre></td></tr></table></figure>
+<h3 id="State的临时缓存"><a href="#State的临时缓存" class="headerlink" title="State的临时缓存"></a>State的临时缓存</h3><p>state的中的数据是变化的，刷新页面之后会重置掉，也可以将部分<code>models</code>中的<code>state</code>存到<code>Localstorage</code>中，让state的数据从<code>Localstorage</code>读取，但不是必要的。而<code>list</code>数据的更新，是直接操作state中的数据的。</p>
+<p>如下(这样就不用更新整个list的数据了)。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">.</span><br><span class="line">.</span><br><span class="line">    grantSuccess(state, action) &#123;</span><br><span class="line">      <span class="keyword">const</span> grantUser = action.payload;</span><br><span class="line">      <span class="keyword">const</span> newList = state.list.map(<span class="function">(<span class="params">user</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (user.id === grantUser.id) &#123;</span><br><span class="line">          user.roles = grantUser.roles;</span><br><span class="line">          <span class="keyword">return</span> &#123; ...user &#125;;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> user;</span><br><span class="line">      &#125;);</span><br><span class="line">      <span class="keyword">return</span> &#123; ...state, ...newList, <span class="attr">loading</span>: <span class="literal">false</span> &#125;;</span><br><span class="line">    &#125;,</span><br><span class="line">.</span><br><span class="line">.</span><br><span class="line">.</span><br></pre></td></tr></table></figure>
+<h2 id="视图组件运用"><a href="#视图组件运用" class="headerlink" title="视图组件运用"></a>视图组件运用</h2><p>Ant 提供的组件非常多，但用起来还是需要一些学习成本的，同时多个组件组合使用时也需要有很多地方注意的。</p>
+<h3 id="Modal注意事项"><a href="#Modal注意事项" class="headerlink" title="Modal注意事项"></a>Modal注意事项</h3><p>在使用Modal组件时，难免会出现一个页面多个Modal的情况，首先要注意的就是Modal的命名，在多Modal情况下，命名不注意很容易出现分不清用的是哪个Modal。建议命名时能望名知意。然后就是Modal需要用到别的Models的数据时，如果在弹窗时通过Ajax获取需要的数据再显示Modal，这样就会出现Modal延迟，而且Modal的动画也无法加载出来。所以，我的处理方式是，在进入这一级<code>Route</code>的时候就将需要的数据<code>预缓存</code>，这样调用时就可随用随取，不会出现延迟了。</p>
+<p>参见<a href="https://github.com/tkvern/dva-passport/blob/develop/resources/assets/ant_passport/src/components/user/UserModalGrant.jsx#L33" target="_blank" rel="noopener">src/components/user/UserModalGrant.jsx#L33</a></p>
+<h3 id="Form注意"><a href="#Form注意" class="headerlink" title="Form注意"></a>Form注意</h3><p>Ant的form组件很完善，需要注意的就是表单的多条件查询。如果单单是一个条件查询的处理比较简单，将查询关键词设成<code>string</code>类型存到相应的Models中的state即可，多条件的话，稍微麻烦一点，需存成Hash对象。灵活处理即可。</p>
+<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><p>官方文档的描述很清楚，我就不充大头了。注意写法规范即可，直接复制粘贴官方例子代码会很难看。</p>
+<h2 id="跨域问题"><a href="#跨域问题" class="headerlink" title="跨域问题"></a>跨域问题</h2><p>终于说到点子上了，前后端分离遇到跨域问题很正常，而这种基于RESTful API的前后端分离就更好弄了。我这以Fetch + PHP + Laravel为例，这种并不是最有解决方案！仅供参考！</p>
+<p>在<code>header</code>中进行如下配置</p>
+<p><code>Access-Control-Allow-Origin</code>配置允许的域</p>
+<p><code>Access-Control-Allow-Methods</code>配置允许的请求方式</p>
+<p><code>Access-Control-Allow-Headers</code>配置允许的请求头</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">use</span> <span class="title">Illuminate</span>\<span class="title">Http</span>\<span class="title">Request</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">|--------------------------------------------------------------------------</span></span><br><span class="line"><span class="comment">| API Routes</span></span><br><span class="line"><span class="comment">|--------------------------------------------------------------------------</span></span><br><span class="line"><span class="comment">|</span></span><br><span class="line"><span class="comment">| Here is where you can register API routes for your application. These</span></span><br><span class="line"><span class="comment">| routes are loaded by the RouteServiceProvider within a group which</span></span><br><span class="line"><span class="comment">| is assigned the "api" middleware group. Enjoy building your API!</span></span><br><span class="line"><span class="comment">|</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line">Route::group([<span class="string">'middleware'</span>=&gt; [<span class="string">'auth:api'</span>]], <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    header(<span class="string">"Access-Control-Allow-Origin: *"</span>);</span><br><span class="line">    header(<span class="string">"Access-Control-Allow-Methods: GET, HEAD, POST, PUT, PATCH, DELETE"</span>);</span><br><span class="line">    header(<span class="string">"Access-Control-Allow-Headers: Access-Control-Allow-Headers, Origin, Accept, Authorization, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers"</span>);</span><br><span class="line">    <span class="keyword">require</span> base_path(<span class="string">'routes/common.php'</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>基于其他编程语言的处理类似。</p>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>了解前端、熟悉前端、精通前端、熟悉前端、不懂前端</p>
+<p>了解 X X 、熟悉 X X 、精通 X X 、熟悉 X X 、不懂 X X </p>
+
+      
+    </div>
+    
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+<div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" , disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}" style="cursor: pointer; border: 0; outline: 0; border-radius: 100%; padding: 0; margin: 0; letter-spacing: normal; text-transform: none; text-indent: 0px; text-shadow: none">
+    <span onmouseover="this.style.color='rgb(236,96,0)';this.style.background='rgb(204,204,204)'" onmouseout="this.style.color='#fff';this.style.background='rgb(236,96,0)'" style="display: inline-block; width: 70px; height: 70px; border-radius: 100%; line-height: 81px; color: #fff; font: 400 35px/75px 'microsofty'; background: rgb(236,96,0)">赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/IMG_2826.JPG" alt="TKVERN WeChat Pay" style="width: 200px; max-width: 100%; display: inline-block">
+        <p>微信打赏</p>
+      </div>
+    
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/T1WIRpXmBaXXXXXXXX.jpg" alt="TKVERN Alipay" style="width: 200px; max-width: 100%; display: inline-block">
+        <p>支付宝打赏</p>
+      </div>
+    
+  </div>
+</div>
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/React/" rel="tag">#React</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/20170113/回家/" rel="next" title="回家">
+                <i class="fa fa-chevron-left"></i> 回家
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/20170228/论假百度钓鱼网站的实现过程/" rel="prev" title="论假百度钓鱼网站的实现过程">
+                论假百度钓鱼网站的实现过程 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/10667077.jpeg" alt="TKVERN">
+          <p class="site-author-name" itemprop="name">TKVERN</p>
+          <p class="site-description motion-element" itemprop="description">Developer & Designer. Believe what you believe, and stick to what you insist on.</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">76</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">categories</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-name">tags</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="http://eims.com.cn/" target="_blank" title="EIMS">
+                  
+                    <i class="fa fa-group"></i>
+                  
+                  EIMS
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href target="_blank" title="ShenZhen, China">
+                  
+                    <i class="fa fa-map-marker"></i>
+                  
+                  ShenZhen, China
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/tkvern" target="_blank" title="Github">
+                  
+                    <i class="fa fa-github"></i>
+                  
+                  Github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="mailto:verncake@gmail.com" target="_blank" title="verncake@gmail.com">
+                  
+                    <i class="fa fa-envelope"></i>
+                  
+                  verncake@gmail.com
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Why-Dva？"><span class="nav-number">1.</span> <span class="nav-text">Why Dva？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Why-Ant-Design"><span class="nav-number">2.</span> <span class="nav-text">Why Ant Design?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Why-yarn"><span class="nav-number">3.</span> <span class="nav-text">Why yarn?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#开发过程中的前后端分离"><span class="nav-number">4.</span> <span class="nav-text">开发过程中的前后端分离</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#如何对模拟做数据持久化处理？"><span class="nav-number">4.1.</span> <span class="nav-text">如何对模拟做数据持久化处理？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#模拟API怎么写？"><span class="nav-number">4.2.</span> <span class="nav-text">模拟API怎么写？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#还有一步"><span class="nav-number">4.3.</span> <span class="nav-text">还有一步</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#友情提示"><span class="nav-number">4.4.</span> <span class="nav-text">友情提示</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何保持登录状态"><span class="nav-number">5.</span> <span class="nav-text">如何保持登录状态</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#准备工作"><span class="nav-number">5.1.</span> <span class="nav-text">准备工作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改Request"><span class="nav-number">5.2.</span> <span class="nav-text">修改Request</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Router"><span class="nav-number">6.</span> <span class="nav-text">Router</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据缓存"><span class="nav-number">7.</span> <span class="nav-text">数据缓存</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么时候做数据缓存"><span class="nav-number">7.1.</span> <span class="nav-text">什么时候做数据缓存?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#什么时候更新数据缓存？"><span class="nav-number">7.2.</span> <span class="nav-text">什么时候更新数据缓存？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#什么时候删除数据缓存？"><span class="nav-number">7.3.</span> <span class="nav-text">什么时候删除数据缓存？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#State的临时缓存"><span class="nav-number">7.4.</span> <span class="nav-text">State的临时缓存</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#视图组件运用"><span class="nav-number">8.</span> <span class="nav-text">视图组件运用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Modal注意事项"><span class="nav-number">8.1.</span> <span class="nav-text">Modal注意事项</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Form注意"><span class="nav-number">8.2.</span> <span class="nav-text">Form注意</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他"><span class="nav-number">8.3.</span> <span class="nav-text">其他</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#跨域问题"><span class="nav-number">9.</span> <span class="nav-text">跨域问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结语"><span class="nav-number">10.</span> <span class="nav-text">结语</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">TKVERN</span>
+  <span class="with-love">
+    <i class="fa fa-eye"></i>
+  </span>
+  <span id="visitors" itemprop="copyrightHolder"></span>
+  <br>
+  Powered by <a class="theme-link" href="http://hexo.io" rel="external nofollow">Hexo</a>
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" rel="external nofollow">NexT</a>
+  <span>本站所有内容除特别声明外，均采用 <a target="_blank" href="https://zh.wikipedia.org/wiki/%E7%9F%A5%E8%AF%86%E5%85%B1%E4%BA%AB%E8%AE%B8%E5%8F%AF%E5%8D%8F%E8%AE%AE" rel="external nofollow"><i class="fa fa-creative-commons fa-fw"></i> BY-NC-SA </a>许可协议。转载请注明出处！</span>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+       search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            isfetched = true;
+            $('.popup').detach().appendTo('.header-inner');
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var matchcounts = 0;
+                var str='<ul class=\"search-result-list\">';                
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length > 1) {
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = true;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = data.url;
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '' && data_content != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title < 0 && index_content < 0 ){
+                                isMatch = false;
+                            } else {
+                                if (index_content < 0) {
+                                    index_content = 0;
+                                }
+                                if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            }
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        matchcounts += 1;
+                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out 100 characters
+                            var start = first_occur - 20;
+                            var end = first_occur + 80;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 50;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substring(start, end);
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                            });
+                            
+                            str += "<p class=\"search-result\">" + match_content +"...</p>"
+                        }
+                        str += "</li>";
+                    }
+                })};
+                str += "</ul>";
+                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+                $resultContent.innerHTML = str;
+            });
+            proceedsearch();
+        }
+    });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("pjTDSznF2e8sNaJ7pB3OtPAF-gzGzoHsz", "S4dEfsJlgqUdQFYB5BAnLAK0");</script>
+  <script>
+    function showSum(){
+      var $visitorsSum = $("#visitors");
+      AV.Query.doCloudQuery('select time from Counter').then(function(data) {
+        var results = data.results;
+        var time = 0;
+        if (results.length !== 0) {
+          for (var i = 0; i < results.length; i++) {
+            time += results[i].get('time');
+          }
+        }
+        $visitorsSum.text(time);
+      }, function(error) {
+        console.log(error);
+      });
+    }
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+      showSum();
+    });
+  </script>
+
+
+
+  
+
+</body>
+</html>

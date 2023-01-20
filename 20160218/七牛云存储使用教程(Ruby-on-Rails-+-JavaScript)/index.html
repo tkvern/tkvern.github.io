@@ -1,0 +1,959 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="google-site-verification" content="nITMHgGRG-3HZXe-SEJlmJxgA7J95q-z75xLLN4qNe4">
+
+
+
+
+  <meta name="baidu-site-verification" content="code-dn5tsPOogu">
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css">
+
+<link rel="stylesheet" href="/css/poem.css">
+
+
+  <meta name="keywords" content="七牛云存储,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="TKVERN BLOG" type="application/atom+xml">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2">
+
+
+
+
+
+
+<meta name="description" content="吐槽写教程之前不得不吐槽一下七牛的官方文档，API的说明是很全面，但是读起来超蛋疼。为什么这么说呢，按照我以往的看API的文档都会有示例代码跑起来帮助理解，而七牛的API文档对于刚接触这种第三方服务商SDK的开发者来说不是太友好。建议七牛借鉴下百度地图SDK的文档写法。">
+<meta name="keywords" content="七牛云存储">
+<meta property="og:type" content="article">
+<meta property="og:title" content="七牛云存储使用教程(Ruby-on-Rails-+-JavaScript)">
+<meta property="og:url" content="https://tkvern.com/20160218/七牛云存储使用教程(Ruby-on-Rails-+-JavaScript)/index.html">
+<meta property="og:site_name" content="TKVERN BLOG">
+<meta property="og:description" content="吐槽写教程之前不得不吐槽一下七牛的官方文档，API的说明是很全面，但是读起来超蛋疼。为什么这么说呢，按照我以往的看API的文档都会有示例代码跑起来帮助理解，而七牛的API文档对于刚接触这种第三方服务商SDK的开发者来说不是太友好。建议七牛借鉴下百度地图SDK的文档写法。">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://tkvern.com/images/cover/qiniubg.png">
+<meta property="og:updated_time" content="2023-01-20T15:23:47.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="七牛云存储使用教程(Ruby-on-Rails-+-JavaScript)">
+<meta name="twitter:description" content="吐槽写教程之前不得不吐槽一下七牛的官方文档，API的说明是很全面，但是读起来超蛋疼。为什么这么说呢，按照我以往的看API的文档都会有示例代码跑起来帮助理解，而七牛的API文档对于刚接触这种第三方服务商SDK的开发者来说不是太友好。建议七牛借鉴下百度地图SDK的文档写法。">
+<meta name="twitter:image" content="https://tkvern.com/images/cover/qiniubg.png">
+
+<link rel="canonical" href=" { { site.url } }{ { page.url } }">
+ <script type="text/javascript">
+    var host = "tkvern.com";
+    if ((host == window.location.host) && (window.location.protocol != "https:"))
+        window.location.protocol = "https";
+</script>
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 6265161176141792000,
+      author: 'tkvern'
+    }
+  };
+</script>
+
+  <title> 七牛云存储使用教程(Ruby-on-Rails-+-JavaScript) | TKVERN BLOG </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+<div style="display:none"><img src="/images/10667077.jpeg"></div>
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?6dbe8d3fc8c188c1852bf28873a922ba";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <a href="https://github.com/tkvern"><img class="hidden-xs hidden-sm" style="position: absolute;top: 0;left: 0;border: 0;" src="/images/forkme.png" alt="Fork me on GitHub" data-canonical-src="/images/forkme.png"></a>
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">TKVERN BLOG</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Developer & Designer</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="#" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                七牛云存储使用教程(Ruby-on-Rails-+-JavaScript)
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2016-02-18T13:26:49+00:00" content="2016-02-18">
+              2016-02-18
+            </time>
+          </span>
+
+          
+            <span class="post-category">
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Ruby-on-Rails/" itemprop="url" rel="index">
+                    <span itemprop="name">Ruby on Rails</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+             <span id="/20160218/七牛云存储使用教程(Ruby-on-Rails-+-JavaScript)/" class="leancloud_visitors" data-flag-title="七牛云存储使用教程(Ruby-on-Rails-+-JavaScript)">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">visitors </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="/images/cover/qiniubg.png" alt="qiniu"></p>
+<h2 id="吐槽"><a href="#吐槽" class="headerlink" title="吐槽"></a>吐槽</h2><p>写教程之前不得不吐槽一下<a href="http://developer.qiniu.com/docs/v6/sdk/index.html" target="_blank" rel="noopener">七牛</a>的官方文档，API的说明是很全面，但是读起来超蛋疼。为什么这么说呢，按照我以往的看API的文档都会有示例代码跑起来帮助理解，而七牛的API文档对于刚接触这种第三方服务商SDK的开发者来说不是太友好。建议七牛借鉴下<a href="http://developer.baidu.com/map/index.php?title=jspopular" target="_blank" rel="noopener">百度地图SDK</a>的文档写法。</p>
+<a id="more"></a>
+<hr>
+<h2 id="初识"><a href="#初识" class="headerlink" title="初识"></a>初识</h2><p>七牛云存储是一家专注云存储领域的技术公司，提供云存储、云处理、云加速分发一站式服务，持续追求高可靠、高可用、高性能、高响应速度，推动客户健康稳定地快速发展。（前面是广告）</p>
+<p>以往开发项目时总会遇到上传文件的问题，譬如上传速度、断点续传、资源服务器部署等等。存在自己的服务器上面，维护成本高。那如何解决这些问题呢，有需求就有市场，云存储应运而生，把这些处理统统放到云存储上，只需要进行API调用即可，而这次我们选中了七牛云存储，便宜，好用，快速。（广告打了一大堆，进入正题吧）</p>
+<hr>
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p>教程正式开始</p>
+<h3 id="注册"><a href="#注册" class="headerlink" title="注册"></a>注册</h3><p>使用前得先注册一个七牛云存储的账号，<a href="https://portal.qiniu.com/signup" target="_blank" rel="noopener">–&gt;注册传送门&lt;–</a></p>
+<h3 id="登录认证"><a href="#登录认证" class="headerlink" title="登录认证"></a>登录认证</h3><p>登录之后查看你的账号身份认证，完成认证解锁更多功能</p>
+<h3 id="获取AK-SK-空间域名"><a href="#获取AK-SK-空间域名" class="headerlink" title="获取AK, SK,空间域名"></a>获取AK, SK,空间域名</h3><p>这两个KEY值是用来生成上传凭证的</p>
+<h3 id="配置服务器环境"><a href="#配置服务器环境" class="headerlink" title="配置服务器环境"></a>配置服务器环境</h3><p>在使用七牛云存储前我们先要配置好<code>上传凭证</code>的生成环境</p>
+<p>代码清单3.6.1: 导入七牛云存储的<code>gem</code>包<br><em><code>Gemfile</code></em><br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">source <span class="string">'https://rubygems.org'</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># Bundle edge Rails instead: gem 'rails', github: 'rails/rails'</span></span><br><span class="line">gem <span class="string">'rails'</span>, <span class="string">'~&gt;4.2.3'</span></span><br><span class="line"><span class="comment"># Use postgresql as the database for Active Record</span></span><br><span class="line">.</span><br><span class="line">.</span><br><span class="line">.</span><br><span class="line">gem <span class="string">'qiniu'</span> <span class="comment">#加入七牛云存储gem包</span></span><br><span class="line">.</span><br><span class="line">.</span><br><span class="line">.</span><br></pre></td></tr></table></figure></p>
+<p>代码清单3.6.2: 然后重新<code>bundle</code>我们的项目会看到安装了很多<code>gem</code>包</p>
+<figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> bundle install</span><br><span class="line">.</span><br><span class="line">.</span><br><span class="line">.</span><br><span class="line">Using qiniu 6.5.1</span><br><span class="line">.</span><br><span class="line">.</span><br><span class="line">.</span><br><span class="line">Bundle complete! 17 Gemfile dependencies, 66 gems now installed.</span><br><span class="line">Use `bundle show [gemname]` to see where a bundled gem is installed.</span><br></pre></td></tr></table></figure>
+<p>如果有提示安装失败或是无法安装一些国外的镜像可修改<code>Gemfile</code>的源到淘宝源或是自行翻墙，推荐一款翻墙工具<a href="https://shadowsocks.com/" target="_blank" rel="noopener">Shadowsocks</a></p>
+<h3 id="配置AccessKey-SecretKey"><a href="#配置AccessKey-SecretKey" class="headerlink" title="配置AccessKey/SecretKey"></a>配置AccessKey/SecretKey</h3><p>代码清单3.7.1: 新建<code>qiniu_sdk.rb</code>文件,将3.3节获取到的AK,SK,空间域名地址输入下面代码<br><em><code>config/initializers/qiniu_sdk.rb</code></em><br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env ruby</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">require</span> <span class="string">'qiniu'</span></span><br><span class="line"></span><br><span class="line">Qiniu.establish_connection! <span class="symbol">:access_key</span> =&gt; <span class="string">'&lt;输入你的AK&gt;'</span>,</span><br><span class="line">                            <span class="symbol">:secret_key</span> =&gt; <span class="string">'&lt;输入你的SK&gt;'</span></span><br><span class="line"></span><br><span class="line">Rails.application.config.qiniu_domain = <span class="string">"&lt;空间域名地址&gt;"</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="生成上传凭证"><a href="#生成上传凭证" class="headerlink" title="生成上传凭证"></a>生成上传凭证</h3><p>代码清单3.8.1: 这个方法我会包装到Helper里面<br><em><code>app/helpers/application_helper.rb</code></em><br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">module</span> <span class="title">ApplicationHelper</span></span></span><br><span class="line">  private</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">uptoken</span></span></span><br><span class="line"></span><br><span class="line">      put_policy = Qiniu::Auth::PutPolicy.new(</span><br><span class="line">        <span class="string">"&lt;你的空间名称&gt;"</span>,                    <span class="comment"># 存储空间</span></span><br><span class="line">        <span class="literal">nil</span>,                           <span class="comment"># 最终资源名，可省略，即缺省为“创建”语义</span></span><br><span class="line">        <span class="number">1800</span>,                          <span class="comment"># 相对有效期，可省略，缺省为3600秒后 uptoken 过期</span></span><br><span class="line">        (Time.now + <span class="number">30</span>.minutes).to_i  <span class="comment"># 绝对有效期，可省略，指明 uptoken 过期期限（绝对值），通常用于调试，这里表示半小时</span></span><br><span class="line">      )</span><br><span class="line"></span><br><span class="line">      uptoken = Qiniu::Auth.generate_uptoken(put_policy) <span class="comment">#生成凭证</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure></p>
+<p>到目前为止我们以及完成了服务端的所有配置,当我们的文件上传时,是不经过我们自己的服务器的,由客户端通过Ajax请求七牛的API再将返回的文件名存入我们的服务器。接下来就是客户端的配置</p>
+<h3 id="导入七牛JavaScriptSDK"><a href="#导入七牛JavaScriptSDK" class="headerlink" title="导入七牛JavaScriptSDK"></a>导入七牛JavaScriptSDK</h3><p><a href="http://developer.qiniu.com/docs/v6/sdk/javascript-sdk.html" target="_blank" rel="noopener">–&gt;下载JavaScriptSDK传送门&lt;–</a></p>
+<p>代码清单3.9.1: 为了代码易于管理我们将七牛的JavaScriptSDK文件放到<em><code>app/assets/javascripts/plugins</code></em>目录</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">- app</span><br><span class="line">  - assets</span><br><span class="line">    + fonts</span><br><span class="line">    + images</span><br><span class="line">    - javascript</span><br><span class="line">      - plugins</span><br><span class="line">        - plupload</span><br><span class="line">            moxie.js</span><br><span class="line">            plupload.dev.js</span><br><span class="line">            plupload.full.min.js</span><br><span class="line">        - qiniu</span><br><span class="line">            qiniu.js</span><br><span class="line">            qiniu.min.js</span><br><span class="line">      application.js</span><br><span class="line">    + stylesheets</span><br></pre></td></tr></table></figure>
+<p>代码清单3.9.2: 引用SDK到<code>application.js</code><br><em><code>app/assets/javascripts/application.js</code></em><br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// # Place all the behaviors and hooks related to the matching controller here.</span></span><br><span class="line"><span class="comment">// # All this logic will automatically be available in application.js.</span></span><br><span class="line"><span class="comment">// # You can use CoffeeScript in this file: http://coffeescript.org/</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//= require plugins/plupload/moxie</span></span><br><span class="line"><span class="comment">//= require plugins/plupload/plupload.dev</span></span><br><span class="line"><span class="comment">//= require plugins/qiniu/qiniu</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="初始化javascript"><a href="#初始化javascript" class="headerlink" title="初始化javascript"></a>初始化javascript</h3><p>在完成以上操作之后我们就可以正式使用七牛云存储了</p>
+<p>代码清单3.9.3: 在<code>controller</code>中引入<code>helper</code>方法，传入上传凭证<br><em><code>app/controllers/uploads_controller.rb</code></em><br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">UploadsController</span> &lt; ActionController::BaseController</span></span><br><span class="line">  <span class="keyword">include</span> ApplicationHelper</span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">index</span></span></span><br><span class="line">    <span class="comment"># 获取上传凭证</span></span><br><span class="line">    @uptoken = uptoken</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure></p>
+<p>代码清单3.9.4: 代码清单在视图文件中使用<br><em><code>app/views/upload/index.html.erb</code></em><br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 初始化按钮 start --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"col-md-12"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"container"</span> <span class="attr">style</span>=<span class="string">"position: absolute; top: 50px;"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">a</span> <span class="attr">class</span>=<span class="string">"btn btn-default btn-lg "</span> <span class="attr">id</span>=<span class="string">"pickfiles"</span> <span class="attr">href</span>=<span class="string">"#"</span> <span class="attr">style</span>=<span class="string">"position: relative; z-index: 1;"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">i</span> <span class="attr">class</span>=<span class="string">"fa fa-plus"</span>&gt;</span><span class="tag">&lt;/<span class="name">i</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">span</span>&gt;</span>选择文件<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 初始化按钮 end --&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 初始化配置 start --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span></span><br><span class="line"><span class="javascript">  <span class="keyword">var</span> uploader = Qiniu.uploader(&#123;</span></span><br><span class="line"><span class="javascript">    runtimes: <span class="string">'html5,html4'</span>,          <span class="comment">//上传模式,依次退化</span></span></span><br><span class="line"><span class="javascript">    browse_button: <span class="string">'pickfiles'</span>,       <span class="comment">//上传选择的点选按钮，**必需**</span></span></span><br><span class="line"><span class="javascript">    uptoken : <span class="string">'&lt;%= @uptoken %&gt;'</span>,</span></span><br><span class="line"><span class="javascript">        <span class="comment">//若未指定uptoken_url,则必须指定 uptoken ,uptoken由其他程序生成</span></span></span><br><span class="line"><span class="javascript">    unique_names: <span class="literal">true</span>,</span></span><br><span class="line"><span class="javascript">        <span class="comment">// 默认 false，key为文件名。若开启该选项，SDK会为每个文件自动生成key（文件名）</span></span></span><br><span class="line"><span class="javascript">    save_key: <span class="literal">true</span>,</span></span><br><span class="line"><span class="javascript">        <span class="comment">// 默认 false。若在服务端生成uptoken的上传策略中指定了 `sava_key`，则开启，SDK在前端将不对key进行任何处理</span></span></span><br><span class="line"><span class="javascript">    domain: <span class="string">'&lt;%= Rails.application.config.qiniu_domain %&gt;'</span>,</span></span><br><span class="line"><span class="javascript">        <span class="comment">//bucket 域名，下载资源时用到，**必需**</span></span></span><br><span class="line"><span class="javascript">    container: <span class="string">'container'</span>,           <span class="comment">//上传区域DOM ID，默认是browser_button的父元素，</span></span></span><br><span class="line"><span class="javascript">    max_file_size: <span class="string">'5mb'</span>,           <span class="comment">//最大文件体积限制</span></span></span><br><span class="line"><span class="javascript">    <span class="comment">// flash_swf_url: 'js/plupload/Moxie.swf',  //引入flash,相对路径</span></span></span><br><span class="line"><span class="javascript">    max_retries: <span class="number">3</span>,                   <span class="comment">//上传失败最大重试次数</span></span></span><br><span class="line"><span class="javascript">    dragdrop: <span class="literal">true</span>,                   <span class="comment">//开启可拖曳上传</span></span></span><br><span class="line"><span class="javascript">    drop_element: <span class="string">'container'</span>,        <span class="comment">//拖曳上传区域元素的ID，拖曳文件或文件夹后可触发上传</span></span></span><br><span class="line"><span class="javascript">    chunk_size: <span class="string">'1mb'</span>,                <span class="comment">//分块上传时，每片的体积</span></span></span><br><span class="line"><span class="javascript">    auto_start: <span class="literal">true</span>,                 <span class="comment">//选择文件后自动上传，若关闭需要自己绑定事件触发上传</span></span></span><br><span class="line">    init: &#123;</span><br><span class="line"><span class="javascript">        <span class="string">'FilesAdded'</span>: <span class="function"><span class="keyword">function</span>(<span class="params">up, files</span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">            plupload.each(files, <span class="function"><span class="keyword">function</span>(<span class="params">file</span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">                <span class="comment">// 文件添加进队列后,处理相关的事情</span></span></span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;,</span><br><span class="line"><span class="javascript">        <span class="string">'BeforeUpload'</span>: <span class="function"><span class="keyword">function</span>(<span class="params">up, file</span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">               <span class="comment">// 每个文件上传前,处理相关的事情</span></span></span><br><span class="line">        &#125;,</span><br><span class="line"><span class="javascript">        <span class="string">'UploadProgress'</span>: <span class="function"><span class="keyword">function</span>(<span class="params">up, file</span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">               <span class="comment">// 每个文件上传时,处理相关的事情</span></span></span><br><span class="line">        &#125;,</span><br><span class="line"><span class="javascript">        <span class="string">'FileUploaded'</span>: <span class="function"><span class="keyword">function</span>(<span class="params">up, file, info</span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">               <span class="comment">// 每个文件上传成功后,处理相关的事情</span></span></span><br><span class="line"><span class="javascript">               <span class="comment">// 其中 info 是文件上传成功后，服务端返回的json，形式如</span></span></span><br><span class="line"><span class="javascript">               <span class="comment">// &#123;</span></span></span><br><span class="line"><span class="javascript">               <span class="comment">//    "hash": "Fh8xVqod2MQ1mocfI4S4KpRL6D98",</span></span></span><br><span class="line"><span class="javascript">               <span class="comment">//    "key": "gogopher.jpg"</span></span></span><br><span class="line"><span class="javascript">               <span class="comment">//  &#125;</span></span></span><br><span class="line"><span class="javascript">               <span class="comment">// 参考http://developer.qiniu.com/docs/v6/api/overview/up/response/simple-response.html</span></span></span><br><span class="line"><span class="javascript">               <span class="keyword">var</span> domain = up.getOption(<span class="string">'domain'</span>);</span></span><br><span class="line"><span class="javascript">               <span class="keyword">var</span> res = $.parseJSON(info);</span></span><br><span class="line"><span class="javascript">               <span class="keyword">var</span> sourceLink = domain + res.key; <span class="comment">//获取上传成功后的文件的Url</span></span></span><br><span class="line"><span class="javascript">               <span class="built_in">console</span>.log(info);</span></span><br><span class="line"><span class="javascript">               <span class="built_in">console</span>.log(sourceLink);</span></span><br><span class="line">        &#125;,</span><br><span class="line"><span class="javascript">        <span class="string">'Error'</span>: <span class="function"><span class="keyword">function</span>(<span class="params">up, err, errTip</span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">               <span class="comment">//上传出错时,处理相关的事情</span></span></span><br><span class="line">        &#125;,</span><br><span class="line"><span class="javascript">        <span class="string">'UploadComplete'</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">               <span class="comment">//队列文件处理完毕后,处理相关的事情</span></span></span><br><span class="line">        &#125;,</span><br><span class="line"><span class="javascript">        <span class="string">'Key'</span>: <span class="function"><span class="keyword">function</span>(<span class="params">up, file</span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">            <span class="comment">// 若想在前端对每个文件的key进行个性化处理，可以配置该函数</span></span></span><br><span class="line"><span class="javascript">            <span class="comment">// 该配置必须要在 unique_names: false , save_key: false 时才生效</span></span></span><br><span class="line"><span class="javascript">            <span class="keyword">var</span> key = <span class="string">""</span>;</span></span><br><span class="line"><span class="javascript">            <span class="comment">// do something with key here</span></span></span><br><span class="line"><span class="javascript">            <span class="keyword">return</span> key</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 初始化配置 end --&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>代码清单3.9.5: 完成了这么多复杂的操作后终于可以试试效果了，启动Rails服务器看看吧<br><figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> rails server -b $IP -p $PORT</span><br></pre></td></tr></table></figure></p>
+<h2 id="作者"><a href="#作者" class="headerlink" title="作者"></a>作者</h2><p>如果教程里面有什么纰漏的地方请给我留言</p>
+
+      
+    </div>
+    
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+<div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" , disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}" style="cursor: pointer; border: 0; outline: 0; border-radius: 100%; padding: 0; margin: 0; letter-spacing: normal; text-transform: none; text-indent: 0px; text-shadow: none">
+    <span onmouseover="this.style.color='rgb(236,96,0)';this.style.background='rgb(204,204,204)'" onmouseout="this.style.color='#fff';this.style.background='rgb(236,96,0)'" style="display: inline-block; width: 70px; height: 70px; border-radius: 100%; line-height: 81px; color: #fff; font: 400 35px/75px 'microsofty'; background: rgb(236,96,0)">赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/IMG_2826.JPG" alt="TKVERN WeChat Pay" style="width: 200px; max-width: 100%; display: inline-block">
+        <p>微信打赏</p>
+      </div>
+    
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/T1WIRpXmBaXXXXXXXX.jpg" alt="TKVERN Alipay" style="width: 200px; max-width: 100%; display: inline-block">
+        <p>支付宝打赏</p>
+      </div>
+    
+  </div>
+</div>
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/七牛云存储/" rel="tag">#七牛云存储</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/20151210/Gulp构建实例/" rel="next" title="Gulp构建实例">
+                <i class="fa fa-chevron-left"></i> Gulp构建实例
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/20160320/wysiwyg-rails-编辑器支援七牛云存储/" rel="prev" title="wysiwyg-rails-编辑器支援七牛云存储">
+                wysiwyg-rails-编辑器支援七牛云存储 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/10667077.jpeg" alt="TKVERN">
+          <p class="site-author-name" itemprop="name">TKVERN</p>
+          <p class="site-description motion-element" itemprop="description">Developer & Designer. Believe what you believe, and stick to what you insist on.</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">76</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">categories</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-name">tags</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="http://eims.com.cn/" target="_blank" title="EIMS">
+                  
+                    <i class="fa fa-group"></i>
+                  
+                  EIMS
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href target="_blank" title="ShenZhen, China">
+                  
+                    <i class="fa fa-map-marker"></i>
+                  
+                  ShenZhen, China
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/tkvern" target="_blank" title="Github">
+                  
+                    <i class="fa fa-github"></i>
+                  
+                  Github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="mailto:verncake@gmail.com" target="_blank" title="verncake@gmail.com">
+                  
+                    <i class="fa fa-envelope"></i>
+                  
+                  verncake@gmail.com
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#吐槽"><span class="nav-number">1.</span> <span class="nav-text">吐槽</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#初识"><span class="nav-number">2.</span> <span class="nav-text">初识</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用"><span class="nav-number">3.</span> <span class="nav-text">使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#注册"><span class="nav-number">3.1.</span> <span class="nav-text">注册</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#登录认证"><span class="nav-number">3.2.</span> <span class="nav-text">登录认证</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#获取AK-SK-空间域名"><span class="nav-number">3.3.</span> <span class="nav-text">获取AK, SK,空间域名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置服务器环境"><span class="nav-number">3.4.</span> <span class="nav-text">配置服务器环境</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置AccessKey-SecretKey"><span class="nav-number">3.5.</span> <span class="nav-text">配置AccessKey/SecretKey</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#生成上传凭证"><span class="nav-number">3.6.</span> <span class="nav-text">生成上传凭证</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#导入七牛JavaScriptSDK"><span class="nav-number">3.7.</span> <span class="nav-text">导入七牛JavaScriptSDK</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#初始化javascript"><span class="nav-number">3.8.</span> <span class="nav-text">初始化javascript</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#作者"><span class="nav-number">4.</span> <span class="nav-text">作者</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">TKVERN</span>
+  <span class="with-love">
+    <i class="fa fa-eye"></i>
+  </span>
+  <span id="visitors" itemprop="copyrightHolder"></span>
+  <br>
+  Powered by <a class="theme-link" href="http://hexo.io" rel="external nofollow">Hexo</a>
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" rel="external nofollow">NexT</a>
+  <span>本站所有内容除特别声明外，均采用 <a target="_blank" href="https://zh.wikipedia.org/wiki/%E7%9F%A5%E8%AF%86%E5%85%B1%E4%BA%AB%E8%AE%B8%E5%8F%AF%E5%8D%8F%E8%AE%AE" rel="external nofollow"><i class="fa fa-creative-commons fa-fw"></i> BY-NC-SA </a>许可协议。转载请注明出处！</span>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+       search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            isfetched = true;
+            $('.popup').detach().appendTo('.header-inner');
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var matchcounts = 0;
+                var str='<ul class=\"search-result-list\">';                
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length > 1) {
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = true;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = data.url;
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '' && data_content != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title < 0 && index_content < 0 ){
+                                isMatch = false;
+                            } else {
+                                if (index_content < 0) {
+                                    index_content = 0;
+                                }
+                                if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            }
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        matchcounts += 1;
+                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out 100 characters
+                            var start = first_occur - 20;
+                            var end = first_occur + 80;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 50;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substring(start, end);
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                            });
+                            
+                            str += "<p class=\"search-result\">" + match_content +"...</p>"
+                        }
+                        str += "</li>";
+                    }
+                })};
+                str += "</ul>";
+                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+                $resultContent.innerHTML = str;
+            });
+            proceedsearch();
+        }
+    });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("pjTDSznF2e8sNaJ7pB3OtPAF-gzGzoHsz", "S4dEfsJlgqUdQFYB5BAnLAK0");</script>
+  <script>
+    function showSum(){
+      var $visitorsSum = $("#visitors");
+      AV.Query.doCloudQuery('select time from Counter').then(function(data) {
+        var results = data.results;
+        var time = 0;
+        if (results.length !== 0) {
+          for (var i = 0; i < results.length; i++) {
+            time += results[i].get('time');
+          }
+        }
+        $visitorsSum.text(time);
+      }, function(error) {
+        console.log(error);
+      });
+    }
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+      showSum();
+    });
+  </script>
+
+
+
+  
+
+</body>
+</html>
